@@ -1,7 +1,16 @@
 ## TODO
-[] - create server route for daily update
-[] - paste in relevant code 
-[] - get it working
+[x] - create server route for daily update
+[x] - paste in relevant code 
+[x] - get it working
+[x] - set up charts router 
+[x] - set up basic get router
+[x] - set up saga for getting charts
+[x] - set up redux for storing charts
+[x] - view charts in browser console log 
+[] - set up component for viewing a chart 
+[] - diplay chart on dom 
+
+
 
 ## Setup Instructions
 
