@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 
-
+import SongDetails from '../SongDetails/SongDetails'
 
 
 
@@ -110,17 +110,25 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/user" exact/>
               :
               // Otherwise, show the Landing page
               <LandingPage />
             }
           </Route>
+          <Route
+            path="/songdetails/:id"
+          >
+            <SongDetails />
+          </Route>
 
-          {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
+
+
+          {/* If none of the other routes matched, we will show a 404. */}
+          
         </Switch>
         <Footer />
       </div>

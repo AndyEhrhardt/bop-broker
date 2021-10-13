@@ -24,8 +24,8 @@ const useStyles = makeStyles(() => ({
       paddingRight: 0
     },
     quickChartWrapper: {
-      maxWidth: 330,
-      minWidth: 300,
+      maxWidth: 290,
+      minWidth: 280,
       textAlign: 'center',
       fontFamily: 'Roboto',
       fontSize: 50,

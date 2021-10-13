@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@material-ui/core/Typography';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-
 import useStyles from '../styles/styles';
 
 function QuickChart(props) {
     const classes = useStyles();
-    
+    const history = useHistory();
     const chart = useSelector(store => store[props.reducer].slice(props.sliceStart, props.sliceStart + 50));
     console.log("sliced chart",chart);
     const [page, setPage] = useState(0);
@@ -22,6 +22,7 @@ function QuickChart(props) {
     
     const handleRowClick = (event) => {
         console.log("in handle row click ", event)
+        history.push(`/songdetails/${event}`)
     }
     const handleChangePage = (event, newPage)=> {
         console.log(newPage);
@@ -31,8 +32,10 @@ function QuickChart(props) {
     const elevationChange = () => {
 
     }
+
+
     return (
-        <Paper className={classes.quickChartWrapper} elevation={3}>
+        <Paper className={classes.quickChartWrapper} elevation={5}>
             <div >
                 <h2 className={classes.quickChartTitle}>
                     {props.chartName}

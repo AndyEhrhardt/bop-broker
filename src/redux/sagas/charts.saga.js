@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_USER" actions
+//gets all 20 charts with movement 
 function* fetchCharts() {
     console.log("in fetch charts")
   try {
