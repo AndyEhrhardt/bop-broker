@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    dispatch({ type: 'GET_ALL_CHARTS'})
+    dispatch({ type: 'GET_ALL_CHARTS'});
   }, [dispatch]);
 
   return (

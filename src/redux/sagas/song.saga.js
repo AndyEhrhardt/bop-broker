@@ -5,8 +5,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchSongDetails(action) {
     console.log("in fetch song details", action.payload)
   try {
-    const response = yield axios.get('/api/charts');
-    console.log(response);
+    const response = yield axios.get(`/api/charts/${action.payload}`);
+    console.log(response.data);
     yield put({ type: 'SET_SONG_DETAILS', payload: response.data });
   } catch (error) {
     console.log('Charts get request failed', error);

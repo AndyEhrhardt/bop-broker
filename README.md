@@ -10,7 +10,16 @@
 [x] - set up component for viewing a chart 
 [x] - diplay chart on dom 
 [] - Some sort of on hover effect for table rows
-[] - clicking a row leads to song details page
+[x] - clicking a row leads to song details page
+[] - get request to get songs historical info and which playlists its on
+[] - redux store to store the song details
+[] - display that information on the dom 
+[] - 
+[] - 
+[] - 
+[] - 
+[] - 
+[] - 
 [] - clicking a chart leads to chart details page 
 
 

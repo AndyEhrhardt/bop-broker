@@ -50,6 +50,23 @@ const useStyles = makeStyles(() => ({
     tableCellPrice:{
       width: 20,
       maxWidth: 20,
+    },
+    detailsSongTitle:{
+      fontFamily: 'Roboto',
+      fontSize: 40,
+      margin: 0,
+      fontWeight: 400,
+      paddingTop: 10
+    },
+    detailsArtist:{
+      fontFamily: 'Roboto',
+      fontSize: 30,
+      margin: 0,
+      fontWeight: 300,
+      paddingTop: 10
+    },
+    mainDetailsWrapper:{
+      
     }
 }))
 
