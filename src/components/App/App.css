@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+
+
+
 html,
 body,
 #react-root {
@@ -109,4 +115,45 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+
+.wrapper{
+  max-width: 300px;
+  min-width: 250px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+.quick-chart-title{
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  margin: 0px;
+  font-weight: 300;
+}
+
+.outer-table-row:hover{
+  background-color: rgb(142, 253, 132);
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.song-name{
+  width: 150px;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
