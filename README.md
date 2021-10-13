@@ -11,12 +11,12 @@
 [x] - diplay chart on dom 
 [] - Some sort of on hover effect for table rows
 [x] - clicking a row leads to song details page
-[] - get request to get songs historical info and which playlists its on
-[] - redux store to store the song details
-[] - display that information on the dom 
-[] - 
-[] - 
-[] - 
+[x] - get request to get songs historical info and which playlists its on
+[x] - redux store to store the song details
+[x] - display that information on the dom 
+[] - Buy button 
+[] - post saga to post buy in user's portfolio
+[] - get route for users historical portfolio, historical song holdings and current monies 
 [] - 
 [] - 
 [] - 

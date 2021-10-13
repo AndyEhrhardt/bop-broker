@@ -55,19 +55,37 @@ const useStyles = makeStyles(() => ({
       fontFamily: 'Roboto',
       fontSize: 40,
       margin: 0,
-      fontWeight: 400,
-      paddingTop: 10
+      fontWeight: 500,
+      paddingTop: 5
     },
     detailsArtist:{
+      fontFamily: 'Roboto',
+      fontSize: 37,
+      margin: 0,
+      fontWeight: 400,
+      paddingTop: 5
+    },
+    detailsRank:{
       fontFamily: 'Roboto',
       fontSize: 30,
       margin: 0,
       fontWeight: 300,
-      paddingTop: 10
+      paddingTop: 5
+    },
+    detailsSubRank:{
+      fontFamily: 'Roboto',
+      fontSize: 20,
+      margin: 0,
+      fontWeight: 300,
+      paddingTop: 0
     },
     mainDetailsWrapper:{
-      
-    }
+    
+    },
+    avilableFonts:{
+      fontFamily: 'Open Sans',
+      fontFamily: 'Roboto', 
+    },
 }))
 
 export default useStyles;
