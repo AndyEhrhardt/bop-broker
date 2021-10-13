@@ -31,7 +31,6 @@ function SongDetails() {
 
     const handleBuy = (event) => {
         console.log("handle buy", quantity);
-
         dispatch({ type: 'POST_PORTFOLIO', payload: songDetails.basicInfo[0], quantity: quantity });
     }
     const handleQuantityChange = (event) => {

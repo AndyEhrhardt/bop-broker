@@ -116,11 +116,11 @@ function App() {
               <LandingPage />
             }
           </Route>
-          <Route
+          <ProtectedRoute
             path="/songdetails/:id"
           >
             <SongDetails />
-          </Route>
+          </ProtectedRoute>
 
           <Route>
             <h1>404</h1>
