@@ -157,3 +157,7 @@ input {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+td{
+  padding: 0;
+}

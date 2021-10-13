@@ -9,12 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@material-ui/core/Typography';
 import TablePagination from '@mui/material/TablePagination';
 
-//import classes = from ('../styles/styles');
+import useStyles from '../styles/styles';
 
 function QuickChart(props) {
     const [page, setPage] = useState(0);
     const chart = useSelector(store => store[props.reducer].slice(props.sliceStart, props.sliceStart + 50));
     console.log("sliced chart",chart)
+    const classes = useStyles();
     const handleRowClick = (event) => {
         console.log("in handle row click ", event)
     }
@@ -25,7 +26,7 @@ function QuickChart(props) {
     }
     return (
         <div className={"wrapper"}>
-            <h2 className={"quick-chart-title"}>
+            <h2 className={classes.quickChartTitle}>
                 {props.chartName}
             </h2>
             <div className={"table"}>
@@ -37,13 +38,13 @@ function QuickChart(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="right">Rank</TableCell>
-                                    <TableCell align="right"><div className={"song-name"}>Song/Arist</div></TableCell>
+                                    <TableCell align="right"><div className={classes.songName}>Song/Arist</div></TableCell>
                                     <TableCell align="right">Price</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {chart.slice(page*5, page*5+5).map((track) => (
-                                    <TableRow key={track.id} onClick={() => handleRowClick(track.concat)}>
+                                    <TableRow className={classes} key={track.id} onClick={() => handleRowClick(track.concat)}>
                                             <TableCell align="right">{track.rank}</TableCell>
                                             <TableCell align="right" className={"song-name"}>{track.song_name.split('(')[0]} <br></br>
                                             {track.artist}
