@@ -7,9 +7,11 @@
 [x] - set up saga for getting charts
 [x] - set up redux for storing charts
 [x] - view charts in browser console log 
-[] - set up component for viewing a chart 
-[] - diplay chart on dom 
-
+[x] - set up component for viewing a chart 
+[x] - diplay chart on dom 
+[] - Some sort of on hover effect for table rows
+[] - clicking a row leads to song details page
+[] - clicking a chart leads to chart details page 
 
 
 ## Setup Instructions

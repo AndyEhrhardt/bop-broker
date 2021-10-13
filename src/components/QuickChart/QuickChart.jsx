@@ -37,7 +37,7 @@ function QuickChart(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="right">Rank</TableCell>
-                                    <TableCell align="right"><div className={"song-name"}>Song</div></TableCell>
+                                    <TableCell align="right"><div className={"song-name"}>Song/Arist</div></TableCell>
                                     <TableCell align="right">Price</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -45,7 +45,9 @@ function QuickChart(props) {
                                 {chart.slice(page*5, page*5+5).map((track) => (
                                     <TableRow key={track.id} onClick={() => handleRowClick(track.concat)}>
                                             <TableCell align="right">{track.rank}</TableCell>
-                                            <TableCell align="right" className={"song-name"}>{track.song_name.split('(')[0]}</TableCell>
+                                            <TableCell align="right" className={"song-name"}>{track.song_name.split('(')[0]} <br></br>
+                                            {track.artist}
+                                            </TableCell>
                                             <TableCell align="right">{track.price}</TableCell>
                                     </TableRow>
                                 ))}
