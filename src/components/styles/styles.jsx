@@ -4,21 +4,20 @@ import { blue } from '@mui/material/colors';
 
 
 const useStyles = makeStyles(() => ({
-    tableFont : {
-      fontFamily: 'Roboto',
-      fontSize: 35,
-      fontWeight: 100,
-    },
-    quickChartTitle: {
+      
+      quickComponentsContainer : {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 30
+      },
+      quickChartTitle: {
         fontFamily: 'Roboto',
-        fontSize: 35,
+        fontSize: 40,
         margin: 0,
-        fontWeight: 300,
+        fontWeight: 400,
         paddingTop: 10
       }, 
-    doesThisWork: {
-      backgroundColor: 'red',
-    },
     songName: {
       width: 130,
       maxWidth: 130,
@@ -30,11 +29,13 @@ const useStyles = makeStyles(() => ({
     },
     quickChartWrapper: {
       maxWidth: 290,
-      minWidth: 280,
+      minWidth: 290,
+      maxHeight: 378,
+      minHeight: 378,
       textAlign: 'center',
       fontFamily: 'Roboto',
       fontSize: 50,
-      fontWeight: 200,
+      fontWeight: 200
     },
     tableCellSongArtist:{
       width: 130,
@@ -43,7 +44,7 @@ const useStyles = makeStyles(() => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       textAlign: 'right',
-      padding: 0,
+      padding: 0
     },
     tableRow:{
       maxHeight: 52,
@@ -65,13 +66,6 @@ const useStyles = makeStyles(() => ({
       fontFamily: 'roboto',
       weight: 100,
      },
-      detailsSongTitle:{
-      fontFamily: 'Roboto',
-      fontSize: 40,
-      margin: 0,
-      fontWeight: 500,
-      paddingTop: 5
-    },
     detailsArtist:{
       fontFamily: 'Roboto',
       fontSize: 37,
@@ -93,17 +87,12 @@ const useStyles = makeStyles(() => ({
       fontWeight: 300,
       paddingTop: 0
     },
-    table: {
-      fontFamily: 'Roboto',
-      fontWeight: 100,
-    },
-    mainDetailsWrapper:{
-    
-    },
-    avilableFonts:{
-      fontFamily: 'Open Sans',
-      fontFamily: 'Roboto', 
-    },
+    portfolioInfo:{
+      fontFamily: 'roboto',
+      fontSize: 15,
+      textAlign: 'left',
+      fontWeight: 300
+    }
 }))
 
 export default useStyles;

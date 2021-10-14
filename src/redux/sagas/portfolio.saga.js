@@ -14,9 +14,6 @@ function* postPortfolio(action) {
 
 }
 function* getPortfolio() {
-    console.log("in get portfolio ")
-
-    
     try {
         const response = yield axios.get('/api/portfolio/');
         yield put({ type: 'SET_PORTFOLIO', payload: response.data });
@@ -24,12 +21,9 @@ function* getPortfolio() {
     catch (error) {
         console.log("error getting to portfolio", error)
     }
-
-
 }
 function* portfolioSaga() {
     yield takeLatest('POST_PORTFOLIO', postPortfolio);
     yield takeLatest('GET_PORTFOLIO', getPortfolio);
   }
-  
   export default portfolioSaga;

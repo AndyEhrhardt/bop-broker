@@ -59,10 +59,23 @@ function QuickChart(props) {
                                 size="small"
                             >
                                 <TableHead>
-                                    <TableRow >
-                                        <TableCell align="left" sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, maxWidth: .3}}>Rank</TableCell>
-                                        <TableCell sx={{fontFamily: 'roboto', fontWeight: 300}} className={classes.tableCellSongArtist} align="right">Song/Arist</TableCell>
-                                        <TableCell className={classes.tableCellPrice} align="right">Price</TableCell>
+                                    <TableRow  >
+                                        <TableCell align="left" 
+                                        sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, 
+                                        maxWidth: .3, fontFamily: 'roboto', fontWeight: 500, 
+                                        fontSize: 15}}>
+                                            Rank
+                                        </TableCell>
+                                        <TableCell sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15}} 
+                                        className={classes.tableCellSongArtist} 
+                                        align="right">
+                                            Song/Arist
+                                        </TableCell>
+                                        <TableCell className={classes.tableCellPrice} 
+                                        sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15}}
+                                        align="right">
+                                            Price
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -72,13 +85,21 @@ function QuickChart(props) {
                                             className={classes.tableRow}
                                             key={track.id}
                                             onClick={() => handleRowClick(track.concat)}
-                                            sx={{ 'td, th': { paddingBottom: .35, paddingTop: .35, fontWeight: 300, cursor: 'pointer', } }}
+                                            sx={{ 'td, th': { paddingBottom: .35, paddingTop: .35, fontWeight: 400, cursor: 'pointer', } }}
                                             >
-                                                    <TableCell align="left" sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>{track.rank}</TableCell>
-                                                    <TableCell sx={{ fontFamily: 'roboto', paddingRight: 1.3, paddingLeft: 1 }} align="right" className={classes.tableCellSongArtist}>
-                                                        <a style={{fontWeight: 300, }}>{track.song_name.split('(')[0]} </a>
+                                                    <TableCell align="left" 
+                                                    sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>
+                                                        {track.rank}
+                                                    </TableCell>
+                                                    <TableCell sx={{ fontFamily: 'roboto', paddingRight: 1.3, paddingLeft: 1 }} 
+                                                    align="right" className={classes.tableCellSongArtist}>
+                                                        <a style={{fontWeight: 400, }}>
+                                                            {track.song_name.split('(')[0]} 
+                                                        </a>
                                                         <br/>
-                                                        <i style={{fontWeight: 100, }}>{track.artist}</i>
+                                                        <i style={{fontWeight: 300, fontSize: 13}}>
+                                                            {track.artist}
+                                                        </i>
                                                     </TableCell>
                                                     <TableCell sx={{ paddingRight: 1.3, paddingLeft: 1 }} align="right">
                                                         ${track.price === 2500 ? "2.5k": track.price === 1250 ? "1.2k" : track.price}
