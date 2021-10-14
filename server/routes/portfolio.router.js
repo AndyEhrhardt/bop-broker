@@ -7,8 +7,18 @@ const {
 } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log("in get portfolio router")
+    const userId = req.user.id;
+    let portfolio = {};
+    const currentHoldingsQuery = `SELECT song_current.*, song_holdings.quantity
+    FROM song_current, song_holdings, "user"
+    WHERE song_current.id = song_holdings.song_id
+    AND song_holdings.user_id = "user".id
+    AND song_holdings.user_id = $1;`
+    pool.query(currentHoldingsQuery, [userId])
+      .then((result) => {
 
-
+      })
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
@@ -16,7 +26,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id;
   const songId = req.body.data.id;
   const quantity = req.body.quantity;
-  let dateQuery = `SELECT song_charts.date
+  const dateQuery = `SELECT song_charts.date
   FROM song_charts
   ORDER BY song_charts.date DESC
   LIMIT 1;`
