@@ -116,7 +116,14 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
-
+.MuiTableBody-root{
+  font-family: 'roboto';
+  font-weight: 100px;
+}	
+.MuiTableCell-root{
+  font-family: 'roboto';
+  font-weight: 100px;
+}
 .outer-table-row:hover{
   background-color: rgb(142, 253, 132);
   animation-name: fadeIn;

@@ -131,7 +131,7 @@ const getDatabaseDate = () => {
 //getDatabaseDate();
 
 //starts the process of getting the new data from spotify every day at 10:30AM UTC
-cron.schedule('00 04 * * *', () => {
+cron.schedule('00 02 * * *', () => {
     console.log("starting functions");
     getDatabaseDate();
 });
@@ -179,6 +179,7 @@ const checkDate = () => {
     } else {
         counter = 0;
         console.log("spotify playlist not yet updated");
+        playlistsToPost.length = 0;
         setTimeout(() => {
             getDatabaseDate(); //if the database date is not older than the incoming date, keep checking every five minutes
         }, 300000);
@@ -198,13 +199,12 @@ const trimData = () => {
         newTrack.date = track.added_at.split('T')[0]; //gets just the date from the datetime provided by spotify
         playlistsToPost.push(newTrack);
     });
-    console.log("this data is nice and trim:", playlistsToPost);
     counter++; //global counter variable is iterated
     return getPlaylists(); //get playlists is called to get the next index in the playlist array 
 }
 //called once all playlist data has been checked and is ready to be posted
 const postPlaylistToDatabase = (playlist) => {
-    console.log(`incoming playlist`, playlist);
+    console.log(`incoming playlist`);
     let queryText = `INSERT INTO "song_charts" ("rank", "song_name", "artist", "spotify_song_id", "spotify_playlist_id", "date", "price")
         VALUES`
     let valueArray = [];
@@ -216,7 +216,7 @@ const postPlaylistToDatabase = (playlist) => {
         queryText += `($${i+1}, $${i+2}, $${i+3}, $${i+4}, $${i+5}, $${i+6}, $${i+7}),` //this string is looped over and is used to sanitize the data
     }
     queryText = queryText.slice(0, queryText.length - 1) //removes the last comma from the end of the string
-    console.log(queryText)
+    console.log("query text generated")
     pool.query(queryText, valueArray)
         .then(result => {
             console.log("new playlists added to song_charts")

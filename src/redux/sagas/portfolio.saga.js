@@ -15,6 +15,8 @@ function* postPortfolio(action) {
 }
 function* getPortfolio() {
     console.log("in get portfolio ")
+
+    
     try {
         const response = yield axios.get('/api/portfolio/');
         yield put({ type: 'SET_PORTFOLIO', payload: response.data });

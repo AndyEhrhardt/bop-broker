@@ -40,13 +40,13 @@ function SongDetails() {
     return (
         <>
             {songDetails.allRanks === undefined ? <p>Loading</p> : 
-            <div >
+            <div>
                 <div className={classes.mainDetailsWrapper}>
                 <h1 className={classes.detailsSongTitle}>{songDetails.basicInfo[0].song_name}</h1>
                 <h2 className={classes.detailsArtist}>{songDetails.basicInfo[0].artist}</h2>
                 <h3 className={classes.detailsRank}>Ranked #{songDetails.basicInfo[0].current_rank}</h3>
                 <h3 className={classes.detailsSubRank}>On US Top 50 Daily</h3>
-                </div>
+            </div>
 
             <input value={quantity} 
             onChange={(event) => handleQuantityChange(event)} 

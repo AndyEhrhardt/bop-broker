@@ -1,9 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { blue } from '@mui/material/colors';
 
 
 
 const useStyles = makeStyles(() => ({
-    
+    tableFont : {
+      fontFamily: 'Roboto',
+      fontSize: 35,
+      fontWeight: 100,
+    },
     quickChartTitle: {
         fontFamily: 'Roboto',
         fontSize: 35,
@@ -29,7 +34,7 @@ const useStyles = makeStyles(() => ({
       textAlign: 'center',
       fontFamily: 'Roboto',
       fontSize: 50,
-      fontWeight: 100,
+      fontWeight: 200,
     },
     tableCellSongArtist:{
       width: 130,
@@ -45,13 +50,22 @@ const useStyles = makeStyles(() => ({
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      textAlign: 'right'
+      textAlign: 'right',
+      backgroundColor: "white",
+      transition: '0.2s',
+      "&:hover": {
+        backgroundColor: '#f2f2f2',
+      }
     },
     tableCellPrice:{
       width: 20,
       maxWidth: 20,
     },
-    detailsSongTitle:{
+    Typography: {
+      fontFamily: 'roboto',
+      weight: 100,
+     },
+      detailsSongTitle:{
       fontFamily: 'Roboto',
       fontSize: 40,
       margin: 0,
@@ -78,6 +92,10 @@ const useStyles = makeStyles(() => ({
       margin: 0,
       fontWeight: 300,
       paddingTop: 0
+    },
+    table: {
+      fontFamily: 'Roboto',
+      fontWeight: 100,
     },
     mainDetailsWrapper:{
     
