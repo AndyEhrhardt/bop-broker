@@ -9,15 +9,17 @@
 [x] - view charts in browser console log 
 [x] - set up component for viewing a chart 
 [x] - diplay chart on dom 
-[] - Some sort of on hover effect for table rows
+[x] - Some sort of on hover effect for table rows
 [x] - clicking a row leads to song details page
 [x] - get request to get songs historical info and which playlists its on
 [x] - redux store to store the song details
 [x] - display that information on the dom 
 [x] - Buy button 
 [x] - post saga to post buy in user's portfolio
+[] - start fresh
 [] - get route for users historical portfolio, historical song holdings and current monies 
-[] - 
+[] - route to portfolio page
+[] - basic portfolio page, just get stuff on the dom
 [] - 
 [] - 
 [] - clicking a chart leads to chart details page 
