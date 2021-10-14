@@ -17,20 +17,43 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     AND song_holdings.user_id = $1;`
     pool.query(currentHoldingsQuery, [userId])
       .then((result) => {
-        console.log(result.rows)
+        portfolio.currentHoldings = result.rows
         const buyingpowerTotalQuery = `SELECT "user".buying_power, "user".total_cash, "user".daily_dividend
         FROM "user"
         WHERE "user".id = $1;`
         pool.query(buyingpowerTotalQuery, [userId])
-      ,then((result) =>{
-        console.log(result.rows)
-        const historicalPortfolioQuery = `
-        `
-        pool.query(historicalPortfolio, [user.id])
-      })
+        .then((result) =>{
+          portfolio.currentMoney = result.rows[0];
+          const historicalPortfolioQuery = `SELECT historical_portfolio.*
+          FROM historical_portfolio, "user" 
+          WHERE historical_portfolio.user_id = "user".id
+          AND historical_portfolio.user_id = $1
+          ORDER BY date DESC;`
+          pool.query(historicalPortfolioQuery, [userId])
+          .then((result) => {
+            portfolio.historicalTotal = result.rows
+            const historicalSongValueQuery = `SELECT historical_song_holdings.*
+            FROM historical_song_holdings, song_holdings, "user"
+            WHERE historical_song_holdings.holding_id = song_holdings.id
+            AND song_holdings.user_id = "user".id
+            AND song_holdings.user_id = $1;`
+            pool.query(historicalSongValueQuery, [userId])
+            .then((result) => {
+              portfolio.historicalSongValue = result.rows;
+              console.log("portfolio assembled")
+              res.send(portfolio)
+            }).catch((error) => {
+              console.log("error getting historical song holdings",error)
+          })
+        }).catch((error) => {
+            console.log("error getting historical total portfolio value",error)
+        })
       }).catch((error) => {
-        console.log("",error)
+          console.log("error getting current total cash, buying power and dividend",error)
       })
+    }).catch((error) => {
+        console.log("error getting current holdings",error)
+  })
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {

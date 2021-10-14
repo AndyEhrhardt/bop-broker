@@ -19,7 +19,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             previousDate.setDate(recentDate.getDate() - 1)
             recentDate = recentDate.toISOString().split('T')[0]
             previousDate = previousDate.toISOString().split('T')[0]
-            console.log(recentDate, previousDate)
         const allChartsQuery = `WITH old_movers AS (
             SELECT song_charts.song_name AS title, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) AS id, song_charts.rank AS rank
             FROM song_charts

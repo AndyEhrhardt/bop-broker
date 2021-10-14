@@ -16,7 +16,7 @@
 [x] - display that information on the dom 
 [x] - Buy button 
 [x] - post saga to post buy in user's portfolio
-[] - start fresh
+[x] - start fresh
 [] - get route for users historical portfolio, historical song holdings and current monies 
 [] - route to portfolio page
 [] - basic portfolio page, just get stuff on the dom
