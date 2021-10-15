@@ -131,5 +131,48 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
 
 })
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log(req.body)
+  const userId = req.user.id;
+  const holding_id = req.body.data.holding_id;
+  const dollarAmount = req.body.data.sharePrice * req.body.data.numberOfShares;
+  const numberOfShares = req.body.data.numberOfShares;
+  const sellState = req.body.data.sellState;
+  let quantityOperator = '';
+  let buyingPowerOperator=  '';
+  console.log(holding_id, dollarAmount, numberOfShares, sellState);
+  if (sellState){
+    quantityOperator = '-';
+  } else {
+    quantityOperator = '+';
+  }
+  if (sellState){
+    buyingPowerOperator = '+';
+  } else {
+    buyingPowerOperator = '-';
+  }
+  const adjustQuantityQuery = `UPDATE song_holdings
+  SET quantity = quantity ${quantityOperator} $1
+  WHERE id = $2
+  AND user_id = $3;`
+  pool.query(adjustQuantityQuery, [numberOfShares, holding_id, userId])
+    .then((result) => {
+      const adjustBuyingPowerQuery = `UPDATE "user"
+      SET buying_power = buying_power ${buyingPowerOperator} $1
+      WHERE "user".id = $2;`
+      pool.query(adjustBuyingPowerQuery, [dollarAmount, userId])
+        .then((result) => {
+            res.sendStatus(200)
+        }).catch((error) => {
+          console.log("error updating buying power", error)
+        })
+    }).catch((error) => {
+      console.log("error updating share quantity", error)
+    })
+
+})
+
+
+
 
 module.exports = router;

@@ -25,7 +25,7 @@ function QuickPortfolio() {
   const dispatch = useDispatch();
   const [modalPop, setModalPop] = useState(false)
   const [buySellTrack, setBuySellTrack] = useState({})
-
+  const [buySellPrice, setBuySellPrice] = useState(0)
   const mouseEnter = () => {
     setElev(12);
   };
@@ -34,15 +34,19 @@ function QuickPortfolio() {
     setElev(4);
   };
 
-  const handleSell = (track) => {
-    console.log(track)
+  const handleSell = (track, price) => {
+    console.log(track, price)
     setBuySellTrack(track)
+    setBuySellPrice(price)
     setModalPop(true)
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   }
   return (
     <>
-    <BuySellModal modalPop={modalPop} setModalPop={setModalPop} track={buySellTrack}/>
+    <BuySellModal modalPop={modalPop} 
+    setModalPop={setModalPop} 
+    track={buySellTrack}
+    price={buySellPrice}/>
       <Paper
         className={classes.quickChartWrapper}
         onMouseEnter={mouseEnter}
@@ -217,7 +221,7 @@ function QuickPortfolio() {
                           }}
                         >
                           {track.current_rank}
-                          <Button onClick={()=> handleSell(track)}>Sell</Button>
+                          <Button onClick={()=> handleSell(track, track.current_price)}>Sell</Button>
                         </TableCell>
                         <TableCell
                           sx={{

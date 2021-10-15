@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 
 function BuySellModal(props){
     const dispatch = useDispatch();
-    const [sellBuy, setSellBuy] = useState(true)
+    const [sellState, setSellState] = useState(true)
     const classes = useStyles();
     const [numberOfShares, setNumberOfShares] = useState('')
     console.log(props.track)
@@ -21,9 +21,24 @@ function BuySellModal(props){
         console.log(numberOfShares)
     }
     const handleBuySell = (buyOrSell) => {
-        
-
+        if (numberOfShares === props.track.quantity && buyOrSell){
+            dispatch({ type: 'SELL_ALL_SHARES', payload: props.track});
+        } else {
+            dispatch({ type: 'UPDATE_SHARE_QUANTITY', 
+            payload: props.track, 
+            sellState: sellState, 
+            numberOfShares: numberOfShares,
+            price: props.price});
+        } 
     }
+    const handleSellAll = () =>{
+        setNumberOfShares(props.track.quantity)
+    }
+    const changeTradeMode = (buySellMode) => { 
+        console.log("sell state is ", buySellMode)
+        setSellState(buySellMode)
+    }
+
     return (
         <Paper>
             <Modal
@@ -32,16 +47,27 @@ function BuySellModal(props){
             >
                 <div className={classes.innerModalWrap}>
                     <div className={classes.title}>
-                    <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
-                        Sell Shares
-                    </Typography>
-                    <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
-                         Buy Shares
-                    </Typography>
+                    <Button disabled={sellState}
+                    onClick={() => changeTradeMode(true)}>
+                        Sell Mode
+                    </Button>
+                    <Button disabled={!sellState}
+                    onClick={()=> changeTradeMode(false)}>
+                        Buy Mode
+                    </Button>
+                    
+                        <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
+                            Sell Shares
+                        </Typography>
+                    
+                        <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
+                            Buy Shares
+                        </Typography>
+                   
                     </div>
                     <div className={classes.inputWrapper}>
                     <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
-                        Sell 
+                    {sellState ? "Sell" : "Buy" }
                             <TextField id="filled-basic" 
                             type="number"
                             label="# Of Shares" 
@@ -55,8 +81,13 @@ function BuySellModal(props){
                         For ${numberOfShares * props.track.current_price}
                     </Typography>
                     </div>
+                    <Button onClick={handleSellAll}>Sell All</Button>
                     <div>
-                    <Button onClick={()=> handleBuySell(sellBuy)}>Sell</Button><Button onClick={()=> handleBuySell(sellBuy)}>Buy</Button>
+                    {sellState ? 
+                        <Button onClick={()=> handleBuySell(sellState)}>Sell</Button>
+                    :
+                        <Button onClick={()=> handleBuySell(sellState)}>Buy</Button>
+                    }   
                     </div>
                 </div>
             </Modal>

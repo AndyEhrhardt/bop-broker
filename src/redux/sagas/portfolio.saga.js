@@ -10,8 +10,6 @@ function* postPortfolio(action) {
     catch (error) {
         console.log("error posting to portfolio", error)
     }
-
-
 }
 function* getPortfolio() {
     try {
@@ -29,14 +27,31 @@ function* sellSong(action) {
         yield put({ type: 'GET_PORTFOLIO' });
     } 
     catch (error) {
-        console.log("error getting to portfolio", error)
+        console.log("error selling all song shares", error)
     }
 }
+function* updateQuantity(action){
+    console.log(action)
+    try{
+        yield axios.put('api/portfolio', {data: {
+            holding_id: action.payload.holding_id,
+            sharePrice: action.price,
+            numberOfShares: action.numberOfShares,
+            sellState: action.sellState
+        }});
+        yield put({ type: 'GET_PORTFOLIO'})
+    }
+    catch(error){
+        console.log("error updating share quantity", error)
+    }
+}
+
 
 function* portfolioSaga() {
     yield takeLatest('POST_PORTFOLIO', postPortfolio);
     yield takeLatest('GET_PORTFOLIO', getPortfolio);
     yield takeLatest('SELL_ALL_SHARES', sellSong);
+    yield takeLatest('UPDATE_SHARE_QUANTITY', updateQuantity)
   }
 
   export default portfolioSaga;
