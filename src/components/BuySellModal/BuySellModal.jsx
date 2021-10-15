@@ -8,27 +8,45 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import useStyles from "./modalStyles";
 import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 
 function BuySellModal(props){
     const dispatch = useDispatch();
-    const [sellState, setSellState] = useState(true)
+    const [sellState, setSellState] = useState(true);
+    const [notEnoughSell, setNotEnoughSell] = useState(false);
+    const [notEnoughBuy, setNotEnoughBuy] = useState(false);
     const classes = useStyles();
     const [numberOfShares, setNumberOfShares] = useState('')
-    console.log(props.track)
+
+    
+console.log("sellable quantity", props.track.quantity)
 
     const handleChange = (event) => {
+        
         setNumberOfShares(event.target.value)
-        console.log(numberOfShares)
+        console.log(parseInt(event.target.value))
+        if(parseInt(event.target.value) > props.track.quantity && sellState){
+            setNotEnoughSell(true)
+        } else if (event.target.value*props.price > props.buyingPower && !sellState){
+            setNotEnoughBuy(true)
+        } else{
+            setNotEnoughSell(false)
+            setNotEnoughBuy(false)
+        }
     }
     const handleBuySell = (buyOrSell) => {
         if (numberOfShares === props.track.quantity && buyOrSell){
             dispatch({ type: 'SELL_ALL_SHARES', payload: props.track});
+            setNumberOfShares(0)
+            props.setModalPop(false);
         } else {
             dispatch({ type: 'UPDATE_SHARE_QUANTITY', 
             payload: props.track, 
             sellState: sellState, 
             numberOfShares: numberOfShares,
             price: props.price});
+            setNumberOfShares(0)
+            props.setModalPop(false);
         } 
     }
     const handleSellAll = () =>{
@@ -68,13 +86,15 @@ function BuySellModal(props){
                     <div className={classes.inputWrapper}>
                     <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
                     {sellState ? "Sell" : "Buy" }
-                            <TextField id="filled-basic" 
-                            type="number"
+                        <TextField id="filled-basic" 
                             label="# Of Shares" 
                             variant="filled" 
                             size="small"
                             value={numberOfShares}
-                            onChange={(event) => {handleChange(event)}}/> 
+                            min={1}
+                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                            onChange={(event) => {handleChange(event)}}
+                        /> 
                         Shares
                     </Typography>
                     <Typography sx={{ fontWeight: 300, fontSize: 30 }}>
@@ -84,9 +104,9 @@ function BuySellModal(props){
                     <Button onClick={handleSellAll}>Sell All</Button>
                     <div>
                     {sellState ? 
-                        <Button onClick={()=> handleBuySell(sellState)}>Sell</Button>
+                        <Button disabled={notEnoughSell} onClick={()=> handleBuySell(sellState)}>Sell</Button>
                     :
-                        <Button onClick={()=> handleBuySell(sellState)}>Buy</Button>
+                        <Button disabled={notEnoughBuy} onClick={()=> handleBuySell(sellState)}>Buy</Button>
                     }   
                     </div>
                 </div>

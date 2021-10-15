@@ -23,9 +23,9 @@
 [x] - sell all shares saga and sell router (delete)
 [x] - write sql, fill out router
 [x] - sell router
-[] - buy/sell popup 
-[] - partial sell/buy more saga and router (put)
-[] - write sql, fill out router
+[x] - buy/sell popup 
+[x] - partial sell/buy more saga and router (put)
+[x] - write sql, fill out router
 [] - conditional buying/selling limited by number of shares and buying power
 [] - 
 [] - 

@@ -128,7 +128,6 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     }).catch((error) => {
       console.log("error deleting song holding", error)
     })
-
 })
 
 router.put('/', rejectUnauthenticated, (req, res) => {
@@ -136,7 +135,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id;
   const holding_id = req.body.data.holding_id;
   const dollarAmount = req.body.data.sharePrice * req.body.data.numberOfShares;
-  const numberOfShares = req.body.data.numberOfShares;
+  const numberOfShares = parseInt(req.body.data.numberOfShares);
   const sellState = req.body.data.sellState;
   let quantityOperator = '';
   let buyingPowerOperator=  '';
