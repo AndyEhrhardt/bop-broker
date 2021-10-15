@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import useStyles from "../styles/styles";
 import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import Paper from "@mui/material/Paper";
@@ -15,12 +14,17 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from '@mui/material/Button';
 
+import useStyles from "../styles/styles";
+import BuySellModal from "../BuySellModal/BuySellModal";
+
 function QuickPortfolio() {
   const classes = useStyles();
   const history = useHistory();
   const portfolio = useSelector((store) => store.portfolio);
   const [elev, setElev] = useState(4);
   const dispatch = useDispatch();
+  const [modalPop, setModalPop] = useState(false)
+  const [buySellTrack, setBuySellTrack] = useState({})
 
   const mouseEnter = () => {
     setElev(12);
@@ -32,10 +36,13 @@ function QuickPortfolio() {
 
   const handleSell = (track) => {
     console.log(track)
-    dispatch({ type: 'SELL_ALL_SHARES', payload: track});
+    setBuySellTrack(track)
+    setModalPop(true)
+    //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   }
   return (
     <>
+    <BuySellModal modalPop={modalPop} setModalPop={setModalPop} track={buySellTrack}/>
       <Paper
         className={classes.quickChartWrapper}
         onMouseEnter={mouseEnter}

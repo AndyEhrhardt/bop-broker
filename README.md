@@ -18,10 +18,22 @@
 [x] - post saga to post buy in user's portfolio
 [x] - start fresh
 [x] - get route for users historical portfolio, historical song holdings and current monies 
-[] - route to portfolio page
-[] - basic portfolio page, just get stuff on the dom
+[x] - route to portfolio page
+[x] - basic portfolio quick display, just get stuff on the dom
+[x] - sell all shares saga and sell router (delete)
+[x] - write sql, fill out router
+[x] - sell router
+[] - buy/sell popup 
+[] - partial sell/buy more saga and router (put)
+[] - write sql, fill out router
+[] - conditional buying/selling limited by number of shares and buying power
 [] - 
 [] - 
+[] - 
+[] - 
+[] - 
+[] - 
+
 [] - clicking a chart leads to chart details page 
 
 
