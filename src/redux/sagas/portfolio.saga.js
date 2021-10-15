@@ -22,8 +22,21 @@ function* getPortfolio() {
         console.log("error getting to portfolio", error)
     }
 }
+function* sellSong(action) {
+    console.log(action.payload)
+    try {
+        yield axios.delete('/api/portfolio/', {data: action.payload});
+        yield put({ type: 'GET_PORTFOLIO' });
+    } 
+    catch (error) {
+        console.log("error getting to portfolio", error)
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('POST_PORTFOLIO', postPortfolio);
     yield takeLatest('GET_PORTFOLIO', getPortfolio);
+    yield takeLatest('SELL_ALL_SHARES', sellSong);
   }
+
   export default portfolioSaga;

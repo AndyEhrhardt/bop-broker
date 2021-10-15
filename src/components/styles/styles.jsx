@@ -28,8 +28,8 @@ const useStyles = makeStyles(() => ({
       paddingRight: 0
     },
     quickChartWrapper: {
-      maxWidth: 290,
-      minWidth: 290,
+      maxWidth: 310,
+      minWidth: 310,
       maxHeight: 378,
       minHeight: 378,
       textAlign: 'center',
@@ -87,12 +87,58 @@ const useStyles = makeStyles(() => ({
       fontWeight: 300,
       paddingTop: 0
     },
-    portfolioInfo:{
+    quickPortfolioInfo:{
       fontFamily: 'roboto',
       fontSize: 15,
+      margin: 0
+    },
+    inlineInfo:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    quickPortColMaster:{
+      display: 'flex',
       textAlign: 'left',
-      fontWeight: 300
+      gap: 10
+    },
+    quickPortColRight:{
+      display: 'flex',
+      textAlign: 'right'
+    },
+    quickPortColInfo:{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end'
+    },
+    quickPortColInfoLeft:{
+      display: 'flex',
+      flexDirection: 'column'
+      //alignItems: 'flex-start'
+    },
+    quickPortGap:{
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '50%'
+    },
+    divider:{
+      backgroundColor: '#b0b0b0',
+      minWidth: 1,
+      maxWidth: 1,
+      opacity: .5
+    },
+    quickPortMaster: {
+      paddingRight: 10,
+      paddingLeft: 10
+    },
+    quickSubTitle:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      fontSize: 15,
+      paddingTop: 6
     }
+    
 }))
 
 export default useStyles;

@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log("in get portfolio router")
     const userId = req.user.id;
     let portfolio = {};
-    const currentHoldingsQuery = `SELECT song_current.*, song_holdings.quantity
+    const currentHoldingsQuery = `SELECT song_current.*, song_holdings.quantity, song_holdings.id as holding_id
     FROM song_current, song_holdings, "user"
     WHERE song_current.id = song_holdings.song_id
     AND song_holdings.user_id = "user".id
@@ -105,5 +105,31 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       console.log("error getting date", error)
     })
 })
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+  const songId = req.body.holding_id;
+  const userId = req.user.id;
+  const totalAssetValue = req.body.quantity * req.body.current_price
+  console.log(userId)
+  const sellQuery = `DELETE FROM song_holdings 
+  WHERE id = $1
+  AND user_id = $2;`
+  pool.query(sellQuery, [songId, userId])
+    .then((result) => {
+      const buyingPowerUpdateQuery = `UPDATE "user"
+      SET buying_power = buying_power + $1
+      WHERE "user".id = $2;`
+      pool.query(buyingPowerUpdateQuery, [totalAssetValue, userId])
+        .then((result) => {
+          res.send()
+        }).catch((error) => {
+          console.log("error updating buying power", error)
+        })
+    }).catch((error) => {
+      console.log("error deleting song holding", error)
+    })
+
+})
+
 
 module.exports = router;
