@@ -26,8 +26,6 @@ function UserPage() {
   return (
     <div className="container">
       <button onClick={toChart}>chart list </button> 
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
       <div className={classes.quickComponentsContainer}>
         <QuickChart chartName={"Global"} sliceStart={0} reducer={"allCharts"} smallerWidth={false}/>
         <QuickPortfolio />
