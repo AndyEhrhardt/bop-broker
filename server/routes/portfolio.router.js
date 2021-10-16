@@ -31,7 +31,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
           ORDER BY date DESC;`
           pool.query(historicalPortfolioQuery, [userId])
           .then((result) => {
-            if (result.rows.length > 0) {
+            if (result.rows.length > 1) {
             portfolio.historicalTotal = result.rows
               if (portfolio.historicalTotal[0].value - portfolio.historicalTotal[1].value > 0){ //picks css color depending on loss/gain/break even
                 portfolio.gains = "#06f202"
@@ -42,7 +42,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
               }
             } else {
               portfolio.gains = "#e6bb00"
-              portfolio.historicalTotal = [{value: 10000}, {value: 10000}]
+              portfolio.historicalTotal = [{value: 10000, date: "new"}, {value: 10000, date: "new"}]
             }
             const historicalSongValueQuery = `SELECT historical_song_holdings.*
             FROM historical_song_holdings, song_holdings, "user"

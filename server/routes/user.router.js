@@ -23,10 +23,32 @@ router.post('/register', (req, res, next) => {
 
   const queryText = `INSERT INTO "user" (username, password)
     VALUES ($1, $2) RETURNING id`;
-  pool
-    .query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
+  pool.query(queryText, [username, password])
+    .then((result) => {
+      const userId = result.rows[0].id;
+      const dateQuery = `SELECT song_charts.date
+      FROM song_charts
+      ORDER BY song_charts.date DESC
+      LIMIT 1`
+      pool.query(dateQuery)
+        .then((result) => {
+          console.log(result.rows)
+          console.log(result.rows[0].date.toISOString().split('T')[0])
+          const date = result.rows[0].date.toISOString().split('T')[0];
+          const firstHistoricalEntry = `INSERT INTO "historical_portfolio"("user_id", "value", "date")
+          VALUES ($1, 10000, $2);`
+          pool.query(firstHistoricalEntry, [userId, date])
+          .then((result) => {
+            console.log(result)
+            res.sendStatus(201)
+          }).catch((error) => {
+            console.log('historical insert failed ', error);
+            res.sendStatus(500);
+          });
+        }).catch((error) => {
+          console.log('get date failed ', error)
+        })
+    }).catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
