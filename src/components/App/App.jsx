@@ -16,6 +16,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import PortfolioPage from '../PortfolioPage/PortfolioPage'
+
 
 import './App.css';
 
@@ -121,7 +123,11 @@ function App() {
           >
             <SongDetails />
           </ProtectedRoute>
-
+          <ProtectedRoute
+            path="/portfoliopage"
+          >
+            <PortfolioPage />
+          </ProtectedRoute>
           <Route>
             <h1>404</h1>
           </Route>

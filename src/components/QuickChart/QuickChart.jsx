@@ -57,9 +57,13 @@ function QuickChart(props) {
         onMouseLeave={mouseLeave} 
         elevation={elev}
         >
-                <h2 className={classes.quickChartTitle}>
+                <Typography sx={{ fontWeight: 400,
+                    fontSize: 40,
+                    cursor: "pointer" }} 
+                    className={classes.quickChartTitle}
+                >
                     {props.chartName}
-                </h2>
+                </Typography>
                 <div className={"table"}>
                     {chart.length === 0 ? <p>Loading</p> : 
                         <TableContainer>

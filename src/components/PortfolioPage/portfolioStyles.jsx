@@ -1,9 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { blue } from '@mui/material/colors';
 
-
-
-const useStyles = makeStyles(() => ({
+const portfolioStyles = makeStyles(() => ({
+    masterWrap: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 20
+    },
     smallComponentsContainer: {
         display: "flex",
         flexDirection: "row",
@@ -27,19 +29,11 @@ const useStyles = makeStyles(() => ({
         "&:hover": {
           backgroundColor: '#f2f2f2',
         }
-      }, 
-    songName: {
-      width: 130,
-      maxWidth: 130,
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      textAlign: 'right',
-      paddingRight: 0
-    },
+      },
     quickChartWrapper: {
-      maxWidth: 310,
-      minWidth: 310,
+      maxWidth: '500',
+      width: '30%',
+      minWidth: '250',
       maxHeight: 378,
       minHeight: 378,
       textAlign: 'center',
@@ -118,6 +112,7 @@ const useStyles = makeStyles(() => ({
     },
     quickPortColMaster:{
       display: 'flex',
+      flexDirection: 'column',
       textAlign: 'left',
       gap: 10
     },
@@ -137,7 +132,6 @@ const useStyles = makeStyles(() => ({
     quickPortGap:{
       display: 'flex',
       justifyContent: 'space-between',
-      width: '50%'
     },
     divider:{
       backgroundColor: '#b0b0b0',
@@ -173,4 +167,4 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-export default useStyles;
+export default portfolioStyles;

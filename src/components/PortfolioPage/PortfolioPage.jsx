@@ -14,11 +14,14 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 
-import useStyles from "../styles/styles";
+import portfolioStyles from "./portfolioStyles";
 import BuySellModal from "../BuySellModal/BuySellModal";
 
-function QuickPortfolio() {
-  const classes = useStyles();
+import PortfolioHoldings from './PortfolioHoldings'
+
+
+function PortfolioPage() {
+  const classes = portfolioStyles();
   const history = useHistory();
   const portfolio = useSelector((store) => store.portfolio);
   const [elev, setElev] = useState(16);
@@ -27,10 +30,6 @@ function QuickPortfolio() {
   const [modalPop, setModalPop] = useState(false);
   const [buySellTrack, setBuySellTrack] = useState({});
   const [buySellPrice, setBuySellPrice] = useState(0);
-
-  const toPortfolio = () => {
-    history.push('/portfoliopage')
-  }
 
   const mouseEnter = () => {
     setElev(12);
@@ -52,6 +51,7 @@ function QuickPortfolio() {
   };
   return (
     <>
+    <div className={classes.masterWrap}>
       <Paper
         className={classes.quickChartWrapper}
         onMouseEnter={mouseEnter}
@@ -69,39 +69,32 @@ function QuickPortfolio() {
               price={buySellPrice}
               buyingPower={portfolio.currentMoney.buying_power}
             />
-              <Typography sx={{ fontWeight: 400,
-                fontSize: 40,
-                cursor: "pointer" }} 
-                className={classes.quickChartTitle}
-                onClick={toPortfolio}
-              >
-                Portfolio
-              </Typography>
             <div className={classes.quickPortMaster}>
-              <div className={classes.quickSubTitle}>
-                <Typography sx={{ fontWeight: 500 }}>Equity</Typography>
-                <Typography sx={{ fontWeight: 500 }}>Returns</Typography>
-              </div>
+              <h2 className={classes.quickChartTitle}>Portfolio</h2>
+              
               <div className={classes.quickPortColMaster}>
+                <div className={classes.quickSubTitle}>
+                    <Typography sx={{ fontWeight: 500 }}>Equity</Typography>
+                </div>
                 <div className={classes.quickPortGap}>
                   <div className={classes.quickPortColInfoLeft}>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
                     >
-                      Net
+                      Total Value
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
                     >
-                      Excess
+                      Buying Power
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
                     >
-                      Assets
+                      Total Asset Value
                     </Typography>
                   </div>
                   <div className={classes.quickPortColInfo}>
@@ -130,33 +123,64 @@ function QuickPortfolio() {
                   </div>
                 </div>
                 <div className={classes.divider}></div>
+                <div className={classes.quickSubTitle}>
+                    <Typography sx={{ fontWeight: 500 }}>Returns</Typography>
+                </div>
                 <div className={classes.quickPortGap}>
                   <div className={classes.quickPortColInfoLeft}>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
                     >
                       {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
-                      "Loss $"  : 
+                      "24h Return $"  : 
                       portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
-                      "Even $" :
-                      "Gain $"
+                      "24h Return $" :
+                      "24h Return $"
                       } 
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
                     >
                       {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
-                      "Loss %"  : 
+                      "24h Return %"  : 
                       portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
-                      "Even %" :
-                      "Gain %"
+                      "24h Return %" :
+                      "24h Return %"
                       } 
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400 }}
+                    >
+                      Dividend
+                    </Typography>
+                    <Typography
+                      className={classes.quickPortfolioInfo}
+                      sx={{ fontWeight: 400 }}
+                    >
+                      {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
+                      "Weekly Return $"  : 
+                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
+                      "Weekly Return $" :
+                      "Weekly Return $"
+                      } 
+                    </Typography>
+                    <Typography
+                      className={classes.quickPortfolioInfo}
+                      sx={{ fontWeight: 400 }}
+                    >
+                      {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
+                      "Return %"  : 
+                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
+                      "Return %" :
+                      "Return %"
+                      } 
+                    </Typography>
+                    <Typography
+                      className={classes.quickPortfolioInfo}
+                      sx={{ fontWeight: 400 }}
                     >
                       Dividend
                     </Typography>
@@ -184,132 +208,40 @@ function QuickPortfolio() {
                       >
                       ${portfolio.currentMoney.daily_dividend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Typography>
+                    <Typography
+                      className={classes.quickPortColRight}
+                      sx={{ fontWeight: 500,
+                        color: portfolio.gains }}
+                    >
+                     
+                    ${Math.abs((portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </Typography>
+                    <Typography
+                      className={classes.quickPortColRight}
+                      sx={{ fontWeight: 500,
+                        color: portfolio.gains }}
+                    >
+                    {Math.abs(((((portfolio.historicalTotal[0].value/portfolio.historicalTotal[1].value)-1)*100).toFixed(2)))}%
+                    </Typography>
+                    <Typography
+                      className={classes.quickPortColRight}
+                      sx={{ fontWeight: portfolio.currentMoney.daily_dividend === 0 ? 400 : 500,
+                        color: portfolio.currentMoney.daily_dividend === 0 ? "#000000" :  "#06f202" }}
+                      >
+                      ${portfolio.currentMoney.daily_dividend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </Typography>
                   </div>
                 </div>
-              </div>
-              <div className={"table"}>
-              <TableContainer>
-                <Typography component={'span'}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell
-                          align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1,
-                            width: 0.1,
-                            maxWidth: 0.3,
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                          }}
-                        >
-                          Rank
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                          }}
-                          className={classes.portTableCellSongArtist}
-                          align="right"
-                        >
-                          Song/Arist
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCellPrice}
-                          sx={{
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                          }}
-                          align="right"
-                        >
-                          Value
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {portfolio.currentHoldings.slice(page, page + 3).map((track, index) => (
-                        <TableRow
-                          className={classes.tableRow}
-                          key={index}
-                          sx={{
-                            "td, th": {
-                              paddingBottom: 0.35,
-                              paddingTop: 0.35,
-                              cursor: "pointer",
-                            },
-                          }}
-                        >
-                          <TableCell
-                            align="left"
-                            sx={{paddingRight: 1.3,
-                              paddingLeft: 1.5,
-                              width: 0.1,
-                              maxWidth: 0.3,
-                             }}>
-                            {track.current_rank}
-                            <Button
-                              onClick={() =>
-                                handleSell(track, track.current_price)
-                              }
-                            >
-                              Sell
-                            </Button>
-                          </TableCell>
-                          <TableCell
-                            sx={{
-                              fontFamily: "roboto",
-                              paddingRight: 1.3,
-                              paddingLeft: 1,
-                            }}
-                            align="right"
-                            className={classes.tableCellSongArtist}
-                          >
-                            <a style={{ fontWeight: 400 }}>
-                              {track.song_name.split("(")[0]}
-                            </a>
-                          </TableCell>
-                          <TableCell
-                            sx={{ paddingRight: 1.3, paddingLeft: 1 }}
-                            align="right"
-                          >
-                          <a style={{ fontWeight: 400 }}>
-                            $
-                            {track.current_price === 2500
-                              ? "2.5k"
-                              : track.current_price === 1250
-                              ? "1.2k"
-                              : track.current_price}
-                          </a>
-                          </TableCell>
-                        </TableRow>
-                        
-                      ))}
-                    </TableBody>
-                  </Table>
-                </Typography>
-                {portfolio.currentHoldings.length > 3 && 
-                <TablePagination
-                  page={page}
-                  rowsPerPage={3}
-                  rowsPerPageOptions={[]}
-                  count={portfolio.currentHoldings.length}
-                  component="div"
-                  onPageChange={handleChangePage}
-                />
-              }
-              </TableContainer>
               </div>
             </div>
           </>
         )}
+        
       </Paper>
+      <PortfolioHoldings/>
+      </div>
     </>
   );
 }
 
-export default QuickPortfolio;
+export default PortfolioPage;

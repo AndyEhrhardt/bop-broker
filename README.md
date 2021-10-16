@@ -26,15 +26,36 @@
 [x] - buy/sell popup 
 [x] - partial sell/buy more saga and router (put)
 [x] - write sql, fill out router
-[] - conditional buying/selling limited by number of shares and buying power
-[] - 
-[] - 
-[] - 
-[] - 
-[] - 
-[] - 
+[x] - conditional buying/selling limited by number of shares and buying power
+[x] - create new page to view all regional charts 
+[x] - .map over quick chart to display charts on dom
+[] - create portfolio page
+[] - open portfolio page by clicking quick portfolio 
+[] - chart.js for historical portfolio value
+[] - chart.js for historical song value 
+[] - incorporate buy/sell modal component into song deatils page 
+
 
 [] - clicking a chart leads to chart details page 
+[] - get saga for chart details
+[] - set up get router for chart details 
+[] - reducer for chart details 
+
+
+[] - horizontal portfolio in top right 
+[] - custom buttons 
+[] - apply fade in fade out on all quick components
+[] - create logo
+[] - styled sign out 
+[] - change log in page styling 
+[] - create header
+
+
+
+
+[] - write and create an about page 
+[] - complete readme
+
 
 
 ## Setup Instructions
