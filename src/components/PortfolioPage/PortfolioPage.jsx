@@ -59,7 +59,7 @@ function PortfolioPage() {
         elevation={elev}
       > 
         {portfolio.currentMoney === undefined ? (
-          <>loading</>
+          <></>
         ) : (
           <>
             <BuySellModal

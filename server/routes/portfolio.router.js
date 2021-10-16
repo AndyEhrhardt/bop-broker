@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     AND song_holdings.user_id = $1;`
     pool.query(currentHoldingsQuery, [userId])
       .then((result) => {
-        portfolio.currentHoldings = result.rows
+        portfolio.currentHoldings = result.rows;
         const buyingpowerTotalQuery = `SELECT "user".buying_power, "user".total_cash, "user".daily_dividend
         FROM "user"
         WHERE "user".id = $1;`
