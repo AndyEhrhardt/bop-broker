@@ -23,6 +23,7 @@ import SongDetails from '../SongDetails/SongDetails'
 
 import LogOutButton from '../LogOutButton/LogOutButton'
 
+import ChartList from '../ChartList/ChartList'
 
 function App() {
   const dispatch = useDispatch();
@@ -108,6 +109,13 @@ function App() {
               <LandingPage />
             }
           </Route>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/chartlist"
+          >
+            <ChartList />
+          </ProtectedRoute>
           <ProtectedRoute
             path="/songdetails/:id"
           >

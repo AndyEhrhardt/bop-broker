@@ -4,7 +4,13 @@ import { blue } from '@mui/material/colors';
 
 
 const useStyles = makeStyles(() => ({
-      
+    smallComponentsContainer: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 10,
+        justifyContent: 'space-around'
+      },
       quickComponentsContainer : {
         display: 'flex',
         flexDirection: 'row',
@@ -37,9 +43,18 @@ const useStyles = makeStyles(() => ({
       fontSize: 50,
       fontWeight: 200
     },
-    tableCellSongArtist:{
+    chartListWidth: {
       width: 130,
       maxWidth: 130,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      textAlign: 'right',
+      padding: 0 
+    },
+    tableCellSongArtist:{
+      width: 150,
+      maxWidth: 150,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -114,7 +129,6 @@ const useStyles = makeStyles(() => ({
     quickPortColInfoLeft:{
       display: 'flex',
       flexDirection: 'column'
-      //alignItems: 'flex-start'
     },
     quickPortGap:{
       display: 'flex',
@@ -137,8 +151,18 @@ const useStyles = makeStyles(() => ({
       justifyContent: 'space-around',
       fontSize: 15,
       paddingTop: 6
+    },
+    header: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    green: {
+      fontColor: 'green'
+    }, 
+    red: {
+      fontColor: 'red'
     }
-    
 }))
 
 export default useStyles;

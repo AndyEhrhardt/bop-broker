@@ -13,13 +13,18 @@ const useStyles = makeStyles(() => ({
         transform: 'translate(-50%, -50%)',
         width: 400,
         backgroundColor: '#fbf9f3',
-        border: '2px solid #000',
-        boxShadow: 24,
         p: 4,
-        height: 300,
+        height: 290,
+        borderRadius: 5
     },
-    inputWrapper:{
-        
+    paperWrap:{
+        minWidth: 500,
+        maxWidth: 400,
+        backgroundColor: '#fbf9f3'
+    },
+    addPadd:{
+        padding: 10,
+        height: 280
     }
 }));
 

@@ -4,21 +4,32 @@ import QuickChart from '../QuickChart/QuickChart'
 import QuickPortfolio from '../QuickPortfolio/QuickPortfolio'
 import useStyles from '../styles/styles';
 import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router-dom';
 
 function UserPage() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
+
+  const user = useSelector((store) => store.user);
+
   useEffect(() => {
     dispatch({ type: 'GET_ALL_CHARTS'});
     dispatch({type: 'GET_PORTFOLIO'});
   }, [dispatch]);
-  const user = useSelector((store) => store.user);
+
+  const toChart = () => {
+    history.push('/chartlist')
+  }
+
+  
   return (
     <div className="container">
+      <button onClick={toChart}>chart list </button> 
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <div className={classes.quickComponentsContainer}>
-        <QuickChart chartName={"Global"} sliceStart={0} reducer={"allCharts"}/>
+        <QuickChart chartName={"Global"} sliceStart={0} reducer={"allCharts"} smallerWidth={false}/>
         <QuickPortfolio />
       </div>
     </div>

@@ -56,12 +56,15 @@ const chartNamesObj = {
   const chart = useSelector(store => store.allCharts);
 
   return (
-    <div className="container">
-      <div className={classes.quickComponentsContainer}>
+    <div>
+        <div className={classes.header}>
+            <Typography sx={{ fontWeight: 300, fontSize: 50 }}>
+                Regional Charts
+            </Typography>
+        </div>
+      <div className={classes.smallComponentsContainer}>
         {chartIdArray.map((chart, index) => (
-            <>
-             <QuickChart chartName={"Global"} sliceStart={0} reducer={"allCharts"}/>
-            </>
+             <QuickChart smallerWidth={true} chartName={chartNamesObj[chart]} sliceStart={index*50} reducer={"allCharts"}/>      
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import useStyles from '../styles/styles';
+import useSmallStyles from './smallerChart';
 import Typography from '@mui/material/Typography';
 import '@fontsource/roboto/300.css';
 import { ContactlessOutlined } from '@material-ui/icons';
@@ -18,16 +19,23 @@ import { ContactlessOutlined } from '@material-ui/icons';
 
 
 function QuickChart(props) {
-    const classes = useStyles();
+    let classes;
     const history = useHistory();
     const chart = useSelector(store => store[props.reducer].slice(props.sliceStart, props.sliceStart + 50));
     const [page, setPage] = useState(0);
     const [elev, setElev] = useState(4);
-    const [row, setRow] = useState("noBackground");
     const handleRowClick = (event) => {
         console.log("in handle row click ", event)
         history.push(`/songdetails/${event}`)
     }
+
+    if(props.smallerWidth){
+        console.log("smaller?")
+        classes = useSmallStyles();
+    } else {
+        classes = useStyles();
+    }
+
 
     const handleChangePage = (event, newPage)=> {
         setPage(newPage)
@@ -40,6 +48,7 @@ function QuickChart(props) {
     const mouseLeave = () => {
         setElev(4)
     }
+
     return (
         <>
         <Paper 
@@ -54,7 +63,7 @@ function QuickChart(props) {
                 <div className={"table"}>
                     {chart.length === 0 ? <p>Loading</p> : 
                         <TableContainer>
-                            <Typography>
+                            <Typography component={'span'}>
                             <Table
                                 size="small"
                             >
@@ -87,7 +96,7 @@ function QuickChart(props) {
                                             onClick={() => handleRowClick(track.concat)}
                                             sx={{ 'td, th': { paddingBottom: .35, paddingTop: .35, fontWeight: 400, cursor: 'pointer', } }}
                                             >
-                                                    <TableCell align="left" 
+                                                    <TableCell align="left"
                                                     sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>
                                                         {track.rank}
                                                     </TableCell>
@@ -120,7 +129,6 @@ function QuickChart(props) {
                     onPageChange={handleChangePage}
                     />
                 </div>
-            
             </Paper>
             </>
     )
