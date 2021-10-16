@@ -162,6 +162,10 @@ const useStyles = makeStyles(() => ({
     }, 
     red: {
       fontColor: 'red'
+    },
+    portTableCellSongArtist: {
+      width: 130,
+      paddingRight: 5
     }
 }))
 

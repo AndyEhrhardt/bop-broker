@@ -76,19 +76,19 @@ function QuickPortfolio() {
                   <div className={classes.quickPortColInfoLeft}>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 400 }}
+                      sx={{ fontWeight: 300 }}
                     >
                       Net
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 400 }}
+                      sx={{ fontWeight: 300 }}
                     >
                       Excess
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 400 }}
+                      sx={{ fontWeight: 300 }}
                     >
                       Assets
                     </Typography>
@@ -96,7 +96,7 @@ function QuickPortfolio() {
                   <div className={classes.quickPortColInfo}>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 300,
+                      sx={{ fontWeight: 500,
                       color: portfolio.gains }}
 
                     >
@@ -104,13 +104,13 @@ function QuickPortfolio() {
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 300 }}
+                      sx={{ fontWeight: 400}}
                     >
-                      ${portfolio.currentMoney.buying_power}
+                      ${portfolio.currentMoney.buying_power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 300,
+                      sx={{ fontWeight: 500,
                         color: portfolio.gains}}
                     >
                       $
@@ -127,14 +127,21 @@ function QuickPortfolio() {
                     >
                       {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
                       "Loss $"  : 
-                        "Gain $"
-                      }
+                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
+                      "Even $" :
+                      "Gain $"
+                      } 
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
                       sx={{ fontWeight: 400 }}
                     >
-                      Gain %
+                      {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
+                      "Loss %"  : 
+                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
+                      "Even %" :
+                      "Gain %"
+                      } 
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
@@ -146,27 +153,25 @@ function QuickPortfolio() {
                   <div className={classes.quickPortColInfo}>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 400,
+                      sx={{ fontWeight: 500,
                         color: portfolio.gains }}
                     >
-                    ${(portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                     
+                    ${Math.abs((portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 400,
+                      sx={{ fontWeight: 500,
                         color: portfolio.gains }}
                     >
-
-
-                    {(((portfolio.historicalTotal[0].value/portfolio.historicalTotal[1].value)-1)*100).toFixed(2)}%
-
-
+                    {Math.abs(((((portfolio.historicalTotal[0].value/portfolio.historicalTotal[1].value)-1)*100).toFixed(2)))}%
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 400 }}
-                    >
-                      {portfolio.currentMoney.daily_dividend}
+                      sx={{ fontWeight: portfolio.currentMoney.daily_dividend === 0 ? 400 : 500,
+                        color: portfolio.currentMoney.daily_dividend === 0 ? "#000000" :  "#06f202" }}
+                      >
+                      ${portfolio.currentMoney.daily_dividend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Typography>
                   </div>
                 </div>
@@ -197,7 +202,7 @@ function QuickPortfolio() {
                             fontWeight: 500,
                             fontSize: 15,
                           }}
-                          className={classes.tableCellSongArtist}
+                          className={classes.portTableCellSongArtist}
                           align="right"
                         >
                           Song/Arist
@@ -271,6 +276,7 @@ function QuickPortfolio() {
                           </a>
                           </TableCell>
                         </TableRow>
+                        
                       ))}
                     </TableBody>
                   </Table>
@@ -286,7 +292,6 @@ function QuickPortfolio() {
                 />
               }
               </TableContainer>
-              
               </div>
             </div>
           </>
