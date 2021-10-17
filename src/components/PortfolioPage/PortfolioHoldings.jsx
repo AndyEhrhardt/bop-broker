@@ -51,8 +51,8 @@ import BuySellModal from "../BuySellModal/BuySellModal";
       };
   return (
       <>
-    {portfolio.currentMoney === undefined ? (
-        <>loading</>
+    {portfolio.currentMoney === undefined || portfolio.currentHoldings.length === 0 ?(
+        <></>
       ) : (
     <div className={"table"}>
               <TableContainer>

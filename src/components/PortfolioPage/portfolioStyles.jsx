@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const portfolioStyles = makeStyles(() => ({
     masterWrap: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         gap: 20
     },
     smallComponentsContainer: {
