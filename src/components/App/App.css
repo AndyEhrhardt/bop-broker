@@ -158,36 +158,35 @@ table {
   }
 }
 
-@keyframes close {
-  0% {
-    transform: translate(-50%, -63%);
-  }
-  100% {
-    transform: translate(-50 ,-200%);
-  }
+@keyframes example {
+  0%   {transform: translate(-50%, -63%)}
+  100% {transform: translate(-50% ,-200%)}
 }
+
+.shutItDown{
+  animation-name: example;
+  animation-duration: 200ms;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -63%);
+  width: 80%;
+  height: 80%;
+  background-color: #fbf9f3;
+}
+
+
+
 
 .openModalWrap{
   position: absolute;
   top: 50%;
   left: 50%;
   animation-name: open;
-  animation-duration: 300ms;
+  animation-duration: 200ms;
   transform: translate(-50%, -63%);
   width: 80%;
   background-color: #fbf9f3;
   height: 80%;
 }
 
-.closeModalWrap{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  animation-name: open;
-  animation-direction: reverse;
-  animation-duration: 300ms;
-  transform: translate(-50%, -63%);
-  width: 80%;
-  background-color: #fbf9f3;
-  height: 80%;
-}

@@ -2,6 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CarpenterTwoTone } from '@mui/icons-material';
 
 const portfolioStyles = makeStyles(() => ({
+    backdrop: {
+        background: 'rgba(255,255,255,0.2)',
+        width: '100%',
+        height: '100%'
+    },
     "@keyframes open": {
         "0%": {
           transform: "translate(-50% ,-200%)"

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
+
 import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import Paper from "@mui/material/Paper";
 import Modal from "@mui/material/Modal";
+import Backdrop from '@mui/material/Backdrop';
 
 
 import portfolioStyles from "./portfolioStyles";
@@ -23,42 +25,22 @@ function PortfolioPage(props) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [modalPop, setModalPop] = useState(false);
-  const [buySellTrack, setBuySellTrack] = useState({});
-  const [buySellPrice, setBuySellPrice] = useState(0);
- const [animateOpenClose, setAnimateOpenClose] = useState(true);
-  const mouseEnter = () => {
-    setElev(12);
-  };
+  
 
-  const mouseLeave = () => {
-    setElev(4);
-  };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleClose = (event) => {
+    event.preventDefault()
+    props.setModalPortfolioOpen(false)
+    console.log("please be false",props.modalPortfolioOpen)
+    setTimeout(() => {props.setPortfolioOpen(false)}, 200)
+  }
 
-  const handleSell = (track, price) => {
-    console.log(track, price);
-    setBuySellTrack(track);
-    setBuySellPrice(price);
-    setModalPop(true);
-    //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
-  };
-  const handleClose = () => {
-    setAnimateOpenClose(false)
-    setTimeout(() => {props.setPortfolioOpen(false)}, 300)
-  }
-  const handleOpen = () => {
-    setAnimateOpenClose(true)
-  }
-console.log(animateOpenClose)
   return (
     <Modal
     open={props.portfolioOpen}
-    onClose={() => handleClose()}
-    onOpen={() => handleOpen()}
+    onOpen={(event) => handleOpen(event)}
+    onBackdropClick={(event) => handleClose(event)} 
     >  
-    <div className={animateOpenClose ? ("openModalWrap"): ("closeModalWrao")}>
+    <div className={props.modalPortfolioOpen ? ("openModalWrap"): ("shutItDown")}>
       {portfolio.currentMoney === undefined ? (
         <></>
       ) : (

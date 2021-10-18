@@ -29,6 +29,7 @@ function QuickPortfolio() {
   const [buySellTrack, setBuySellTrack] = useState({});
   const [buySellPrice, setBuySellPrice] = useState(0);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
+  const [modalPortfolioOpen, setModalPortfolioOpen] = useState(true);
   const toPortfolio = () => {
     history.push('/portfoliopage')
   }
@@ -51,7 +52,9 @@ function QuickPortfolio() {
     setModalPop(true);
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   };
-  const openPortfolioModal = () => {
+  const openPortfolioModal = (event) => {
+    event.preventDefault()
+    setModalPortfolioOpen(true)
     setPortfolioOpen(true)
   }
 
@@ -68,6 +71,8 @@ function QuickPortfolio() {
         ) : (
           <>
             <PortfolioPage 
+            modalPortfolioOpen={modalPortfolioOpen}
+            setModalPortfolioOpen={setModalPortfolioOpen}
             portfolioOpen={portfolioOpen}
             setPortfolioOpen={setPortfolioOpen}
             />
@@ -82,7 +87,7 @@ function QuickPortfolio() {
                 fontSize: 40,
                 cursor: "pointer" }} 
                 className={classes.quickChartTitle}
-                onClick={openPortfolioModal}
+                onClick={(event) => {openPortfolioModal(event)}}
               >
                 Portfolio
               </Typography>
