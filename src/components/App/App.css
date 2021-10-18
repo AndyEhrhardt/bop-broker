@@ -171,7 +171,7 @@ table {
   left: 50%;
   transform: translate(-50%, -63%);
   width: 80%;
-  height: 80%;
+  height: 70%;
   background-color: white;
 }
 
@@ -184,9 +184,9 @@ table {
   left: 50%;
   animation-name: open;
   animation-duration: 200ms;
-  transform: translate(-50%, -63%);
+  transform: translate(-50%, -74%);
   width: 80%;
   background-color: white;
-  height: 80%;
+  height: 70%;
 }
 

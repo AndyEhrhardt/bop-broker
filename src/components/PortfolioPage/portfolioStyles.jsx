@@ -30,7 +30,9 @@ const portfolioStyles = makeStyles(() => ({
     },
     holdingsmaster: {
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: 250,
+        minHeight: 250
     },
     holdingsWrapper:{
         minWidth: "95%"

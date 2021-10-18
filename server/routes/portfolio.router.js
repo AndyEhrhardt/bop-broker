@@ -50,7 +50,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             WHERE historical_song_holdings.holding_id = song_holdings.id
             AND song_holdings.user_id = "user".id
             AND song_holdings.user_id = $1
-            ORDER BY id ASC;`
+            ORDER BY date DESC;`
             pool.query(historicalSongValueQuery, [userId])
             .then((result) => {
               let songValHist = result.rows;
@@ -62,7 +62,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
               console.log(songValHist)
               for (let i = 0; i < songValHist.length ; i++){
                 console.log(songValHist[i].holding_id)
-                portfolio.historicalSongValue[songValHist[i].holding_id].push({value: songValHist[i].value, rank: songValHist[i].rank})
+                portfolio.historicalSongValue[songValHist[i].holding_id].push({value: songValHist[i].value, 
+                  rank: songValHist[i].rank, date: songValHist[i].date, idFromHoldingTable: songValHist[i].holding_id})
               }
               console.log(portfolio.historicalSongValue)
 
