@@ -18,7 +18,6 @@ import portfolioStyles from "./portfolioStyles";
 import BuySellModal from "../BuySellModal/BuySellModal";
 
 
-
   function PortfolioHoldings() {
     const classes = portfolioStyles();
     const history = useHistory();
@@ -50,7 +49,7 @@ import BuySellModal from "../BuySellModal/BuySellModal";
         //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
       };
   return (
-      <>
+      <div>
     {portfolio.currentMoney === undefined || portfolio.currentHoldings.length === 0 ?(
         <></>
       ) : (
@@ -65,8 +64,6 @@ import BuySellModal from "../BuySellModal/BuySellModal";
                           sx={{
                             paddingRight: 1.3,
                             paddingLeft: 1,
-                            width: 0.1,
-                            maxWidth: 0.3,
                             fontFamily: "roboto",
                             fontWeight: 500,
                             fontSize: 15,
@@ -114,9 +111,7 @@ import BuySellModal from "../BuySellModal/BuySellModal";
                           <TableCell
                             align="left"
                             sx={{paddingRight: 1.3,
-                              paddingLeft: 1.5,
-                              width: 0.1,
-                              maxWidth: 0.3,
+                              paddingLeft: 1.5,                           
                              }}>
                             {track.current_rank}
                             <Button
@@ -172,7 +167,7 @@ import BuySellModal from "../BuySellModal/BuySellModal";
               </TableContainer>
             </div>
       )}
-      </>
+      </div>
   )}
 
   export default PortfolioHoldings;

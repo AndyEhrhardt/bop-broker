@@ -1,10 +1,80 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { CarpenterTwoTone } from '@mui/icons-material';
 
 const portfolioStyles = makeStyles(() => ({
+    "@keyframes open": {
+        "0%": {
+          transform: "translate(-50% ,-200%)"
+        },
+        "100%": {
+        transform: 'translate(-50%, -63%)',
+        }
+      },
+      "@keyframes close": {
+        "0%": {
+          transform: "translate(-50%, -63%)"
+        },
+        "100%": {
+          transform: "translate(-50 ,-200%)"
+        }
+      },
+    openModalWrap:{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        animation: '$open 300ms',
+        transform: 'translate(-50%, -63%)',
+        width: "80%",
+        backgroundColor: '#fbf9f3',
+        p: 4,
+        height: '80%'
+    },
+    closeModalWrap:{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        animation: '$open 300ms',
+        animationDirection: 'reverse',
+        transform: 'translate(-50%, -63%)',
+        width: "80%",
+        backgroundColor: '#fbf9f3',
+        p: 4,
+        height: '80%'
+    },
+    grayLine:{
+        backgroundColor: 'gray',
+        opacity: .5,
+        height: 1
+    },
+    holdingsmaster: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    holdingsWrapper:{
+        minWidth: "95%"
+    },
     masterWrap: {
         display: 'flex',
         flexDirection: 'row',
-        gap: 20
+        gap: 10,
+        padding: 10,
+        justifyContent: 'center',
+        minHeight:  '45%',
+        maxHeight: '50%'
+    },
+    graphwrapper:{
+        minWidth: '60%'
+        // minHeight: '45%'
+    },
+    overviewWrapper:{
+        // minWidth: 290,
+        // maxWidth: 350,
+        //maxWidth: 200
+    },
+    masterOverview:{
+        minWidth: 190,
+        width: 200,
+        maxWidth: 220
     },
     smallComponentsContainer: {
         display: "flex",
@@ -13,34 +83,6 @@ const portfolioStyles = makeStyles(() => ({
         gap: 10,
         justifyContent: 'space-around'
       },
-      quickComponentsContainer : {
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 30
-      },
-      quickChartTitle: {
-        fontFamily: 'Roboto',
-        fontSize: 40,
-        margin: 0,
-        fontWeight: 400, 
-        backgroundColor: "white",
-        transition: '0.2s',
-        "&:hover": {
-          backgroundColor: '#f2f2f2',
-        }
-      },
-    quickChartWrapper: {
-      maxWidth: '500',
-      width: '30%',
-      minWidth: '250',
-      maxHeight: 378,
-      minHeight: 378,
-      textAlign: 'center',
-      fontFamily: 'Roboto',
-      fontSize: 50,
-      fontWeight: 200
-    },
     chartListWidth: {
       width: 130,
       maxWidth: 130,
@@ -110,12 +152,6 @@ const portfolioStyles = makeStyles(() => ({
       flexDirection: 'row',
       justifyContent: 'space-between'
     },
-    quickPortColMaster:{
-      display: 'flex',
-      flexDirection: 'column',
-      textAlign: 'left',
-      gap: 10
-    },
     quickPortColRight:{
       display: 'flex',
       textAlign: 'right'
@@ -131,7 +167,7 @@ const portfolioStyles = makeStyles(() => ({
     },
     quickPortGap:{
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'space-between'
     },
     divider:{
       backgroundColor: '#b0b0b0',
@@ -146,7 +182,7 @@ const portfolioStyles = makeStyles(() => ({
     quickSubTitle:{
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
       fontSize: 15,
       paddingTop: 6
     },

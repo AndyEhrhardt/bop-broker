@@ -1,30 +1,48 @@
 import { Line } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
 import portfolioStyles from "./portfolioStyles";
-import "moment-timezone";
+import { ClassNames } from "@emotion/react";
 
 function PortfolioGraph(props) {
   const [labels, setLabels] = useState([]);
-  let [totalCash, setTotalCash] = useState([]);
-
+  let [dailyTotal, setDailyTotal] = useState([]);
+  const classes = portfolioStyles();  
   useEffect(() => {
     assignValues();
   }, []);
 
   const assignValues = () => {
-    if ((props.histData[1].date = "new")) {
-      setLabels(["", props.histData[0].date.split("T")[0], "", "", "", "", "", ""]);
-      setTotalCash([props.histData[0].value, props.histData[0].value]);
-    } else {
+    let newLabels = [];
+    let newDailyTotal = [];
+    console.log(props.histData.length)
+    if ((props.histData[1].date === "new")) {
+        newLabels = ["", props.histData[0].date.split("T")[0].slice(5), "", "", "", "", "", ""];
+        newDailyTotal = [props.histData[0].value, props.histData[0].value];
+    } else if (props.histData.length < 7){
+        for (let i = 0; i < 7; i++){
+            if(props.histData[i].value === undefined){
+                newLabels.push("")
+                newDailyTotal.push("")
+            } else {
+                newLabels.push(props.histData[i].date.split("T")[0].slice(5))
+                newDailyTotal.push(props.histData[i].value)
+            }
+        }
+    } else{
+        for (let i = props.histData.length-1; i >= 0; i--){
+            newLabels.push(props.histData[i].date.split("T")[0].slice(5))
+            newDailyTotal.push(props.histData[i].value)
+        }
     }
+    setLabels(newLabels);
+    setDailyTotal(newDailyTotal);
   };
-
   const data = {
     labels: labels,
     datasets: [
       {
-        label: "Daily Total Net",
-        data: totalCash,
+        label: "Daily Total",
+        data: dailyTotal,
         fill: false,
         backgroundColor: props.color,
         borderColor: props.color,
@@ -33,6 +51,8 @@ function PortfolioGraph(props) {
   };
 
   const options = {
+    maintainAspectRatio: false,
+    responsive: true,
     scales: {
       yAxes: [
         {
@@ -45,12 +65,10 @@ function PortfolioGraph(props) {
   };
 
   return (
-    <>
-      <>
-        <div className="header"></div>
+      <div className={classes.graphwrapper} >
+        {console.log(dailyTotal, labels)}
         <Line data={data} options={options} />
-      </>
-    </>
+      </div>
   );
 }
 

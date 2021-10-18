@@ -145,3 +145,49 @@ input {
 table {
   border-collapse: collapse;
 }
+
+
+
+
+@keyframes open {
+  from {
+    transform: translate(-50% ,-200%);
+  }
+  to {
+  transform: translate(-50%, -63%);
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: translate(-50%, -63%);
+  }
+  100% {
+    transform: translate(-50 ,-200%);
+  }
+}
+
+.openModalWrap{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation-name: open;
+  animation-duration: 300ms;
+  transform: translate(-50%, -63%);
+  width: 80%;
+  background-color: #fbf9f3;
+  height: 80%;
+}
+
+.closeModalWrap{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation-name: open;
+  animation-direction: reverse;
+  animation-duration: 300ms;
+  transform: translate(-50%, -63%);
+  width: 80%;
+  background-color: #fbf9f3;
+  height: 80%;
+}

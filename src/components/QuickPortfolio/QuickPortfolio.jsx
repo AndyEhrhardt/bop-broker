@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
+import PortfolioPage from '../PortfolioPage/PortfolioPage'
 
 import useStyles from "../styles/styles";
 import BuySellModal from "../BuySellModal/BuySellModal";
@@ -27,7 +28,7 @@ function QuickPortfolio() {
   const [modalPop, setModalPop] = useState(false);
   const [buySellTrack, setBuySellTrack] = useState({});
   const [buySellPrice, setBuySellPrice] = useState(0);
-
+  const [portfolioOpen, setPortfolioOpen] = useState(false);
   const toPortfolio = () => {
     history.push('/portfoliopage')
   }
@@ -50,6 +51,10 @@ function QuickPortfolio() {
     setModalPop(true);
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   };
+  const openPortfolioModal = () => {
+    setPortfolioOpen(true)
+  }
+
   return (
     <>
       <Paper
@@ -62,6 +67,10 @@ function QuickPortfolio() {
           <></>
         ) : (
           <>
+            <PortfolioPage 
+            portfolioOpen={portfolioOpen}
+            setPortfolioOpen={setPortfolioOpen}
+            />
             <BuySellModal
               modalPop={modalPop}
               setModalPop={setModalPop}
@@ -73,7 +82,7 @@ function QuickPortfolio() {
                 fontSize: 40,
                 cursor: "pointer" }} 
                 className={classes.quickChartTitle}
-                onClick={toPortfolio}
+                onClick={openPortfolioModal}
               >
                 Portfolio
               </Typography>

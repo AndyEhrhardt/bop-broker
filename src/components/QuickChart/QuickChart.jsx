@@ -73,6 +73,12 @@ function QuickChart(props) {
                             >
                                 <TableHead>
                                     <TableRow  >
+                                    <TableCell align="left" 
+                                        sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .5, 
+                                        maxWidth: .1, fontFamily: 'roboto', fontWeight: 500, 
+                                        fontSize: 15}}>
+                                            ^
+                                        </TableCell>
                                         <TableCell align="left" 
                                         sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, 
                                         maxWidth: .3, fontFamily: 'roboto', fontWeight: 500, 
@@ -100,6 +106,16 @@ function QuickChart(props) {
                                             onClick={() => handleRowClick(track.concat)}
                                             sx={{ 'td, th': { paddingBottom: .35, paddingTop: .35, fontWeight: 400, cursor: 'pointer', } }}
                                             >
+                                                    <TableCell align="left"
+                                                    sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>
+                                                    <Typography
+                                                        className={classes.quickPortColRight}
+                                                        sx={{ fontWeight: 500,
+                                                            color: track.movement > 0 ? "#06f202" :  track.movement < 0 ? "#f71500" : "#e6bb00"}}
+                                                        >
+                                                        {track.movement > 0 ? `+${track.movement}` : track.movement}
+                                                    </Typography>
+                                                    </TableCell>
                                                     <TableCell align="left"
                                                     sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>
                                                         {track.rank}

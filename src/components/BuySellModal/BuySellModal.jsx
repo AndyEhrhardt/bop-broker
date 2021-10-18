@@ -18,7 +18,6 @@ function BuySellModal(props) {
   const classes = useStyles();
   const [numberOfShares, setNumberOfShares] = useState("");
 
-  console.log("sellable quantity", props.track.quantity);
 
   const handleChange = (event) => {
     setNumberOfShares(event.target.value);
