@@ -37,7 +37,7 @@ function PortfolioPage(props) {
   return (
     <Modal
     open={props.portfolioOpen}
-    onOpen={(event) => handleOpen(event)}
+    
     onBackdropClick={(event) => handleClose(event)} 
     >  
     <div className={props.modalPortfolioOpen ? ("openModalWrap"): ("shutItDown")}>

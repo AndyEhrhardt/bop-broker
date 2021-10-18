@@ -23,29 +23,6 @@ const portfolioStyles = makeStyles(() => ({
           transform: "translate(-50 ,-200%)"
         }
       },
-    openModalWrap:{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        animation: '$open 300ms',
-        transform: 'translate(-50%, -63%)',
-        width: "80%",
-        backgroundColor: '#fbf9f3',
-        p: 4,
-        height: '80%'
-    },
-    closeModalWrap:{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        animation: '$open 300ms',
-        animationDirection: 'reverse',
-        transform: 'translate(-50%, -63%)',
-        width: "80%",
-        backgroundColor: '#fbf9f3',
-        p: 4,
-        height: '80%'
-    },
     grayLine:{
         backgroundColor: 'gray',
         opacity: .5,

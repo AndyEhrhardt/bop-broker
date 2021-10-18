@@ -22,6 +22,8 @@ const useStyles = makeStyles(() => ({
         fontSize: 40,
         margin: 0,
         fontWeight: 400, 
+        padding: 5,
+        borderRadius: 5,
         backgroundColor: "white",
         transition: '0.2s',
         "&:hover": {
@@ -79,7 +81,7 @@ const useStyles = makeStyles(() => ({
     },
     tableCellPrice:{
       width: 20,
-      maxWidth: 20,
+      maxWidth: 30,
     },
     Typography: {
       fontFamily: 'roboto',
@@ -168,8 +170,9 @@ const useStyles = makeStyles(() => ({
       fontColor: 'red'
     },
     portTableCellSongArtist: {
-      width: 130,
-      paddingRight: 5
+      width: 100,
+      maxWidth: 80,
+      paddingRight: 0
     }
 }))
 

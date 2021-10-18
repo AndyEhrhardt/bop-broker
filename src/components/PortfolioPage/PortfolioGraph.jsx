@@ -53,20 +53,28 @@ function PortfolioGraph(props) {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
+    elements: {
+      point:{
+        radius: 0
+      }
     },
+    scales: {
+      x: {
+        grid:{
+         display:false
+             }
+       },
+    y: 
+       {
+     grid:{
+      display:false
+          }
+       }
+    }
   };
 
   return (
       <div className={classes.graphwrapper} >
-        {console.log(dailyTotal, labels)}
         <Line data={data} options={options} />
       </div>
   );

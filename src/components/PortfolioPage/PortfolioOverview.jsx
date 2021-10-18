@@ -131,28 +131,22 @@ import portfolioStyles from "./portfolioStyles";
                       sx={{ fontWeight: 400 }}
                     >
                       {portfolio.historicalTotal[0].value -
-                        portfolio.historicalTotal[1].value <
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value <
                       0
-                        ? "Weekly Return $"
-                        : portfolio.historicalTotal[0].value -
-                            portfolio.historicalTotal[1].value ===
-                          0
-                        ? "Weekly Return $"
-                        : "Weekly Return $"}
+                        ? "Total Loss $"
+                        : 
+                        "Total Return $"}
                     </Typography>
                     <Typography
                       className={classes.quickPortfolioInfo}
                       sx={{ fontWeight: 400 }}
                     >
                       {portfolio.historicalTotal[0].value -
-                        portfolio.historicalTotal[1].value <
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value <
                       0
-                        ? "Return %"
-                        : portfolio.historicalTotal[0].value -
-                            portfolio.historicalTotal[1].value ===
-                          0
-                        ? "Return %"
-                        : "Return %"}
+                        ? "Total Loss %"
+                        : 
+                        "Total Return %"}
                     </Typography>
                   </div>
                   <div className={classes.quickPortColInfo}>
@@ -160,7 +154,7 @@ import portfolioStyles from "./portfolioStyles";
                       className={classes.quickPortColRight}
                       sx={{ fontWeight: 500, color: portfolio.gains }}
                     >
-                      $
+                      $ 
                       {Math.abs(
                         portfolio.historicalTotal[0].value -
                           portfolio.historicalTotal[1].value
@@ -202,24 +196,31 @@ import portfolioStyles from "./portfolioStyles";
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500, color: portfolio.gains }}
+                      sx={{ fontWeight: 500, color: portfolio.historicalTotal[0].value -
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value > 0 ? "#06f202" :
+                        portfolio.historicalTotal[0].value - 
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value < 0 ? "#f71500" : "#e6bb00" }}
                     >
                       $
                       {Math.abs(
                         portfolio.historicalTotal[0].value -
-                          portfolio.historicalTotal[1].value
+                          portfolio.historicalTotal[portfolio.historicalTotal.length-1].value
                       )
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      
                     </Typography>
                     <Typography
                       className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500, color: portfolio.gains }}
+                      sx={{ fontWeight: 500, color: portfolio.historicalTotal[0].value -
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value > 0 ? "#06f202" :
+                        portfolio.historicalTotal[0].value - 
+                        portfolio.historicalTotal[portfolio.historicalTotal.length-1].value < 0 ? "#f71500" : "#e6bb00"}}
                     >
                       {Math.abs(
                         (
                           (portfolio.historicalTotal[0].value /
-                            portfolio.historicalTotal[1].value -
+                            portfolio.historicalTotal[portfolio.historicalTotal.length-1].value -
                             1) *
                           100
                         ).toFixed(2)

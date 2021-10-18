@@ -38,8 +38,8 @@ const useSmallStyles = makeStyles(() => ({
     padding: 0,
   },
   tableCellSongArtist: {
-    width: 150,
-    maxWidth: 150,
+    width: 110,
+    maxWidth: 110,
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",

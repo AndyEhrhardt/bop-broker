@@ -172,7 +172,7 @@ table {
   transform: translate(-50%, -63%);
   width: 80%;
   height: 80%;
-  background-color: #fbf9f3;
+  background-color: white;
 }
 
 
@@ -186,7 +186,7 @@ table {
   animation-duration: 200ms;
   transform: translate(-50%, -63%);
   width: 80%;
-  background-color: #fbf9f3;
+  background-color: white;
   height: 80%;
 }
 

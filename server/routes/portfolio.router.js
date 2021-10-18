@@ -14,7 +14,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     FROM song_current, song_holdings, "user"
     WHERE song_current.id = song_holdings.song_id
     AND song_holdings.user_id = "user".id
-    AND song_holdings.user_id = $1;`
+    AND song_holdings.user_id = $1
+    ORDER BY holding_id DESC;`
     pool.query(currentHoldingsQuery, [userId])
       .then((result) => {
         portfolio.currentHoldings = result.rows;
@@ -48,10 +49,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             FROM historical_song_holdings, song_holdings, "user"
             WHERE historical_song_holdings.holding_id = song_holdings.id
             AND song_holdings.user_id = "user".id
-            AND song_holdings.user_id = $1;`
+            AND song_holdings.user_id = $1
+            ORDER BY id ASC;`
             pool.query(historicalSongValueQuery, [userId])
             .then((result) => {
-              portfolio.historicalSongValue = result.rows;
+              let songValHist = result.rows;
+              portfolio.historicalSongValue = {}
+              for (let i = 0; i< portfolio.currentHoldings.length ; i++){
+                portfolio.historicalSongValue[portfolio.currentHoldings[i].holding_id] = []
+              }
+              console.log(portfolio.historicalSongValue)
+              console.log(songValHist)
+              for (let i = 0; i < songValHist.length ; i++){
+                console.log(songValHist[i].holding_id)
+                portfolio.historicalSongValue[songValHist[i].holding_id].push({value: songValHist[i].value, rank: songValHist[i].rank})
+              }
+              console.log(portfolio.historicalSongValue)
+
+
               console.log("portfolio assembled")
               res.send(portfolio)
             }).catch((error) => {
@@ -133,12 +148,17 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
       WHERE "user".id = $2;`
       pool.query(buyingPowerUpdateQuery, [totalAssetValue, userId])
         .then((result) => {
-          res.send()
-        }).catch((error) => {
-          console.log("error updating buying power", error)
-        })
+          const deleteHistoricalHolding = `DELETE FROM historical_song_holdings
+          WHERE holding_id= $1;`
+          pool.query(deleteHistoricalHolding, [songId])
+          }).then((result) => {
+            res.sendStatus(200)
+          }).catch((error) => {
+            console.log("error deleting Historical", error)
+          })
+
     }).catch((error) => {
-      console.log("error deleting song holding", error)
+      console.log("error updating buying power", error)
     })
 })
 

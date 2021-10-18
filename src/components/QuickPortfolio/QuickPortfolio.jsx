@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useSelector} from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
@@ -23,7 +23,6 @@ function QuickPortfolio() {
   const history = useHistory();
   const portfolio = useSelector((store) => store.portfolio);
   const [elev, setElev] = useState(16);
-  const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [modalPop, setModalPop] = useState(false);
   const [buySellTrack, setBuySellTrack] = useState({});
@@ -226,6 +225,7 @@ function QuickPortfolio() {
                             fontFamily: "roboto",
                             fontWeight: 500,
                             fontSize: 15,
+                            paddingRight: 1
                           }}
                           className={classes.portTableCellSongArtist}
                           align="right"
@@ -238,6 +238,8 @@ function QuickPortfolio() {
                             fontFamily: "roboto",
                             fontWeight: 500,
                             fontSize: 15,
+                            paddingLeft: 0,
+                            paddingRight: 1
                           }}
                           align="right"
                         >
@@ -271,14 +273,15 @@ function QuickPortfolio() {
                                 handleSell(track, track.current_price)
                               }
                             >
-                              Sell
+                              $
                             </Button>
                           </TableCell>
                           <TableCell
                             sx={{
                               fontFamily: "roboto",
-                              paddingRight: 1.3,
+                              paddingRight: 1,
                               paddingLeft: 1,
+                              maxWidth: 80
                             }}
                             align="right"
                             className={classes.tableCellSongArtist}
@@ -288,7 +291,7 @@ function QuickPortfolio() {
                             </a>
                           </TableCell>
                           <TableCell
-                            sx={{ paddingRight: 1.3, paddingLeft: 1 }}
+                            sx={{ paddingRight: 1.3, paddingLeft: 0 }}
                             align="right"
                           >
                           <a style={{ fontWeight: 400 }}>

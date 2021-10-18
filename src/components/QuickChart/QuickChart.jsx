@@ -74,24 +74,26 @@ function QuickChart(props) {
                                 <TableHead>
                                     <TableRow  >
                                     <TableCell align="left" 
-                                        sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .5, 
+                                        sx={{ paddingRight: 1.3, paddingLeft: 1, width: .5, paddingTop: 0,
                                         maxWidth: .1, fontFamily: 'roboto', fontWeight: 500, 
-                                        fontSize: 15}}>
+                                        fontSize: 15, paddingBottom: 0}}>
                                             ^
                                         </TableCell>
                                         <TableCell align="left" 
-                                        sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, 
+                                        sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, paddingTop: 0,
                                         maxWidth: .3, fontFamily: 'roboto', fontWeight: 500, 
-                                        fontSize: 15}}>
+                                        fontSize: 15, paddingBottom: 0}}>
                                             Rank
                                         </TableCell>
-                                        <TableCell sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15}} 
+                                        <TableCell sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15, 
+                                        maxWidth: 120, paddingTop: 0, paddingBottom: 0}} 
                                         className={classes.tableCellSongArtist} 
                                         align="right">
                                             Song/Arist
                                         </TableCell>
                                         <TableCell className={classes.tableCellPrice} 
-                                        sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15}}
+                                        sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15, 
+                                        paddingLeft: 0, paddingTop: 0, paddingBottom: 0}}
                                         align="right">
                                             Price
                                         </TableCell>

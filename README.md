@@ -29,9 +29,19 @@
 [x] - conditional buying/selling limited by number of shares and buying power
 [x] - create new page to view all regional charts 
 [x] - .map over quick chart to display charts on dom
-[] - create portfolio page
-[] - open portfolio page by clicking quick portfolio 
-[] - chart.js for historical portfolio value
+[x] - create portfolio page
+[x] - open portfolio page by clicking quick portfolio 
+[x] - chart.js for historical portfolio value
+
+[] - table for portfolio 
+[] - doughnut chart for portfolio
+[x] - finish overview information
+[] - get paper shadow (15 min)
+[] - no border(15 min)
+
+
+
+
 [] - chart.js for historical song value 
 [] - incorporate buy/sell modal component into song deatils page 
 
