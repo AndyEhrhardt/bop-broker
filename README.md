@@ -38,8 +38,8 @@
 [x] - get paper shadow (15 min)
 [x] - no border(15 min)
 
-[] - two options for ways to view porfolio
-
+[] - two options for views in the porfolio page (split current view into two views to make the page more horizontal)
+[] - allow user to view song details from either quick portfolio or the portfolio page 
 
 [] - clean up portfolio table
 [] - better buttons 
@@ -51,12 +51,20 @@
 [] - clicking trade button will not trigger song details 
 
 
-
-
-[] - clicking a chart leads to chart details page 
+[] - clicking a chart leads to chart details modal
 [] - get saga for chart details
 [] - set up get router for chart details 
 [] - reducer for chart details 
+
+[] - specialty chart folder/ file(s)
+[] - build out a specialty chart table 
+[] - get saga for chart 
+[] - server side code for chart 
+[] - create specialty chart redux store
+[] - clicking on song leads to song details
+[] - clicking on buy/sell button will open modal 
+
+
 
 
 [] - horizontal portfolio in top right 

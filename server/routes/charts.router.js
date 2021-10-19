@@ -44,7 +44,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     let playlistAndSongId = req.params.id;
     let songId = playlistAndSongId.slice(0,22);
     let songDetails = {};
-    const chartRanksQuery = `SELECT song_charts.rank
+    const chartRanksQuery = `SELECT song_charts.rank, song_charts.date
     FROM song_charts
     WHERE concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) = $1
     ORDER BY date DESC

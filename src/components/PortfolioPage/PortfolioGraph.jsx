@@ -19,15 +19,13 @@ function PortfolioGraph(props) {
         newLabels = ["", props.histData[0].date.split("T")[0].slice(5), "", "", "", "", "", ""];
         newDailyTotal = [props.histData[0].value, props.histData[0].value];
     } else if (props.histData.length < 7){
-        for (let i = 0; i < 7; i++){
-            if(props.histData[i].value === undefined){
-                newLabels.push("")
-                newDailyTotal.push("")
-            } else {
-                newLabels.push(props.histData[i].date.split("T")[0].slice(5))
-                newDailyTotal.push(props.histData[i].value)
-            }
-        }
+      for (let i = 0; i < props.histData.length; i++) {
+        newLabels.push(props.histData[i].date.split("T")[0].slice(5));
+        newDailyTotal.push(props.histData[i].value);
+      }
+      for (let i = 0; i < 7- props.histData.length; i++){
+          newLabels.push("");
+      }
     } else{
         for (let i = props.histData.length-1; i >= 0; i--){
             newLabels.push(props.histData[i].date.split("T")[0].slice(5))

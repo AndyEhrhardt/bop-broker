@@ -10,27 +10,36 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-import useStyles from '../styles/styles';
-import useSmallStyles from './smallerChart';
 import Typography from '@mui/material/Typography';
 import '@fontsource/roboto/300.css';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
+
+import useStyles from '../styles/styles';
+import useSmallStyles from './smallerChart';
+import SwapVertSharpIcon from '@mui/icons-material/SwapVertSharp';
+
 import { ContactlessOutlined } from '@material-ui/icons';
 
-
+import SongDetails from '../SongDetails/SongDetails'
 
 function QuickChart(props) {
     let classes;
+    const dispatch = useDispatch();
     const history = useHistory();
     const chart = useSelector(store => store[props.reducer].slice(props.sliceStart, props.sliceStart + 50));
     const [page, setPage] = useState(0);
     const [elev, setElev] = useState(4);
+    const [songDetailsOpen, setSongDetailsOpen] = useState(false);
+    const [songDetailsId, setSongDetailsId] = useState('')
     const handleRowClick = (event) => {
-        console.log("in handle row click ", event)
-        history.push(`/songdetails/${event}`)
+        console.log(event)
+        dispatch({ type: 'GET_SONG_DETAILS', payload: event });
+        
+        setSongDetailsId(event);
+        setSongDetailsOpen(true);
     }
 
     if(props.smallerWidth){
-        console.log("smaller?")
         classes = useSmallStyles();
     } else {
         classes = useStyles();
@@ -57,6 +66,12 @@ function QuickChart(props) {
         onMouseLeave={mouseLeave} 
         elevation={elev}
         >
+            <SongDetails
+            songDetailsOpen={songDetailsOpen}
+            setSongDetailsOpen={setSongDetailsOpen}
+            id={songDetailsId}
+            chartName={props.chartName}
+            />
                 <Typography sx={{ fontWeight: 400,
                     fontSize: 40,
                     cursor: "pointer" }} 
@@ -74,26 +89,26 @@ function QuickChart(props) {
                                 <TableHead>
                                     <TableRow  >
                                     <TableCell align="left" 
-                                        sx={{ paddingRight: 1.3, paddingLeft: 1, width: .5, paddingTop: 0,
+                                        sx={{ paddingRight: 1.3, paddingLeft: .1, width: .5, paddingTop: 0,
                                         maxWidth: .1, fontFamily: 'roboto', fontWeight: 500, 
-                                        fontSize: 15, paddingBottom: 0}}>
-                                            ^
+                                        fontSize: 15, paddingBottom: 0, maxHeight: .5, marginBottom: '-=5px'}}>
+                                            <SwapVertSharpIcon/>
                                         </TableCell>
                                         <TableCell align="left" 
                                         sx={{ paddingRight: 1.3, paddingLeft: 1 , width: .1, paddingTop: 0,
                                         maxWidth: .3, fontFamily: 'roboto', fontWeight: 500, 
-                                        fontSize: 15, paddingBottom: 0}}>
+                                        fontSize: 15, paddingBottom: .5}}>
                                             Rank
                                         </TableCell>
                                         <TableCell sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15, 
-                                        maxWidth: 120, paddingTop: 0, paddingBottom: 0}} 
+                                        maxWidth: 120, paddingTop: 0, paddingBottom: .5}} 
                                         className={classes.tableCellSongArtist} 
                                         align="right">
                                             Song/Arist
                                         </TableCell>
                                         <TableCell className={classes.tableCellPrice} 
                                         sx={{fontFamily: 'roboto', fontWeight: 500, fontSize: 15, 
-                                        paddingLeft: 0, paddingTop: 0, paddingBottom: 0}}
+                                        paddingLeft: 0, paddingTop: 0, paddingBottom: .5}}
                                         align="right">
                                             Price
                                         </TableCell>
@@ -109,13 +124,15 @@ function QuickChart(props) {
                                             sx={{ 'td, th': { paddingBottom: .35, paddingTop: .35, fontWeight: 400, cursor: 'pointer', } }}
                                             >
                                                     <TableCell align="left"
-                                                    sx={{ paddingRight: 1.3, paddingLeft: 1.5 , width: .1, maxWidth: .3}}>
+                                                    sx={{ paddingRight: .5, paddingLeft: .8 , width: .1, maxWidth: .5, minWidth: '24px'}}>
                                                     <Typography
                                                         className={classes.quickPortColRight}
-                                                        sx={{ fontWeight: 500,
-                                                            color: track.movement > 0 ? "#06f202" :  track.movement < 0 ? "#f71500" : "#e6bb00"}}
+                                                        sx={{ fontWeight: 400,
+                                                            color: track.movement > 0 ? "#06f202" :  track.movement < 0 ? "#f71500" : track.movement === 0 ? "#e6bb00" : "#0077ff"}} 
                                                         >
+                                                            {console.log(track.movement === null)}
                                                         {track.movement > 0 ? `+${track.movement}` : track.movement}
+                                                        {track.movement === null && <NewReleasesIcon/>}
                                                     </Typography>
                                                     </TableCell>
                                                     <TableCell align="left"

@@ -109,7 +109,7 @@ function PortfolioHoldings() {
     setBuySellPrice(price);
     setModalPop(true);
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
-  };
+  };  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -136,58 +136,57 @@ function PortfolioHoldings() {
                   <TableRow>
                     <TableCell
                       align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
+                      sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
                     >
+                      <br/>
                       Trade
                     </TableCell>
                     <TableCell
                       align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
+                      sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
                     >
-                      24h%
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px"}} fontSize={'inherit'}/>24h$
+                      <br/>
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px"}} fontSize={'inherit'}/>Total$
                     </TableCell>
                     <TableCell
                       align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
+                      sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
                     >
-                      Total%
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px"}} fontSize={'inherit'}/>24h%
+                      <br/>
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px"}} fontSize={'inherit'}/>Total%
                     </TableCell>
                     <TableCell
                       align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
+                      sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
                     >
-                      24h
-                      <br></br>
-                      Rank
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px"}} fontSize={'inherit'}/>24h
+                      <br/>
+                      <SwapVertIcon sx={{ postition: 'relative', top: "2px", fontWeight: 400, paddingBottom: 0}} fontSize={'inherit'}/>Total
                     </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
-                    >
-                      Total
-                      <br></br>
-                      Rank
-                    </TableCell>
+
                     <TableCell
                       align="left"
                       sx={{
                         paddingRight: 1.3,
                         paddingLeft: 1,
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
+                        paddingBottom: 0
                       }}
                     >
                       Current
-                      <br></br>
-                      Rank
                     </TableCell>
                     <TableCell
                       sx={{
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
                         paddingRight: 1.3,
+                        waxWidth: 100, 
+                        paddingBottom: 0
                       }}
                       className={classes.portTableCellSongArtist}
                       align="right"
@@ -197,9 +196,10 @@ function PortfolioHoldings() {
                     <TableCell
                       sx={{
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
-                        paddingRight: 0.1,
+                        paddingRight: 0.1, 
+                        paddingBottom: 0
                       }}
                       align="right"
                     >
@@ -209,51 +209,50 @@ function PortfolioHoldings() {
                       className={classes.tableCellPrice}
                       sx={{
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
                         width: 40,
                         minWidth: 40,
                         paddingLeft: 1,
-                        paddingRight: 1,
+                        paddingRight: 1, 
+                        paddingBottom: 0
                       }}
                       align="right"
                     >
-                      # Of
-                      <br></br>
-                      Shares
+                      
+                      
+                      #Held
                     </TableCell>
                     <TableCell
                       className={classes.tableCellPrice}
                       sx={{
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
                         width: 40,
                         minWidth: 40,
                         paddingLeft: 1,
-                        paddingRight: 1,
+                        paddingRight: 1, 
+                        paddingBottom: 0
                       }}
                       align="right"
                     >
-                      Share
-                      <br></br>
-                      Price
+                      $Per
                     </TableCell>
                     <TableCell
                       className={classes.tableCellPrice}
                       sx={{
                         fontFamily: "roboto",
-                        fontWeight: 500,
+                        fontWeight: 400,
                         fontSize: 15,
                         width: 40,
                         minWidth: 40,
                         paddingLeft: 1,
-                        paddingRight: 1,
+                        paddingRight: 1, 
+                        paddingBottom: 0
                       }}
                       align="right"
                     >
-                      Total
-                      <br></br>
                       Value
                     </TableCell>
                   </TableRow>
@@ -273,6 +272,9 @@ function PortfolioHoldings() {
                           },
                         }}
                       >
+
+
+
                         <TableCell>
                         <Button
                           onClick={() =>
@@ -282,6 +284,12 @@ function PortfolioHoldings() {
                               $
                         </Button>
                         </TableCell>
+
+
+
+
+
+
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
                           <TableCell
@@ -309,7 +317,8 @@ function PortfolioHoldings() {
                                   ? "#f71500"
                                   : "#e6bb00",
                             }}
-                          >     
+                          > 
+                          
                             {portfolio.historicalSongValue[track.holding_id][1]
                               .rank -
                               portfolio.historicalSongValue[track.holding_id][0]
@@ -317,6 +326,123 @@ function PortfolioHoldings() {
                             0
                               ? "+"
                               : ""}
+                            {track.current_price -
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank] < 0 ? "-" : ""}
+                            ${
+                              Math.abs(track.current_price -
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank])
+                              .toFixed(2).toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            <Typography sx={{ fontWeight: 500, fontSize: "0.875rem", color: track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] > 0 ? "#06f202" : track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] < 0 ? "#f71500" : "#e6bb00"}}>   
+                              
+                              {track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] > 0 ? "+" : track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] < 0 ? "-" : "" }
+                              
+                              ${Math.abs(
+                            (track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] 
+                          )).toFixed(2)}
+                          </Typography>
+                          </TableCell>
+
+
+                        ) : (
+
+
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color: "#e6bb00",
+                            }}
+                          >
+                            $0
+                          </TableCell>
+
+                        )}
+
+
+
+
+                        <TableCell
+                          align="left"
+                          sx={{
+                            paddingRight: 1.3,
+                            paddingLeft: 1.5,
+                            fontWeight: 500,
+                            color:
+                            track.current_price -
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank
+                                ] >
+                              0
+                                ? "#06f202"
+                                : track.current_price -
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank
+                                ] <
+                                  0
+                                ? "#f71500"
+                                : "#e6bb00",
+                          }}
+                        >
+
+
+
+                          {track.current_price -
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank
+                                ] >
+                          0
+                            ? "+"
+                            : ""}
                             {(
                               (track.current_price /
                                 priceObject[
@@ -328,61 +454,30 @@ function PortfolioHoldings() {
                               100
                             ).toFixed(2)}
                             %
-                          </TableCell>
-                        ) : (
-                          <TableCell
-                            align="left"
-                            sx={{
-                              paddingRight: 1.3,
-                              paddingLeft: 1.5,
-                              fontWeight: 500,
-                              color: "#e6bb00",
-                            }}
-                          >
-                            0%
-                          </TableCell>
-                        )}
-
-                        <TableCell
-                          align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1.5,
-                            fontWeight: 500,
-                            color:
-                              portfolio.historicalSongValue[track.holding_id][
-                                portfolio.historicalSongValue[track.holding_id]
-                                  .length - 1
-                              ].rank -
-                                portfolio.historicalSongValue[
-                                  track.holding_id
-                                ][0].rank >
-                              0
-                                ? "#06f202"
-                                : portfolio.historicalSongValue[
+                            <Typography sx={{fontWeight: 500, fontSize: "0.875rem", color: track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
                                     track.holding_id
-                                  ][
-                                    portfolio.historicalSongValue[
-                                      track.holding_id
-                                    ].length - 1
-                                  ].rank -
-                                    portfolio.historicalSongValue[
-                                      track.holding_id
-                                    ][0].rank <
-                                  0
-                                ? "#f71500"
-                                : "#e6bb00",
-                          }}
-                        >
-                          {portfolio.historicalSongValue[track.holding_id][
-                            portfolio.historicalSongValue[track.holding_id]
-                              .length - 1
-                          ].rank -
-                            portfolio.historicalSongValue[track.holding_id][0]
-                              .rank >
-                          0
-                            ? "+"
-                            : ""}
+                                  ].length - 1
+                                ].rank
+                              ] > 0 ? "#06f202" : track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] < 0 ? "#f71500" : "#e6bb00"}}
+                              >  
+                          {track.current_price -
+                              priceObject[
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
+                              ] > 0 ? "+" : ""}
                           {(
                             (track.current_price /
                               priceObject[
@@ -396,7 +491,13 @@ function PortfolioHoldings() {
                             100
                           ).toFixed(2)}
                           %
+
+                          </Typography>
                         </TableCell>
+
+
+
+
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
                           <TableCell
@@ -432,32 +533,11 @@ function PortfolioHoldings() {
                             0
                               ? "+"
                               : ""}
-                            {portfolio.historicalSongValue[track.holding_id][1]
+                          {portfolio.historicalSongValue[track.holding_id][1]
                               .rank -
                               portfolio.historicalSongValue[track.holding_id][0]
                                 .rank}
-                          </TableCell>
-                        ) : (
-                          <TableCell
-                            align="left"
-                            sx={{
-                              paddingRight: 1.3,
-                              paddingLeft: 1.5,
-                              fontWeight: 500,
-                              color: "#e6bb00",
-                            }}
-                          >
-                            0
-                          </TableCell>
-                        )}
-                        <TableCell
-                          align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1.5,
-                            fontWeight: 500,
-                            color:
-                              portfolio.historicalSongValue[track.holding_id][
+                            <Typography sx={{ fontWeight: 500, fontSize: "0.875rem", color: portfolio.historicalSongValue[track.holding_id][
                                 portfolio.historicalSongValue[track.holding_id]
                                   .length - 1
                               ].rank -
@@ -478,10 +558,8 @@ function PortfolioHoldings() {
                                     ][0].rank <
                                   0
                                 ? "#f71500"
-                                : "#e6bb00",
-                          }}
-                        >
-                          {portfolio.historicalSongValue[track.holding_id][
+                                : "#e6bb00"}}>
+                                  {portfolio.historicalSongValue[track.holding_id][
                             portfolio.historicalSongValue[track.holding_id]
                               .length - 1
                           ].rank -
@@ -496,7 +574,69 @@ function PortfolioHoldings() {
                           ].rank -
                             portfolio.historicalSongValue[track.holding_id][0]
                               .rank}
-                        </TableCell>
+                            </Typography >
+                          </TableCell>
+                        ) : (
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color: "#e6bb00",
+                            }}
+                          >
+                            0
+                            {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
+                            portfolio.historicalSongValue[track.holding_id][0]
+                              .rank >
+                          0
+                            ? "+"
+                            : ""}
+                            <Typography sx={{fontWeight: 500, fontSize: "0.875rem", color: portfolio.historicalSongValue[track.holding_id][
+                                portfolio.historicalSongValue[track.holding_id]
+                                  .length - 1
+                              ].rank -
+                                portfolio.historicalSongValue[
+                                  track.holding_id
+                                ][0].rank >
+                              0
+                                ? "#06f202"
+                                : portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][
+                                    portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ].length - 1
+                                  ].rank -
+                                    portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ][0].rank <
+                                  0
+                                ? "#f71500"
+                                : "#e6bb00"}}>
+                                  {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
+                            portfolio.historicalSongValue[track.holding_id][0]
+                              .rank >
+                          0
+                            ? "+"
+                            : ""}
+                          {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
+                            portfolio.historicalSongValue[track.holding_id][0]
+                              .rank}
+                            </Typography >
+                          </TableCell>
+                        )}
+                        
                         <TableCell
                           align="left"
                           sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
@@ -508,6 +648,7 @@ function PortfolioHoldings() {
                             fontFamily: "roboto",
                             paddingRight: 1.3,
                             paddingLeft: 1,
+                            maxWidth: 100
                           }}
                           align="right"
                           className={classes.tableCellSongArtist}

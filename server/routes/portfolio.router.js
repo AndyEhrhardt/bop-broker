@@ -58,16 +58,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
               for (let i = 0; i< portfolio.currentHoldings.length ; i++){
                 portfolio.historicalSongValue[portfolio.currentHoldings[i].holding_id] = []
               }
-              console.log(portfolio.historicalSongValue)
-              console.log(songValHist)
               for (let i = 0; i < songValHist.length ; i++){
-                console.log(songValHist[i].holding_id)
                 portfolio.historicalSongValue[songValHist[i].holding_id].push({value: songValHist[i].value, 
                   rank: songValHist[i].rank, date: songValHist[i].date, idFromHoldingTable: songValHist[i].holding_id})
               }
-              console.log(portfolio.historicalSongValue)
-
-
               console.log("portfolio assembled")
               res.send(portfolio)
             }).catch((error) => {

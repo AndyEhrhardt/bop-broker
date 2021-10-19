@@ -21,8 +21,6 @@ import PortfolioPage from '../PortfolioPage/PortfolioPage'
 
 import './App.css';
 
-import SongDetails from '../SongDetails/SongDetails'
-
 import LogOutButton from '../LogOutButton/LogOutButton'
 
 import ChartList from '../ChartList/ChartList'
@@ -117,11 +115,6 @@ function App() {
             path="/chartlist"
           >
             <ChartList />
-          </ProtectedRoute>
-          <ProtectedRoute
-            path="/songdetails/:id"
-          >
-            <SongDetails />
           </ProtectedRoute>
           <ProtectedRoute
             path="/portfoliopage"

@@ -1,69 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TablePagination from '@mui/material/TablePagination';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Fade from "@mui/material/Fade";
 
-import useStyles from '../styles/styles';
+import songStyles from "./songDetailsStyles";
+import Modal from "@mui/material/Modal";
+import DetailsGraph from "./DetailsGraph";
 
+function SongDetails(props) {
+  const classes = songStyles();
+  const dispatch = useDispatch();
+  const songDetails = useSelector((store) => store.songDetails);
+  console.log("the song details", songDetails);
+  const [quantity, setQuantity] = useState(0);
 
-function SongDetails() {
-    const classes = useStyles();
-    const {id} = useParams();
-    const dispatch = useDispatch();
-    const songDetails = useSelector(store => store.songDetails);
-    console.log("the song details", songDetails)
-    const [quantity, setQuantity] = useState(0)
+  //   useEffect(() => {
+  //     dispatch({ type: "GET_SONG_DETAILS", payload: props.id });
+  //     console.log("props id", props.id);
+  //   }, [dispatch]);
 
-
-    useEffect(() => {
-        dispatch({ type: 'GET_SONG_DETAILS', payload: id });
-    }, [dispatch]);
-
-    const handleBuy = (event) => {
-        console.log("handle buy", quantity);
-        dispatch({ type: 'POST_PORTFOLIO', payload: songDetails.basicInfo[0], quantity: quantity });
+    const handleClose = () => {
+        dispatch({ type: "CLEAR_SONG_DETAILS"});
+        props.setSongDetailsOpen(false);
     }
-    const handleQuantityChange = (event) => {
-        console.log(event.target.value)
-        setQuantity(event.target.value)
-    }
-    return (
-        <>
-            {songDetails.allRanks === undefined ? <p>Loading</p> : 
-            <div>
-                <div className={classes.mainDetailsWrapper}>
-                <h1 className={classes.detailsSongTitle}>{songDetails.basicInfo[0].song_name}</h1>
-                <h2 className={classes.detailsArtist}>{songDetails.basicInfo[0].artist}</h2>
-                <h3 className={classes.detailsRank}>Ranked #{songDetails.basicInfo[0].current_rank}</h3>
-                <h3 className={classes.detailsSubRank}>On US Top 50 Daily</h3>
+
+
+  return (
+    <Modal
+      open={props.songDetailsOpen}
+      onClose={() => {
+        handleClose();
+      }}
+      disableAutoFocus={true}
+    >
+      <div className={classes.innerModalWrap}>
+        {songDetails.allRanks === undefined ? (
+          <p>Loading</p>
+        ) : (
+          <div>
+            <div className={classes.mainDetailsWrapper}>
+              <Typography
+                sx={{ fontWeight: 500, fontSize: 25, fontFamily: "roboto" }}
+              >
+                {songDetails.basicInfo[0].song_name}
+              </Typography>
+              <Typography
+                sx={{ fontWeight: 400, fontSize: 20, fontFamily: "roboto" }}
+              >
+                {songDetails.basicInfo[0].artist}
+              </Typography>
+
+              <Typography
+                sx={{ fontWeight: 300, fontSize: 17, fontFamily: "roboto" }}
+              >
+                Rank #{songDetails.basicInfo[0].current_rank}
+              </Typography>
+              <Typography
+                sx={{ fontWeight: 300, fontSize: 17, fontFamily: "roboto" }}
+              >
+                On {props.chartName}
+              </Typography>
             </div>
 
-            <input value={quantity} 
-            onChange={(event) => handleQuantityChange(event)} 
-            type={"numer"}></input>
-            <Button 
-            value={quantity} 
-            onClick={handleBuy}>
-                Buy
-            </Button>
-            
-            
-            
-            
-            </div>
-            }
-        </>
-    )
+
+
+
+            <DetailsGraph/> 
+
+          </div>
+        )}
+      </div>
+    </Modal>
+  );
 }
 
 export default SongDetails;
