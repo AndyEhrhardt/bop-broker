@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 
 import portfolioStyles from "./portfolioStyles";
 import BuySellModal from "../BuySellModal/BuySellModal";
@@ -136,17 +137,19 @@ function PortfolioHoldings() {
                       align="left"
                       sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
                     >
-                      24h Value
-                      <br></br>
-                      Change%
+                      Trade
                     </TableCell>
                     <TableCell
                       align="left"
                       sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
                     >
-                      Total Value
-                      <br></br>
-                      Change%
+                      24h%
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
+                    >
+                      Total%
                     </TableCell>
                     <TableCell
                       align="left"
@@ -154,7 +157,7 @@ function PortfolioHoldings() {
                     >
                       24h
                       <br></br>
-                      Rank^
+                      Rank
                     </TableCell>
                     <TableCell
                       align="left"
@@ -162,7 +165,7 @@ function PortfolioHoldings() {
                     >
                       Total
                       <br></br>
-                      Rank^
+                      Rank
                     </TableCell>
                     <TableCell
                       align="left"
@@ -256,6 +259,7 @@ function PortfolioHoldings() {
                 </TableHead>
                 <TableBody>
                   {portfolio.currentHoldings.slice(page*3, page*3+3).map((track, index) => (
+                    
                     <TableRow
                       className={classes.tableRow}
                       key={index}
@@ -267,6 +271,13 @@ function PortfolioHoldings() {
                         },
                       }}
                     >
+                      <TableCell>
+                        <Button
+                        onClick={() => handleSell(track, track.current_price)}
+                        >
+                        $
+                        </Button>
+                    </TableCell>
                       {portfolio.historicalSongValue[track.holding_id].length >
                       1 ? (
                         <TableCell
@@ -374,7 +385,7 @@ function PortfolioHoldings() {
                             ] -
                             1) *
                           100
-                        ).toFixed(2)}
+                        ).toFixed(2)}%
                       </TableCell>
                       {portfolio.historicalSongValue[track.holding_id].length >
                       1 ? (
@@ -477,11 +488,6 @@ function PortfolioHoldings() {
                         sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
                       >
                         {track.current_rank}
-                        <Button
-                          onClick={() => handleSell(track, track.current_price)}
-                        >
-                          $
-                        </Button>
                       </TableCell>
                       <TableCell
                         sx={{
@@ -506,6 +512,7 @@ function PortfolioHoldings() {
                           paddingRight: 0.1,
                           paddingLeft: 1.1,
                           width: 20,
+                          minWidth: 80
                         }}
                         align="right"
                       >

@@ -248,7 +248,7 @@ function QuickPortfolio() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {portfolio.currentHoldings.slice(page, page + 3).map((track, index) => (
+                      {portfolio.currentHoldings.slice(page*3, page*3 + 3).map((track, index) => (
                         <TableRow
                           className={classes.tableRow}
                           key={index}

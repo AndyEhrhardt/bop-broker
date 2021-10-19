@@ -33,17 +33,22 @@
 [x] - open portfolio page by clicking quick portfolio 
 [x] - chart.js for historical portfolio value
 
-[] - table for portfolio 
-[] - doughnut chart for portfolio
+[x] - table for portfolio 
 [x] - finish overview information
-[] - get paper shadow (15 min)
-[] - no border(15 min)
+[x] - get paper shadow (15 min)
+[x] - no border(15 min)
 
 
+[] - clean up portfolio table
+[] - better buttons 
 
 
+[] - song details modal 
 [] - chart.js for historical song value 
 [] - incorporate buy/sell modal component into song deatils page 
+[] - clicking trade button will not trigger song details 
+
+
 
 
 [] - clicking a chart leads to chart details page 
@@ -66,7 +71,8 @@
 [] - write and create an about page 
 [] - complete readme
 
-
+[] - change login page 
+[] - change register page
 
 ## Setup Instructions
 
