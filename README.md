@@ -38,6 +38,8 @@
 [x] - get paper shadow (15 min)
 [x] - no border(15 min)
 
+[] - two options for ways to view porfolio
+
 
 [] - clean up portfolio table
 [] - better buttons 

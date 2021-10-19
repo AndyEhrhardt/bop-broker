@@ -13,7 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
-import SwapVertIcon from '@mui/icons-material/SwapVert';
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 
 import portfolioStyles from "./portfolioStyles";
 import BuySellModal from "../BuySellModal/BuySellModal";
@@ -258,28 +258,106 @@ function PortfolioHoldings() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {portfolio.currentHoldings.slice(page*3, page*3+3).map((track, index) => (
-                    
-                    <TableRow
-                      className={classes.tableRow}
-                      key={index}
-                      sx={{
-                        "td, th": {
-                          paddingBottom: 0.35,
-                          paddingTop: 0.35,
-                          cursor: "pointer",
-                        },
-                      }}
-                    >
-                      <TableCell>
-                        <Button
-                        onClick={() => handleSell(track, track.current_price)}
-                        >
-                        $
-                        </Button>
-                    </TableCell>
-                      {portfolio.historicalSongValue[track.holding_id].length >
-                      1 ? (
+                  {portfolio.currentHoldings
+                    .slice(page * 3, page * 3 + 3)
+                    .map((track, index) => (
+                      <TableRow
+                        className={classes.tableRow}
+                        key={index}
+                        sx={{
+                          "td, th": {
+                            paddingBottom: 0.35,
+                            paddingTop: 0.35,
+                            cursor: "pointer",
+                          },
+                        }}
+                      >
+                        <TableCell>
+                          <Button
+                            onClick={() =>
+                              handleSell(track, track.current_price)
+                            }
+                          >
+                            $
+                          </Button>
+                        </TableCell>
+                        {portfolio.historicalSongValue[track.holding_id]
+                          .length > 1 ? (
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color:
+                                portfolio.historicalSongValue[
+                                  track.holding_id
+                                ][1].rank -
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][0].rank >
+                                0
+                                  ? "#06f202"
+                                  : portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ][1].rank -
+                                      portfolio.historicalSongValue[
+                                        track.holding_id
+                                      ][0].rank <
+                                    0
+                                  ? "#f71500"
+                                  : "#e6bb00",
+                            }}
+                          >
+                            {
+                              ("this",
+                              console.log(
+                                portfolio.historicalSongValue[
+                                  track.holding_id
+                                ][1].rank
+                              ))
+                            }
+                            {
+                              ("minus this",
+                              console.log(
+                                portfolio.historicalSongValue[
+                                  track.holding_id
+                                ][0].rank
+                              ))
+                            }
+                            {portfolio.historicalSongValue[track.holding_id][1]
+                              .rank -
+                              portfolio.historicalSongValue[track.holding_id][0]
+                                .rank >
+                            0
+                              ? "+"
+                              : ""}
+                            {(
+                              (track.current_price /
+                                priceObject[
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][1].rank
+                                ] -
+                                1) *
+                              100
+                            ).toFixed(2)}
+                            %
+                          </TableCell>
+                        ) : (
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color: "#e6bb00",
+                            }}
+                          >
+                            0%
+                          </TableCell>
+                        )}
+
                         <TableCell
                           align="left"
                           sx={{
@@ -287,8 +365,10 @@ function PortfolioHoldings() {
                             paddingLeft: 1.5,
                             fontWeight: 500,
                             color:
-                              portfolio.historicalSongValue[track.holding_id][1]
-                                .rank -
+                              portfolio.historicalSongValue[track.holding_id][
+                                portfolio.historicalSongValue[track.holding_id]
+                                  .length - 1
+                              ].rank -
                                 portfolio.historicalSongValue[
                                   track.holding_id
                                 ][0].rank >
@@ -296,7 +376,11 @@ function PortfolioHoldings() {
                                 ? "#06f202"
                                 : portfolio.historicalSongValue[
                                     track.holding_id
-                                  ][1].rank -
+                                  ][
+                                    portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ].length - 1
+                                  ].rank -
                                     portfolio.historicalSongValue[
                                       track.holding_id
                                     ][0].rank <
@@ -305,8 +389,10 @@ function PortfolioHoldings() {
                                 : "#e6bb00",
                           }}
                         >
-                          {portfolio.historicalSongValue[track.holding_id][1]
-                            .rank -
+                          {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
                             portfolio.historicalSongValue[track.holding_id][0]
                               .rank >
                           0
@@ -315,80 +401,70 @@ function PortfolioHoldings() {
                           {(
                             (track.current_price /
                               priceObject[
-                                portfolio.historicalSongValue[
-                                  track.holding_id
-                                ][1].rank
+                                portfolio.historicalSongValue[track.holding_id][
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ].length - 1
+                                ].rank
                               ] -
                               1) *
                             100
                           ).toFixed(2)}
                           %
                         </TableCell>
-                      ) : (
-                        <TableCell
-                          align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1.5,
-                            fontWeight: 500,
-                            color: "#e6bb00",
-                          }}
-                        >
-                          0%
-                        </TableCell>
-                      )}
-
-                      <TableCell
-                        align="left"
-                        sx={{
-                          paddingRight: 1.3,
-                          paddingLeft: 1.5,
-                          fontWeight: 500,
-                          color:
-                            portfolio.historicalSongValue[track.holding_id][
-                              portfolio.historicalSongValue[track.holding_id]
-                                .length - 1
-                            ].rank -
+                        {portfolio.historicalSongValue[track.holding_id]
+                          .length > 1 ? (
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color:
+                                portfolio.historicalSongValue[
+                                  track.holding_id
+                                ][1].rank -
+                                  portfolio.historicalSongValue[
+                                    track.holding_id
+                                  ][0].rank >
+                                0
+                                  ? "#06f202"
+                                  : portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ][1].rank -
+                                      portfolio.historicalSongValue[
+                                        track.holding_id
+                                      ][0].rank <
+                                    0
+                                  ? "#f71500"
+                                  : "#e6bb00",
+                            }}
+                          >
+                            {portfolio.historicalSongValue[track.holding_id][1]
+                              .rank -
                               portfolio.historicalSongValue[track.holding_id][0]
                                 .rank >
                             0
-                              ? "#06f202"
-                              : portfolio.historicalSongValue[track.holding_id][
-                                  portfolio.historicalSongValue[
-                                    track.holding_id
-                                  ].length - 1
-                                ].rank -
-                                  portfolio.historicalSongValue[
-                                    track.holding_id
-                                  ][0].rank <
-                                0
-                              ? "#f71500"
-                              : "#e6bb00",
-                        }}
-                      >
-                        {portfolio.historicalSongValue[track.holding_id][
-                          portfolio.historicalSongValue[track.holding_id]
-                            .length - 1
-                        ].rank -
-                          portfolio.historicalSongValue[track.holding_id][0]
-                            .rank >
-                        0
-                          ? "+"
-                          : ""}
-                        {(
-                          (track.current_price /
-                            priceObject[
-                              portfolio.historicalSongValue[track.holding_id][
-                                portfolio.historicalSongValue[track.holding_id]
-                                  .length - 1
-                              ].rank
-                            ] -
-                            1) *
-                          100
-                        ).toFixed(2)}%
-                      </TableCell>
-                      {portfolio.historicalSongValue[track.holding_id].length >
-                      1 ? (
+                              ? "+"
+                              : ""}
+                            {portfolio.historicalSongValue[track.holding_id][1]
+                              .rank -
+                              portfolio.historicalSongValue[track.holding_id][0]
+                                .rank}
+                          </TableCell>
+                        ) : (
+                          <TableCell
+                            align="left"
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1.5,
+                              fontWeight: 500,
+                              color: "#e6bb00",
+                            }}
+                          >
+                            0
+                          </TableCell>
+                        )}
                         <TableCell
                           align="left"
                           sx={{
@@ -396,8 +472,10 @@ function PortfolioHoldings() {
                             paddingLeft: 1.5,
                             fontWeight: 500,
                             color:
-                              portfolio.historicalSongValue[track.holding_id][1]
-                                .rank -
+                              portfolio.historicalSongValue[track.holding_id][
+                                portfolio.historicalSongValue[track.holding_id]
+                                  .length - 1
+                              ].rank -
                                 portfolio.historicalSongValue[
                                   track.holding_id
                                 ][0].rank >
@@ -405,7 +483,11 @@ function PortfolioHoldings() {
                                 ? "#06f202"
                                 : portfolio.historicalSongValue[
                                     track.holding_id
-                                  ][1].rank -
+                                  ][
+                                    portfolio.historicalSongValue[
+                                      track.holding_id
+                                    ].length - 1
+                                  ].rank -
                                     portfolio.historicalSongValue[
                                       track.holding_id
                                     ][0].rank <
@@ -414,138 +496,87 @@ function PortfolioHoldings() {
                                 : "#e6bb00",
                           }}
                         >
-                          {portfolio.historicalSongValue[track.holding_id][1]
-                            .rank -
+                          {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
                             portfolio.historicalSongValue[track.holding_id][0]
                               .rank >
                           0
                             ? "+"
                             : ""}
-                          {portfolio.historicalSongValue[track.holding_id][1]
-                            .rank -
+                          {portfolio.historicalSongValue[track.holding_id][
+                            portfolio.historicalSongValue[track.holding_id]
+                              .length - 1
+                          ].rank -
                             portfolio.historicalSongValue[track.holding_id][0]
                               .rank}
                         </TableCell>
-                      ) : (
                         <TableCell
                           align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1.5,
-                            fontWeight: 500,
-                            color: "#e6bb00",
-                          }}
+                          sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
                         >
-                          0
+                          {track.current_rank}
                         </TableCell>
-                      )}
-                      <TableCell
-                        align="left"
-                        sx={{
-                          paddingRight: 1.3,
-                          paddingLeft: 1.5,
-                          fontWeight: 500,
-                          color:
-                            portfolio.historicalSongValue[track.holding_id][
-                              portfolio.historicalSongValue[track.holding_id]
-                                .length - 1
-                            ].rank -
-                              portfolio.historicalSongValue[track.holding_id][0]
-                                .rank >
-                            0
-                              ? "#06f202"
-                              : portfolio.historicalSongValue[track.holding_id][
-                                  portfolio.historicalSongValue[
-                                    track.holding_id
-                                  ].length - 1
-                                ].rank -
-                                  portfolio.historicalSongValue[
-                                    track.holding_id
-                                  ][0].rank <
-                                0
-                              ? "#f71500"
-                              : "#e6bb00",
-                        }}
-                      >
-                        {portfolio.historicalSongValue[track.holding_id][
-                          portfolio.historicalSongValue[track.holding_id]
-                            .length - 1
-                        ].rank -
-                          portfolio.historicalSongValue[track.holding_id][0]
-                            .rank >
-                        0
-                          ? "+"
-                          : ""}
-                        {portfolio.historicalSongValue[track.holding_id][
-                          portfolio.historicalSongValue[track.holding_id]
-                            .length - 1
-                        ].rank -
-                          portfolio.historicalSongValue[track.holding_id][0]
-                            .rank}
-                      </TableCell>
-                      <TableCell
-                        align="left"
-                        sx={{ paddingRight: 1.3, paddingLeft: 1.5 }}
-                      >
-                        {track.current_rank}
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          fontFamily: "roboto",
-                          paddingRight: 1.3,
-                          paddingLeft: 1,
-                        }}
-                        align="right"
-                        className={classes.tableCellSongArtist}
-                      >
-                        <a style={{ fontWeight: 400 }}>
-                          {track.song_name.split("(")[0]}
-                        </a>
-                        <br />
-                        <i style={{ fontWeight: 300, fontSize: 13 }}>
-                          {track.artist}
-                        </i>
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          fontFamily: "roboto",
-                          paddingRight: 0.1,
-                          paddingLeft: 1.1,
-                          width: 20,
-                          minWidth: 80
-                        }}
-                        align="right"
-                      >
-                        {chartNamesObj[track.spotify_playlist_id]}
-                      </TableCell>
-                      <TableCell
-                        sx={{ paddingRight: 1, paddingLeft: 1 }}
-                        align="right"
-                      >
-                        <a style={{ fontWeight: 400 }}>
-                          {track.quantity}
-                        </a>
-                      </TableCell>
-                      <TableCell
-                        sx={{ paddingRight: 1, paddingLeft: 1 }}
-                        align="right"
-                      >
-                        <a style={{ fontWeight: 400 }}>
-                          ${(priceObject[track.current_rank]).toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </a>
-                      </TableCell>
-                      <TableCell
-                        sx={{ paddingRight: 1, paddingLeft: 1 }}
-                        align="right"
-                      >
-                        <a style={{ fontWeight: 400 }}>
-                          ${(track.quantity * track.current_price).toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </a>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        <TableCell
+                          sx={{
+                            fontFamily: "roboto",
+                            paddingRight: 1.3,
+                            paddingLeft: 1,
+                          }}
+                          align="right"
+                          className={classes.tableCellSongArtist}
+                        >
+                          <a style={{ fontWeight: 400 }}>
+                            {track.song_name.split("(")[0]}
+                          </a>
+                          <br />
+                          <i style={{ fontWeight: 300, fontSize: 13 }}>
+                            {track.artist}
+                          </i>
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            fontFamily: "roboto",
+                            paddingRight: 0.1,
+                            paddingLeft: 1.1,
+                            width: 20,
+                            minWidth: 80,
+                          }}
+                          align="right"
+                        >
+                          {chartNamesObj[track.spotify_playlist_id]}
+                        </TableCell>
+                        <TableCell
+                          sx={{ paddingRight: 1, paddingLeft: 1 }}
+                          align="right"
+                        >
+                          <a style={{ fontWeight: 400 }}>{track.quantity}</a>
+                        </TableCell>
+                        <TableCell
+                          sx={{ paddingRight: 1, paddingLeft: 1 }}
+                          align="right"
+                        >
+                          <a style={{ fontWeight: 400 }}>
+                            $
+                            {priceObject[track.current_rank]
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          </a>
+                        </TableCell>
+                        <TableCell
+                          sx={{ paddingRight: 1, paddingLeft: 1 }}
+                          align="right"
+                        >
+                          <a style={{ fontWeight: 400 }}>
+                            $
+                            {(track.quantity * track.current_price)
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          </a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Typography>
