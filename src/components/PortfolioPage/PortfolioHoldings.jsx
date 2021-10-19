@@ -103,17 +103,6 @@ function PortfolioHoldings() {
   const [buySellTrack, setBuySellTrack] = useState({});
   const [buySellPrice, setBuySellPrice] = useState(0);
 
-  const mouseEnter = () => {
-    setElev(12);
-  };
-
-  const mouseLeave = () => {
-    setElev(4);
-  };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleSell = (track, price) => {
     console.log(track, price);
     setBuySellTrack(track);
@@ -121,6 +110,11 @@ function PortfolioHoldings() {
     setModalPop(true);
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <div>
       {portfolio.currentMoney === undefined ||
@@ -128,6 +122,13 @@ function PortfolioHoldings() {
         <></>
       ) : (
         <div className={"table"}>
+          <BuySellModal
+              modalPop={modalPop}
+              setModalPop={setModalPop}
+              track={buySellTrack}
+              price={buySellPrice}
+              buyingPower={portfolio.currentMoney.buying_power}
+            />
           <TableContainer>
             <Typography component={"span"}>
               <Table size="small">
@@ -273,13 +274,13 @@ function PortfolioHoldings() {
                         }}
                       >
                         <TableCell>
-                          <Button
-                            onClick={() =>
-                              handleSell(track, track.current_price)
-                            }
-                          >
-                            $
-                          </Button>
+                        <Button
+                          onClick={() =>
+                                handleSell(track, track.current_price)
+                          }
+                        >
+                              $
+                        </Button>
                         </TableCell>
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
@@ -308,23 +309,7 @@ function PortfolioHoldings() {
                                   ? "#f71500"
                                   : "#e6bb00",
                             }}
-                          >
-                            {
-                              ("this",
-                              console.log(
-                                portfolio.historicalSongValue[
-                                  track.holding_id
-                                ][1].rank
-                              ))
-                            }
-                            {
-                              ("minus this",
-                              console.log(
-                                portfolio.historicalSongValue[
-                                  track.holding_id
-                                ][0].rank
-                              ))
-                            }
+                          >     
                             {portfolio.historicalSongValue[track.holding_id][1]
                               .rank -
                               portfolio.historicalSongValue[track.holding_id][0]
