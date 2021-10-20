@@ -32,23 +32,40 @@
 [x] - create portfolio page
 [x] - open portfolio page by clicking quick portfolio 
 [x] - chart.js for historical portfolio value
-
 [x] - table for portfolio 
 [x] - finish overview information
 [x] - get paper shadow (15 min)
 [x] - no border(15 min)
 
+
+
 [] - two options for views in the porfolio page (split current view into two views to make the page more horizontal)
 [] - allow user to view song details from either quick portfolio or the portfolio page 
+[] - ^clicking trade button will not trigger song details 
 
-[] - clean up portfolio table
+
+
+[] - horizontal portfolio in top right 
+[] - create logo
+[] - create header
+[] - styled sign out 
+
+
+
+
+[x] - song details modal 
+[x] - chart.js for historical song value 
+[x] - incorporate buy/sell modal component into song deatils page 
+[] - conditional buy based on user's buying power 
+[] - table containing all other charts the song appears on 
+
+
+
+
+
+[] - datagrid in portfolio page
 [] - better buttons 
 
-
-[] - song details modal 
-[] - chart.js for historical song value 
-[] - incorporate buy/sell modal component into song deatils page 
-[] - clicking trade button will not trigger song details 
 
 
 [] - clicking a chart leads to chart details modal
@@ -67,13 +84,13 @@
 
 
 
-[] - horizontal portfolio in top right 
+
 [] - custom buttons 
 [] - apply fade in fade out on all quick components
-[] - create logo
-[] - styled sign out 
+
+
 [] - change log in page styling 
-[] - create header
+
 
 
 

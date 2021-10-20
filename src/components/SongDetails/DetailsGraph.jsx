@@ -18,8 +18,8 @@ function DetailsGraph(props) {
   const assignValues = () => {
     let newLabels = [];
     let newDailyRank = [];
-    let minimum = 1;
-    let maximum = 50;
+    let minimum = histData[0].rank;
+    let maximum = histData[0].rank;
     console.log(histData.length);
     if (histData.length === 1) {
       newLabels = [
@@ -54,7 +54,7 @@ function DetailsGraph(props) {
     labels: labels,
     datasets: [
       {
-        label: "Daily Rank",
+        label: "Rank",
         data: dailyRank,
         fill: false,
         backgroundColor: "#e6bb00",
@@ -66,11 +66,27 @@ function DetailsGraph(props) {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
-    elements: {
-      point: {
-        radius: 0,
-      },
+    type: 'line',
+    interaction: {
+      intersect: true,
+      axis: 'x',
     },
+    tooltips: {
+      mode: 'index',
+      intersect: false
+   },
+   hover: {
+    mode: 'index',
+    intersect: false
+    },
+    // elements: {
+    //   point: {
+    //     radius: 0,
+    //     color: 'white',
+    //     pointHitRadius: 12,
+    //     mode: 'x',
+    //   },
+    // },
     scales: {
       x: {
         grid: {
@@ -78,13 +94,16 @@ function DetailsGraph(props) {
         },
       },
       y: {
+        // suggestedMin: 20,
+        // suggestedMax: 30,
         min: 1,
         max: 50,
+        grace: '5%',
         display: true,
-        position: "right",
-        id: "y-axis-2",
-        type: "linear",
         reverse: true,
+        ticks: {
+          stepSize: 5
+        },
         grid: {
           display: false,
         },

@@ -332,11 +332,11 @@ function PortfolioHoldings() {
                                     track.holding_id
                                   ][1].rank] < 0 ? "-" : ""}
                             ${
-                              Math.abs(track.current_price -
+                              Math.abs(track.current_price * track.quantity -
                                 priceObject[
                                   portfolio.historicalSongValue[
                                     track.holding_id
-                                  ][1].rank])
+                                  ][1].rank] * track.quantity)
                               .toFixed(2).toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             <Typography sx={{ fontWeight: 500, fontSize: "0.875rem", color: track.current_price -
@@ -372,14 +372,14 @@ function PortfolioHoldings() {
                               ] < 0 ? "-" : "" }
                               
                               ${Math.abs(
-                            (track.current_price -
+                            (track.current_price * track.quantity -
                               priceObject[
                                 portfolio.historicalSongValue[track.holding_id][
                                   portfolio.historicalSongValue[
                                     track.holding_id
                                   ].length - 1
                                 ].rank
-                              ] 
+                               ] * track.quantity
                           )).toFixed(2)}
                           </Typography>
                           </TableCell>
