@@ -12,11 +12,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     ORDER BY song_charts.date DESC
     LIMIT 1`
     pool.query(dateQuery)
-        .then((result) => {
-            let recentDate = ''
-            let previousDate = new Date();
-            recentDate = new Date(result.rows[0].date.toISOString())//.split('T')[0]
-            previousDate.setDate(recentDate.getDate() - 1)
+        .then((result) => {            
+            let recentDate = new Date(result.rows[0].date.toISOString())
+            let previousDate = new Date(recentDate)
+            previousDate.setDate(previousDate.getDate() - 1)
             recentDate = recentDate.toISOString().split('T')[0]
             previousDate = previousDate.toISOString().split('T')[0]
         const allChartsQuery = `WITH old_movers AS (
@@ -33,6 +32,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             ORDER BY song_charts.id;`
         pool.query(allChartsQuery, [previousDate, recentDate])
             .then((result) => {
+                //console.log(result.rows)
                 res.send(result.rows);
             })
         }).catch((error) => {
