@@ -57,7 +57,6 @@ function App() {
             path="/user"
           >
             <UserPage />
-            <LogOutButton/>
           </ProtectedRoute>
 
           <ProtectedRoute

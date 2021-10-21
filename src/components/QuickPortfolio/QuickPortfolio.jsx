@@ -29,9 +29,7 @@ function QuickPortfolio() {
   const [buySellPrice, setBuySellPrice] = useState(0);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [modalPortfolioOpen, setModalPortfolioOpen] = useState(true);
-  const toPortfolio = () => {
-    history.push('/portfoliopage')
-  }
+  
 
   const mouseEnter = () => {
     setElev(12);
@@ -60,10 +58,10 @@ function QuickPortfolio() {
   return (
     <>
       <Paper
-        className={classes.quickChartWrapper}
+        className={classes.quickPortfolio}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
-        elevation={elev}
+        elevation={0}
       > 
         {portfolio.currentMoney === undefined ? (
           <></>
@@ -81,20 +79,24 @@ function QuickPortfolio() {
               track={buySellTrack}
               price={buySellPrice}
               buyingPower={portfolio.currentMoney.buying_power}
-            />
-              <Typography sx={{ fontWeight: 400,
-                fontSize: 40,
-                cursor: "pointer" }} 
+            />              
+            <div className={classes.quickPortMaster}>
+              <div>
+              <Typography sx={{ fontWeight: 300,
+                fontSize: 35,
+                cursor: "pointer",
+                paddingTop: 0,
+                paddingBottom: 0,
+                textAlign: 'center' }} 
                 className={classes.quickChartTitle}
                 onClick={(event) => {openPortfolioModal(event)}}
               >
                 Portfolio
               </Typography>
-            <div className={classes.quickPortMaster}>
-              <div className={classes.quickSubTitle}>
+              <div className={classes.quickSubTitle1}>
                 <Typography sx={{ fontWeight: 500 }}>Equity</Typography>
                 <Typography sx={{ fontWeight: 500 }}>Returns</Typography>
-              </div>
+              </div>        
               <div className={classes.quickPortColMaster}>
                 <div className={classes.quickPortGap}>
                   <div className={classes.quickPortColInfoLeft}>
@@ -199,6 +201,8 @@ function QuickPortfolio() {
                     </Typography>
                   </div>
                 </div>
+              </div>
+
               </div>
               <div className={"table"}>
               <TableContainer>

@@ -2,6 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const songStyles = makeStyles(() => ({
+    graphwrapper:{
+        maxHeight: 240,
+        minHeight: 240
+    },
+    graphDetailsBuy:{
+        height: 'fit'
+    },
     buttonDiv:{
         display: 'flex',
         justifyContent: 'center'
@@ -52,6 +59,8 @@ const songStyles = makeStyles(() => ({
         backgroundColor: 'white',
         p: 4,
         height: '60%',
+        maxHeight: 420,
+        minHeight: 420,
         borderRadius: 5,
         padding: 15
     },

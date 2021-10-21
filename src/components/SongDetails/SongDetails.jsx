@@ -97,7 +97,7 @@ function SongDetails(props) {
         {songDetails.allRanks === undefined ? (
           <p>Loading</p>
         ) : (
-          <div>
+          <div className={classes.graphDetailsBuy}>
             <div className={classes.buySellAndDetails}>
               <div className={classes.mainDetailsWrapper}>
                 <Typography
@@ -153,7 +153,7 @@ function SongDetails(props) {
             masterId={props.songDetailsId}
             />
             }
-          </div>  
+            </div>  
 
 
             <DetailsGraph/> 

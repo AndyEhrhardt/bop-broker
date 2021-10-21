@@ -39,6 +39,14 @@ const useStyles = makeStyles(() => ({
       textAlign: 'right',
       paddingRight: 0
     },
+    headerPort:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    quickPortfolio:{
+        
+    },
     quickChartWrapper: {
       maxWidth: 310,
       minWidth: 310,
@@ -121,20 +129,24 @@ const useStyles = makeStyles(() => ({
     quickPortColMaster:{
       display: 'flex',
       textAlign: 'left',
-      gap: 10
+      gap: 10,
+      paddingRight: 5
     },
     quickPortColRight:{
       display: 'flex',
-      textAlign: 'right'
+      textAlign: 'right',
+      gap: 10
     },
     quickPortColInfo:{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'flex-end'
+      alignItems: 'flex-end',
+      gap: 10.2
     },
     quickPortColInfoLeft:{
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      gap: 10
     },
     quickPortGap:{
       display: 'flex',
@@ -149,7 +161,8 @@ const useStyles = makeStyles(() => ({
     },
     quickPortMaster: {
       paddingRight: 10,
-      paddingLeft: 10
+      paddingLeft: 10,
+      display: 'flex'
     },
     quickSubTitle:{
       display: 'flex',
@@ -157,6 +170,25 @@ const useStyles = makeStyles(() => ({
       justifyContent: 'space-around',
       fontSize: 15,
       paddingTop: 6
+    },
+    quickSubTitle1:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      gap:15,
+      fontSize: 15,
+      paddingTop: 0,
+      paddingBottom: 0
+    },
+    quickSubTitle2:{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      gap:15,
+      fontSize: 15,
+      paddingTop: 6,
+      maxWidth: '50%',
+      minWidth: '50%'
     },
     header: {
       display: 'flex',
