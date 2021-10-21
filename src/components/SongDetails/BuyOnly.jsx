@@ -35,7 +35,9 @@ function BuyOnly(props) {
 
   const handleBuy = (buyOrSell) => {
       console.log(numberOfShares)
+      console.log(props.track.spotify_song_id + props.track.spotify_playlist_id)
       dispatch({ type: "POST_PORTFOLIO", payload: props.track.id, quantity: numberOfShares});
+      dispatch({ type: "GET_SONG_DETAILS", payload: props.track.spotify_song_id + props.track.spotify_playlist_id })
       setNumberOfShares(0);
   };
 

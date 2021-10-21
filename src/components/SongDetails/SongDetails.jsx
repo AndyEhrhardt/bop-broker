@@ -79,24 +79,12 @@ function SongDetails(props) {
   const dispatch = useDispatch();
   const songDetails = useSelector((store) => store.songDetails);
   const portfolio = useSelector((store) => store.portfolio);
-  console.log("the song details", songDetails);
-  const [quantity, setQuantity] = useState(0);
-
   const [songOwned, setSongOwned] = useState(false)
-  //   useEffect(() => {
-  //     dispatch({ type: "GET_SONG_DETAILS", payload: props.id });
-  //     console.log("props id", props.id);
-  //   }, [dispatch]);
-
     const handleClose = () => {
         dispatch({ type: "CLEAR_SONG_DETAILS"});
         props.setSongDetailsOpen(false);
     }
-const handleSongOwned = () =>{
-  console.log("in handle song owned")
-  setSongOwned(true)
-}
-console.log("song owned", songOwned)
+
   return (
     <Modal
       open={props.songDetailsOpen}
@@ -138,6 +126,15 @@ console.log("song owned", songOwned)
                 >
                   ${priceObject[songDetails.basicInfo[0].current_rank]}
                 </Typography>
+                
+                  {songDetails.basicInfo[0].quantity === undefined ? <></> :
+                  <Typography
+                  sx={{ fontWeight: 300, fontSize: 17, fontFamily: "roboto" }}
+                  >
+                  # Of Shares 
+                  Held: {songDetails.basicInfo[0].quantity}
+                  </Typography>
+                  }
               </div>
             
             {songDetails.owned ? 
@@ -146,14 +143,16 @@ console.log("song owned", songOwned)
             quantity={songDetails.quantity}
             price={priceObject[songDetails.basicInfo[0].rank]}
             buyingPower={portfolio.currentMoney.buying_power}
+            masterId={props.songDetailsId}
             /> 
             :
             <BuyOnly
             track={songDetails.basicInfo[0]}
             price={songDetails.basicInfo[0].current_price}
             buyingPower={portfolio.currentMoney.buying_power}
+            masterId={props.songDetailsId}
             />
-          }
+            }
           </div>  
 
 

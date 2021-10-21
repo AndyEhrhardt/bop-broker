@@ -20,61 +20,39 @@ function BuySell(props) {
   
 
 
-  const handleChangeMode = (event) => {
-    console.log(event)
-    setSellState(event)
-    if (numberOfShares > props.quantity && sellState) {
-      setNotEnoughSell(true);
-    } else if (
-      numberOfShares * props.price > props.buyingPower &&
-      !sellState
-    ) {
-      setNotEnoughBuy(true);
-    } else {
-      setNotEnoughSell(false);
-      setNotEnoughBuy(false);
-    }
-  };
-
   const handleChange = (event) => {
     setNumberOfShares(event.target.value);
-    changeTradeMode(event);
     console.log(parseInt(event.target.value));
     console.log(props.quantity, "quantity")
-    if (parseInt(event.target.value) > props.quantity && sellState) {
+    if (parseInt(event.target.value) > props.quantity) {
       setNotEnoughSell(true);
-    } else if (
-      event.target.value * props.price > props.buyingPower &&
-      !sellState
-    ) {
+    } else if (event.target.value * props.price > props.buyingPower) {
       setNotEnoughBuy(true);
     } else {
       setNotEnoughSell(false);
       setNotEnoughBuy(false);
     }
   };
-  const handleBuySell = (buyOrSell) => {
-    if (numberOfShares === props.track.quantity && buyOrSell) {
+  const handleBuySell = () => {
+    if (parseInt(numberOfShares) === props.track.quantity && sellState) {
       dispatch({ type: "SELL_ALL_SHARES", payload: props.track });
+      dispatch({ type: "GET_SONG_DETAILS", payload: props.track.spotify_song_id + props.track.spotify_playlist_id });
       setNumberOfShares(0);
-      props.setModalPop(false);
     } else {
+      console.log(props.track, sellState, numberOfShares, props.track.current_price)
       dispatch({
         type: "UPDATE_SHARE_QUANTITY",
         payload: props.track,
         sellState: sellState,
         numberOfShares: numberOfShares,
-        price: props.price,
+        price: props.track.current_price,
       });
+      dispatch({ type: "GET_SONG_DETAILS", payload: props.track.spotify_song_id + props.track.spotify_playlist_id })
       setNumberOfShares(0);
     }
   };
   const handleSellAll = () => {
     setNumberOfShares(props.track.quantity);
-  };
-  const changeTradeMode = (buySellMode) => {
-    console.log("sell state is ", buySellMode);
-    setSellState(buySellMode);
   };
 
   return (
@@ -88,7 +66,7 @@ function BuySell(props) {
                   className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20, height: 30 }}
                   color="success"
                   variant={sellState ? "contained" : "outlined"}
-                  onClick={() => handleChangeMode(true)}
+                  onClick={() => setSellState(true)}
                 >
                   Sell
                 </Button>
@@ -96,7 +74,7 @@ function BuySell(props) {
                   className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20 , height: 30}}
                   color="success"
                   variant={!sellState ? "contained" : "outlined"}
-                  onClick={() => handleChangeMode(false)}
+                  onClick={() => setSellState(false)}
                 >
                   Buy
                 </Button> 
@@ -147,14 +125,14 @@ function BuySell(props) {
               {sellState ? (
                   <Button
                     disabled={notEnoughSell}
-                    onClick={() => handleBuySell(sellState)}
+                    onClick={() => handleBuySell()}
                   >
                     Sell
                   </Button>
                 ) : (
                   <Button
                     disabled={notEnoughBuy}
-                    onClick={() => handleBuySell(sellState)}
+                    onClick={() => handleBuySell()}
                   >
                     Buy
                   </Button>

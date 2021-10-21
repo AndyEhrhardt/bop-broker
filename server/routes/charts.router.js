@@ -82,6 +82,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                                 if (songDetails.basicInfo[0].id === i.id){
                                     songDetails.owned = true;
                                     songDetails.quantity = i.quantity;
+                                    songDetails.basicInfo[0].quantity=i.quantity;
+                                    songDetails.basicInfo[0].holding_id=i.holding_id;
                                 }
                             }
                             res.send(songDetails)

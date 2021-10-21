@@ -287,10 +287,7 @@ function PortfolioHoldings() {
 
 
 
-
-
-                          {console.log(portfolio.historicalSongValue, track.holding_id)}
-                          {console.log(portfolio.historicalSongValue[track.holding_id])}
+                          
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
                           <TableCell
@@ -332,6 +329,9 @@ function PortfolioHoldings() {
                                   portfolio.historicalSongValue[
                                     track.holding_id
                                   ][1].rank] < 0 ? "-" : ""}
+                                  
+
+
                             ${
                               Math.abs(track.current_price * track.quantity -
                                 priceObject[
@@ -371,7 +371,8 @@ function PortfolioHoldings() {
                                   ].length - 1
                                 ].rank
                               ] < 0 ? "-" : "" }
-                              
+
+             
                               ${Math.abs(
                             (track.current_price * track.quantity -
                               priceObject[
@@ -382,14 +383,11 @@ function PortfolioHoldings() {
                                 ].rank
                                ] * track.quantity
                           )).toFixed(2)}
+                          
                           </Typography>
                           </TableCell>
-
-
                         ) : (
-
-
-                          <TableCell
+                        <TableCell
                             align="left"
                             sx={{
                               paddingRight: 1.3,
@@ -399,11 +397,12 @@ function PortfolioHoldings() {
                             }}
                           >
                             $0
+                            <Typography sx={{ fontWeight: 500, fontSize: "0.875rem", color: "#e6bb00"}}> 
+                              $0
+                            </Typography>
                           </TableCell>
 
                         )}
-
-
 
                       {portfolio.historicalSongValue[track.holding_id].length > 1 ? (
                         <TableCell
@@ -504,9 +503,11 @@ function PortfolioHoldings() {
                         color: "#e6bb00",
                       }}
                     >
-                      %0
+                      0%
+                      <Typography sx={{ fontWeight: 500, fontSize: "0.875rem", color: "#e6bb00"}}> 
+                        0%
+                      </Typography>
                     </TableCell>
-
                   )}  
 
 

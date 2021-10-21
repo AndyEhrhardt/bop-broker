@@ -32,6 +32,7 @@ function* sellSong(action) {
 }
 function* updateQuantity(action){
     console.log(action)
+    console.log("in")
     try{
         yield axios.put('api/portfolio', {data: {
             holding_id: action.payload.holding_id,

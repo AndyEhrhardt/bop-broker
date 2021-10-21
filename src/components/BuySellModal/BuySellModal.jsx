@@ -40,6 +40,7 @@ function BuySellModal(props) {
       setNumberOfShares(0);
       props.setModalPop(false);
     } else {
+      console.log(props.track, sellState, numberOfShares, props.price)
       dispatch({
         type: "UPDATE_SHARE_QUANTITY",
         payload: props.track,
