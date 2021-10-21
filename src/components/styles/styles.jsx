@@ -87,6 +87,15 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#f2f2f2',
       }
     },
+    hoverOnOverview:{
+      "&:hover": {
+        backgroundColor: '#f2f2f2',
+      },
+      borderRadius: 5,
+      padding: 5,
+      backgroundColor: "white",
+      transition: '0.2s',
+    },
     tableCellPrice:{
       width: 20,
       maxWidth: 30,
@@ -160,8 +169,6 @@ const useStyles = makeStyles(() => ({
       opacity: .5
     },
     quickPortMaster: {
-      paddingRight: 10,
-      paddingLeft: 10,
       display: 'flex'
     },
     quickSubTitle:{

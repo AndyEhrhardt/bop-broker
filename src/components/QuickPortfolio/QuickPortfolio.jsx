@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import Paper from "@mui/material/Paper";
@@ -13,7 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
-import PortfolioPage from '../PortfolioPage/PortfolioPage'
+import PortfolioPage from "../PortfolioPage/PortfolioPage";
 
 import useStyles from "../styles/styles";
 import BuySellModal from "../BuySellModal/BuySellModal";
@@ -29,7 +30,6 @@ function QuickPortfolio() {
   const [buySellPrice, setBuySellPrice] = useState(0);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [modalPortfolioOpen, setModalPortfolioOpen] = useState(true);
-  
 
   const mouseEnter = () => {
     setElev(12);
@@ -38,8 +38,8 @@ function QuickPortfolio() {
   const mouseLeave = () => {
     setElev(4);
   };
-  const handleChangePage = (event, newPage)=> {
-    setPage(newPage)
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
   const handleSell = (track, price) => {
@@ -50,10 +50,10 @@ function QuickPortfolio() {
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   };
   const openPortfolioModal = (event) => {
-    event.preventDefault()
-    setModalPortfolioOpen(true)
-    setPortfolioOpen(true)
-  }
+    event.preventDefault();
+    setModalPortfolioOpen(true);
+    setPortfolioOpen(true);
+  };
 
   return (
     <>
@@ -61,17 +61,17 @@ function QuickPortfolio() {
         className={classes.quickPortfolio}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
-        elevation={0}
-      > 
+        elevation={elev}
+      >
         {portfolio.currentMoney === undefined ? (
           <></>
         ) : (
           <>
-            <PortfolioPage 
-            modalPortfolioOpen={modalPortfolioOpen}
-            setModalPortfolioOpen={setModalPortfolioOpen}
-            portfolioOpen={portfolioOpen}
-            setPortfolioOpen={setPortfolioOpen}
+            <PortfolioPage
+              modalPortfolioOpen={modalPortfolioOpen}
+              setModalPortfolioOpen={setModalPortfolioOpen}
+              portfolioOpen={portfolioOpen}
+              setPortfolioOpen={setPortfolioOpen}
             />
             <BuySellModal
               modalPop={modalPop}
@@ -79,251 +79,301 @@ function QuickPortfolio() {
               track={buySellTrack}
               price={buySellPrice}
               buyingPower={portfolio.currentMoney.buying_power}
-            />              
+            />
             <div className={classes.quickPortMaster}>
+            <Box
+            sx={{cursor: "pointer"}}
+            className={classes.hoverOnOverview}
+            onClick={(event) => {
+              openPortfolioModal(event);
+            }}>
               <div>
-              <Typography sx={{ fontWeight: 300,
-                fontSize: 35,
-                cursor: "pointer",
-                paddingTop: 0,
-                paddingBottom: 0,
-                textAlign: 'center' }} 
-                className={classes.quickChartTitle}
-                onClick={(event) => {openPortfolioModal(event)}}
-              >
-                Portfolio
-              </Typography>
-              <div className={classes.quickSubTitle1}>
-                <Typography sx={{ fontWeight: 500 }}>Equity</Typography>
-                <Typography sx={{ fontWeight: 500 }}>Returns</Typography>
-              </div>        
-              <div className={classes.quickPortColMaster}>
-                <div className={classes.quickPortGap}>
-                  <div className={classes.quickPortColInfoLeft}>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      Net
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      Excess
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      Assets
-                    </Typography>
-                  </div>
-                  <div className={classes.quickPortColInfo}>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500,
-                      color: portfolio.gains }}
-
-                    >
-                      ${(portfolio.currentMoney.total_cash).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: 400}}
-                    >
-                      ${portfolio.currentMoney.buying_power.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500,
-                        color: portfolio.gains}}
-                    >
-                      $
-                      {(portfolio.currentMoney.total_cash - portfolio.currentMoney.buying_power).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </Typography>
-                  </div>
+                
+                <Typography
+                  sx={{
+                    fontWeight: 300,
+                    fontSize: 35,
+                    cursor: "pointer",
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                    textAlign: "center",
+                  }}
+                  onClick={(event) => {
+                    openPortfolioModal(event);
+                  }}
+                >
+                  Portfolio
+                </Typography>
+                <div className={classes.quickSubTitle1}>
+                  <Typography sx={{ fontWeight: 500 }}>Equity</Typography>
+                  <Typography sx={{ fontWeight: 500 }}>Returns</Typography>
                 </div>
-                <div className={classes.divider}></div>
-                <div className={classes.quickPortGap}>
-                  <div className={classes.quickPortColInfoLeft}>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
-                      "Loss $"  : 
-                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
-                      "Even $" :
-                      "Gain $"
-                      } 
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      {portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value < 0 ? 
-                      "Loss %"  : 
-                      portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value === 0 ? 
-                      "Even %" :
-                      "Gain %"
-                      } 
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortfolioInfo}
-                      sx={{ fontWeight: 300 }}
-                    >
-                      Dividend
-                    </Typography>
-                  </div>
-                  <div className={classes.quickPortColInfo}>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500,
-                        color: portfolio.gains }}
-                    >
-                     
-                    ${Math.abs((portfolio.historicalTotal[0].value-portfolio.historicalTotal[1].value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: 500,
-                        color: portfolio.gains }}
-                    >
-                    {Math.abs(((((portfolio.historicalTotal[0].value/portfolio.historicalTotal[1].value)-1)*100).toFixed(2)))}%
-                    </Typography>
-                    <Typography
-                      className={classes.quickPortColRight}
-                      sx={{ fontWeight: portfolio.currentMoney.daily_dividend === 0 ? 400 : 500,
-                        color: portfolio.currentMoney.daily_dividend === 0 ? "#000000" :  "#06f202" }}
+                <div className={classes.quickPortColMaster}>
+                  <div className={classes.quickPortGap}>
+                    <div className={classes.quickPortColInfoLeft}>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
                       >
-                      ${portfolio.currentMoney.daily_dividend.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </Typography>
+                        Net
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
+                      >
+                        Excess
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
+                      >
+                        Assets
+                      </Typography>
+                    </div>
+                    <div className={classes.quickPortColInfo}>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{ fontWeight: 500, color: portfolio.gains }}
+                      >
+                        $
+                        {portfolio.currentMoney.total_cash
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{ fontWeight: 400 }}
+                      >
+                        $
+                        {portfolio.currentMoney.buying_power
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{ fontWeight: 500, color: portfolio.gains }}
+                      >
+                        $
+                        {(
+                          portfolio.currentMoney.total_cash -
+                          portfolio.currentMoney.buying_power
+                        )
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className={classes.divider}></div>
+                  <div className={classes.quickPortGap}>
+                    <div className={classes.quickPortColInfoLeft}>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
+                      >
+                        {portfolio.historicalTotal[0].value -
+                          portfolio.historicalTotal[1].value <
+                        0
+                          ? "Loss $"
+                          : portfolio.historicalTotal[0].value -
+                              portfolio.historicalTotal[1].value ===
+                            0
+                          ? "Even $"
+                          : "Gain $"}
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
+                      >
+                        {portfolio.historicalTotal[0].value -
+                          portfolio.historicalTotal[1].value <
+                        0
+                          ? "Loss %"
+                          : portfolio.historicalTotal[0].value -
+                              portfolio.historicalTotal[1].value ===
+                            0
+                          ? "Even %"
+                          : "Gain %"}
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortfolioInfo}
+                        sx={{ fontWeight: 300 }}
+                      >
+                        Dividend
+                      </Typography>
+                    </div>
+                    <div className={classes.quickPortColInfo}>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{ fontWeight: 500, color: portfolio.gains }}
+                      >
+                        $
+                        {Math.abs(
+                          portfolio.historicalTotal[0].value -
+                            portfolio.historicalTotal[1].value
+                        )
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{ fontWeight: 500, color: portfolio.gains }}
+                      >
+                        {Math.abs(
+                          (
+                            (portfolio.historicalTotal[0].value /
+                              portfolio.historicalTotal[1].value -
+                              1) *
+                            100
+                          ).toFixed(2)
+                        )}
+                        %
+                      </Typography>
+                      <Typography
+                        className={classes.quickPortColRight}
+                        sx={{
+                          fontWeight:
+                            portfolio.currentMoney.daily_dividend === 0
+                              ? 400
+                              : 500,
+                          color:
+                            portfolio.currentMoney.daily_dividend === 0
+                              ? "#000000"
+                              : "#06f202",
+                        }}
+                      >
+                        $
+                        {portfolio.currentMoney.daily_dividend
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Typography>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              </div>
+              </Box>
               <div className={"table"}>
-              <TableContainer>
-                <Typography component={'span'}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell
-                          align="left"
-                          sx={{
-                            paddingRight: 1.3,
-                            paddingLeft: 1,
-                            width: 0.1,
-                            maxWidth: 0.3,
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                          }}
-                        >
-                          Rank
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                            paddingRight: 1
-                          }}
-                          className={classes.portTableCellSongArtist}
-                          align="right"
-                        >
-                          Song/Arist
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCellPrice}
-                          sx={{
-                            fontFamily: "roboto",
-                            fontWeight: 500,
-                            fontSize: 15,
-                            paddingLeft: 0,
-                            paddingRight: 1
-                          }}
-                          align="right"
-                        >
-                          Value
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {portfolio.currentHoldings.slice(page*3, page*3 + 3).map((track, index) => (
-                        <TableRow
-                          className={classes.tableRow}
-                          key={index}
-                          sx={{
-                            "td, th": {
-                              paddingBottom: 0.35,
-                              paddingTop: 0.35,
-                              cursor: "pointer",
-                            },
-                          }}
-                        >
+                <TableContainer>
+                  <Typography component={"span"}>
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
                           <TableCell
                             align="left"
-                            sx={{paddingRight: 1.3,
-                              paddingLeft: 1.5,
+                            sx={{
+                              paddingRight: 1.3,
+                              paddingLeft: 1,
                               width: 0.1,
                               maxWidth: 0.3,
-                             }}>
-                            {track.current_rank}
-                            <Button
-                              onClick={() =>
-                                handleSell(track, track.current_price)
-                              }
-                            >
-                              $
-                            </Button>
+                              fontFamily: "roboto",
+                              fontWeight: 500,
+                              fontSize: 15,
+                            }}
+                          >
+                            Rank
                           </TableCell>
                           <TableCell
                             sx={{
                               fontFamily: "roboto",
+                              fontWeight: 500,
+                              fontSize: 15,
                               paddingRight: 1,
-                              paddingLeft: 1,
-                              maxWidth: 80
                             }}
+                            className={classes.portTableCellSongArtist}
                             align="right"
-                            className={classes.tableCellSongArtist}
                           >
-                            <a style={{ fontWeight: 400 }}>
-                              {track.song_name.split("(")[0]}
-                            </a>
+                            Song/Arist
                           </TableCell>
                           <TableCell
-                            sx={{ paddingRight: 1.3, paddingLeft: 0 }}
+                            className={classes.tableCellPrice}
+                            sx={{
+                              fontFamily: "roboto",
+                              fontWeight: 500,
+                              fontSize: 15,
+                              paddingLeft: 0,
+                              paddingRight: 1,
+                            }}
                             align="right"
                           >
-                          <a style={{ fontWeight: 400 }}>
-                            $
-                            {track.current_price === 2500
-                              ? "2.5k"
-                              : track.current_price === 1250
-                              ? "1.2k"
-                              : track.current_price}
-                          </a>
+                            Value
                           </TableCell>
                         </TableRow>
-                        
-                      ))}
-                    </TableBody>
-                  </Table>
-                </Typography>
-                {portfolio.currentHoldings.length > 3 && 
-                <TablePagination
-                  page={page}
-                  rowsPerPage={3}
-                  rowsPerPageOptions={[]}
-                  count={portfolio.currentHoldings.length}
-                  component="div"
-                  onPageChange={handleChangePage}
-                />
-              }
-              </TableContainer>
+                      </TableHead>
+                      <TableBody>
+                        {portfolio.currentHoldings
+                          .slice(page * 3, page * 3 + 3)
+                          .map((track, index) => (
+                            <TableRow
+                              className={classes.tableRow}
+                              key={index}
+                              sx={{
+                                "td, th": {
+                                  paddingBottom: 0.35,
+                                  paddingTop: 0.35,
+                                  cursor: "pointer",
+                                },
+                              }}
+                            >
+                              <TableCell
+                                align="left"
+                                sx={{
+                                  paddingRight: 1.3,
+                                  paddingLeft: 1.5,
+                                  width: 0.1,
+                                  maxWidth: 0.3,
+                                }}
+                              >
+                                {track.current_rank}
+                                <Button
+                                  onClick={() =>
+                                    handleSell(track, track.current_price)
+                                  }
+                                >
+                                  $
+                                </Button>
+                              </TableCell>
+                              <TableCell
+                                sx={{
+                                  fontFamily: "roboto",
+                                  paddingRight: 1,
+                                  paddingLeft: 1,
+                                  maxWidth: 80,
+                                }}
+                                align="right"
+                                className={classes.tableCellSongArtist}
+                              >
+                                <a style={{ fontWeight: 400 }}>
+                                  {track.song_name.split("(")[0]}
+                                </a>
+                              </TableCell>
+                              <TableCell
+                                sx={{ paddingRight: 1.3, paddingLeft: 0 }}
+                                align="right"
+                              >
+                                <a style={{ fontWeight: 400 }}>
+                                  $
+                                  {track.current_price === 2500
+                                    ? "2.5k"
+                                    : track.current_price === 1250
+                                    ? "1.2k"
+                                    : track.current_price}
+                                </a>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </Typography>
+                  {portfolio.currentHoldings.length > 3 && (
+                    <TablePagination
+                      page={page}
+                      rowsPerPage={3}
+                      rowsPerPageOptions={[]}
+                      count={portfolio.currentHoldings.length}
+                      component="div"
+                      onPageChange={handleChangePage}
+                    />
+                  )}
+                </TableContainer>
               </div>
             </div>
           </>
