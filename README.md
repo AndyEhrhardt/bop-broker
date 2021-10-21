@@ -40,7 +40,8 @@
 [x] - chart.js for historical song value 
 [x] - incorporate buy/sell modal component into song deatils page 
 
-[] - conditional buy based on user's buying power 
+[x] - conditional buy based on user's buying power 
+[] - fix bug where user's can change to buy mode after entering in sell amount and buy button still renders 
 [] - table containing all other charts the song appears on 
 
 [] - horizontal portfolio in top right 

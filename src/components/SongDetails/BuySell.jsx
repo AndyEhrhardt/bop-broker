@@ -19,8 +19,26 @@ function BuySell(props) {
   const [numberOfShares, setNumberOfShares] = useState("");
   
 
+
+  const handleChangeMode = (event) => {
+    console.log(event)
+    setSellState(event)
+    if (numberOfShares > props.quantity && sellState) {
+      setNotEnoughSell(true);
+    } else if (
+      numberOfShares * props.price > props.buyingPower &&
+      !sellState
+    ) {
+      setNotEnoughBuy(true);
+    } else {
+      setNotEnoughSell(false);
+      setNotEnoughBuy(false);
+    }
+  };
+
   const handleChange = (event) => {
     setNumberOfShares(event.target.value);
+    changeTradeMode(event);
     console.log(parseInt(event.target.value));
     console.log(props.quantity, "quantity")
     if (parseInt(event.target.value) > props.quantity && sellState) {
@@ -49,7 +67,6 @@ function BuySell(props) {
         price: props.price,
       });
       setNumberOfShares(0);
-      props.setModalPop(false);
     }
   };
   const handleSellAll = () => {
@@ -71,7 +88,7 @@ function BuySell(props) {
                   className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20, height: 30 }}
                   color="success"
                   variant={sellState ? "contained" : "outlined"}
-                  onClick={() => changeTradeMode(true)}
+                  onClick={() => handleChangeMode(true)}
                 >
                   Sell
                 </Button>
@@ -79,7 +96,7 @@ function BuySell(props) {
                   className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20 , height: 30}}
                   color="success"
                   variant={!sellState ? "contained" : "outlined"}
-                  onClick={() => changeTradeMode(false)}
+                  onClick={() => handleChangeMode(false)}
                 >
                   Buy
                 </Button> 
@@ -127,7 +144,7 @@ function BuySell(props) {
               <Button onClick={handleSellAll}>Sell All</Button>
               } 
               <div className={classes.buttonDiv}>
-                {props.buyAndSell && sellState ? (
+              {sellState ? (
                   <Button
                     disabled={notEnoughSell}
                     onClick={() => handleBuySell(sellState)}
