@@ -1,3 +1,14 @@
+## DESCRIPTION
+BopBroker is a web app that allows users to buy and sell "shares" of songs using fake money. Share price is determined by the songs position on a daily top 50 chart and chart information is obtained once a day from Spotify API.
+
+## SETUP
+clone this repository
+npm install
+set up a databse in postico called 'song-trader'
+paste in the the data in the database.sql file (sample data included)
+npm run server 
+npm run client
+
 ## TODO
 [x] - create server route for daily update
 [x] - paste in relevant code 
