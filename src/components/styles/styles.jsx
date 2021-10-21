@@ -4,7 +4,14 @@ import { blue } from '@mui/material/colors';
 
 
 const useStyles = makeStyles(() => ({
-    smallComponentsContainer: {
+      logoAndTitle:{
+        paddingRight: 30
+      },
+      logo:{
+        maxWidth: 100,
+        position: 'absolute'
+      },
+      smallComponentsContainer: {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -18,17 +25,11 @@ const useStyles = makeStyles(() => ({
         gap: 30
       },
       quickChartTitle: {
-        fontFamily: 'Roboto',
-        fontSize: 40,
-        margin: 0,
-        fontWeight: 400, 
         padding: 5,
+        paddingTop: 30,
+        paddingLeft: 40,
         borderRadius: 5,
         backgroundColor: "white",
-        transition: '0.2s',
-        "&:hover": {
-          backgroundColor: '#f2f2f2',
-        }
       }, 
     songName: {
       width: 130,

@@ -25,7 +25,7 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
-  padding: 5px;
+  padding: 0px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -151,28 +151,35 @@ table {
 
 @keyframes open {
   from {
-    transform: translate(-50% ,-200%);
+    top: -60%;
+    left: 33%;
   }
   to {
-  transform: translate(-50%, -74%);
+  top: -1%;
+  left: 33%;
   }
 }
 
 @keyframes example {
-  0%   {transform: translate(-50%, -74%)}
-  100% {transform: translate(-50% ,-200%)}
+  0%   {
+    top: -1%;
+    left: 33%;
+  }
+  100% {
+    top: -60%;
+    left: 33%;
+  }
 }
 
 .shutItDown{
   animation-name: example;
   animation-duration: 200ms;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -74%);
-  width: 80%;
-  height: 70%;
+  position: absolute;
+  top: -1%;
+  left: 33%;
   background-color: none;
+  /* display: flex;
+  justify-content: center; */
 }
 
 
@@ -180,14 +187,11 @@ table {
 
 .openModalWrap{
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: -1%;
+  left: 33%;
   animation-name: open;
   animation-duration: 200ms;
-  transform: translate(-50%, -74%);
-  width: 80%;
   background-color: none;
-  height: 70%;
 }
 
 

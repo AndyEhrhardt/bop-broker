@@ -35,8 +35,8 @@ function DetailsGraph(props) {
       newDailyRank = [histData[0].rank, histData[0].rank];
     } else if (histData.length < 7) {
       for (let i = 0; i < histData.length; i++) {
-        newLabels.push(histData[i].date.split("T")[0].slice(5));
-        newDailyRank.push(histData[i].rank);
+        newLabels.unshift(histData[i].date.split("T")[0].slice(5));
+        newDailyRank.unshift(histData[i].rank);
       }
       for (let i = 0; i < 7 - histData.length; i++) {
         newLabels.push("");

@@ -252,10 +252,10 @@ function QuickPortfolio() {
               </div>
               </Box>
               <div className={"table"}>
-                <TableContainer>
+                <TableContainer sx={{ maxHeight: 175 }}>
                   <Typography component={"span"}>
-                    <Table size="small">
-                      <TableHead>
+                    <Table stickyHeader size="small">
+                      <TableHead >
                         <TableRow>
                           <TableCell
                             align="left"
@@ -299,9 +299,7 @@ function QuickPortfolio() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {portfolio.currentHoldings
-                          .slice(page * 3, page * 3 + 3)
-                          .map((track, index) => (
+                        {portfolio.currentHoldings.map((track, index) => (
                             <TableRow
                               className={classes.tableRow}
                               key={index}
@@ -363,16 +361,6 @@ function QuickPortfolio() {
                       </TableBody>
                     </Table>
                   </Typography>
-                  {portfolio.currentHoldings.length > 3 && (
-                    <TablePagination
-                      page={page}
-                      rowsPerPage={3}
-                      rowsPerPageOptions={[]}
-                      count={portfolio.currentHoldings.length}
-                      component="div"
-                      onPageChange={handleChangePage}
-                    />
-                  )}
                 </TableContainer>
               </div>
             </div>

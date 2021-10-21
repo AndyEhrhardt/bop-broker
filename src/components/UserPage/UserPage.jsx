@@ -5,8 +5,8 @@ import QuickPortfolio from "../QuickPortfolio/QuickPortfolio";
 import useStyles from "../styles/styles";
 import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router-dom";
-import LogOutButton from '../LogOutButton/LogOutButton'
-import ChartList from '../ChartList/ChartList'
+import LogOutButton from "../LogOutButton/LogOutButton";
+import ChartList from "../ChartList/ChartList";
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -23,24 +23,25 @@ function UserPage() {
   return (
     <div className="container">
       <div className={classes.headerPort}>
-      <LogOutButton/>
-        <Typography
-          sx={{
-            fontWeight: 300,
-            fontSize: 50,
-            cursor: "pointer",
-            paddingTop: 0,
-            paddingBottom: 0,
-            maxHeight: 30
-          }}
-          className={classes.quickChartTitle}
-          onClick={(event) => {
-            openPortfolioModal(event);
-          }}
-        >
-          BopBroker
-        </Typography>
-        <QuickPortfolio />
+        <LogOutButton />
+        <div className={classes.logoAndTitle}>
+          <img className={classes.logo} src={"images/favicon5.png"} />
+          <Typography
+            sx={{
+              fontWeight: 300,
+              fontFamily: 'roboto',
+              fontSize: 55,
+              paddingTop: 3,
+              paddingBottom: 0,
+              maxHeight: 30,
+            }}
+            className={classes.quickChartTitle}
+          >
+            BopBroker
+          </Typography>
+          </div>
+          <QuickPortfolio />
+        
       </div>
 
       <div className={classes.quickComponentsContainer}>

@@ -15,6 +15,7 @@ import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 
+import SongDetails from "../SongDetails/SongDetails"
 import portfolioStyles from "./portfolioStyles";
 import BuySellModal from "../BuySellModal/BuySellModal";
 
@@ -102,7 +103,9 @@ function PortfolioHoldings() {
   const [modalPop, setModalPop] = useState(false);
   const [buySellTrack, setBuySellTrack] = useState({});
   const [buySellPrice, setBuySellPrice] = useState(0);
-
+  const [songDetailsOpen, setSongDetailsOpen] = useState(false);
+  const [songDetailsId, setSongDetailsId] = useState('')
+  const [chartName, setChartName] = useState('')
   const handleSell = (track, price) => {
     console.log(track, price);
     setBuySellTrack(track);
@@ -110,6 +113,15 @@ function PortfolioHoldings() {
     setModalPop(true);
     //dispatch({ type: 'SELL_ALL_SHARES', payload: track});
   };  
+
+  const handleRowClick = (event) => {
+    console.log(event.spotify_song_id + event.spotify_playlist_id)
+    let songId = event.spotify_song_id + event.spotify_playlist_id
+    dispatch({ type: 'GET_SONG_DETAILS', payload: songId });
+    setSongDetailsId(songId);
+    setChartName(chartNamesObj[event.spotify_playlist_id]);
+    setSongDetailsOpen(true);
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -128,6 +140,12 @@ function PortfolioHoldings() {
               track={buySellTrack}
               price={buySellPrice}
               buyingPower={portfolio.currentMoney.buying_power}
+            />
+            <SongDetails
+              songDetailsOpen={songDetailsOpen}
+              setSongDetailsOpen={setSongDetailsOpen}
+              id={songDetailsId}
+              chartName={chartName}
             />
           <TableContainer>
             <Typography component={"span"}>
@@ -178,6 +196,8 @@ function PortfolioHoldings() {
                       }}
                     >
                       Current
+                      <br/>
+                      Rank
                     </TableCell>
                     <TableCell
                       sx={{
@@ -271,6 +291,7 @@ function PortfolioHoldings() {
                             cursor: "pointer",
                           },
                         }}
+                        onClick={() => handleRowClick(track)}
                       >
 
 
