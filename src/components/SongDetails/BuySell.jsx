@@ -22,7 +22,8 @@ function BuySell(props) {
   const handleChange = (event) => {
     setNumberOfShares(event.target.value);
     console.log(parseInt(event.target.value));
-    if (parseInt(event.target.value) > props.track.quantity && sellState) {
+    console.log(props.quantity, "quantity")
+    if (parseInt(event.target.value) > props.quantity && sellState) {
       setNotEnoughSell(true);
     } else if (
       event.target.value * props.price > props.buyingPower &&
@@ -65,29 +66,36 @@ function BuySell(props) {
             
             <div>
               <div className={classes.title}>
-                {props.buyAndSell && 
                 <>
                 <Button
-                  disabled={sellState}
+                  className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20, height: 30 }}
+                  color="success"
+                  variant={sellState ? "contained" : "outlined"}
                   onClick={() => changeTradeMode(true)}
                 >
-                  Sell Mode
+                  Sell
                 </Button>
                 <Button
-                  disabled={!sellState}
+                  className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20 , height: 30}}
+                  color="success"
+                  variant={!sellState ? "contained" : "outlined"}
                   onClick={() => changeTradeMode(false)}
                 >
-                  Buy Mode
+                  Buy
                 </Button> 
                 </>
-                }   
-
-                <Typography className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 30 }}>
-                  Buy
-                </Typography>
                 <div className={classes.grayLine}></div>
               </div>
               <div className={classes.forInputBuyWrap}>
+                {sellState ? 
+                <Typography sx={{ fontWeight: 300, fontSize: 20, textAlign: 'center' }}>
+                  Sell
+                </Typography>
+                :
+                <Typography sx={{ fontWeight: 300, fontSize: 20, textAlign: 'center' }}>
+                  Buy
+                </Typography>
+                } 
                   <div className={classes.inputPrice}>
                     <Typography sx={{ fontWeight: 300, fontSize: 20 }}>
                     Shares
@@ -106,11 +114,11 @@ function BuySell(props) {
                     />
                     
                   </div>
-                  <div className={classes.inputPrice}>
+                  <div className={classes.forAmount}>
                     <Typography sx={{ fontWeight: 300, fontSize: 20 }}>
                       For 
                     </Typography>
-                    <Typography sx={{ fontWeight: 300, fontSize: 20 }}>
+                    <Typography sx={{ fontWeight: 300, fontSize: 20, textAlign: 'right' }}>
                     ${numberOfShares * props.track.current_price}
                     </Typography> 
                   </div>

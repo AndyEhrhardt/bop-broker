@@ -13,8 +13,12 @@ const songStyles = makeStyles(() => ({
         maxWidth: 200,
         minWidth: 150
     },
-
     inputPrice:{
+        maxWidth: 250,
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    forAmount:{
         maxWidth: 250,
         display: 'flex',
         justifyContent: 'space-between',

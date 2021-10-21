@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 
-
+import BuyOnly from "./BuyOnly";
 import BuySell from "./BuySell";
 import songStyles from "./songDetailsStyles";
 import Modal from "@mui/material/Modal";
@@ -82,6 +82,7 @@ function SongDetails(props) {
   console.log("the song details", songDetails);
   const [quantity, setQuantity] = useState(0);
 
+  const [songOwned, setSongOwned] = useState(false)
   //   useEffect(() => {
   //     dispatch({ type: "GET_SONG_DETAILS", payload: props.id });
   //     console.log("props id", props.id);
@@ -91,8 +92,11 @@ function SongDetails(props) {
         dispatch({ type: "CLEAR_SONG_DETAILS"});
         props.setSongDetailsOpen(false);
     }
-
-
+const handleSongOwned = () =>{
+  console.log("in handle song owned")
+  setSongOwned(true)
+}
+console.log("song owned", songOwned)
   return (
     <Modal
       open={props.songDetailsOpen}
@@ -136,11 +140,20 @@ function SongDetails(props) {
                 </Typography>
               </div>
             
-            <BuySell buyAndSell={false}
-              track={songDetails.basicInfo[0]}
-              price={priceObject[songDetails.basicInfo[0].rank]}
-              buyingPower={portfolio.currentMoney.buying_power}
+            {songDetails.owned ? 
+            <BuySell 
+            track={songDetails.basicInfo[0]}
+            quantity={songDetails.quantity}
+            price={priceObject[songDetails.basicInfo[0].rank]}
+            buyingPower={portfolio.currentMoney.buying_power}
+            /> 
+            :
+            <BuyOnly
+            track={songDetails.basicInfo[0]}
+            price={songDetails.basicInfo[0].current_price}
+            buyingPower={portfolio.currentMoney.buying_power}
             />
+          }
           </div>  
 
 

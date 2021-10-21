@@ -41,6 +41,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   });
 
   router.get('/:id', rejectUnauthenticated, (req, res) => {
+    let userId = req.user.id;
     let playlistAndSongId = req.params.id;
     let songId = playlistAndSongId.slice(0,22);
     let songDetails = {};
@@ -59,13 +60,32 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             pool.query(songInfoQuery, [playlistAndSongId])
                 .then((result) => {
                     songDetails.basicInfo = result.rows;
+                    console.log(songDetails.basicInfo)
                     const chartOverlapQuery = `SELECT song_current.spotify_playlist_id, song_current.current_rank, song_current.current_price
                     FROM song_current 
                     WHERE song_current.spotify_song_id = $1;`
                     pool.query(chartOverlapQuery, [songId])
                     .then((result) => {
                         songDetails.chartOverlap = result.rows;
-                        res.send(songDetails)
+                        const currentHoldingsQuery = `SELECT song_current.*, song_holdings.quantity, song_holdings.id as holding_id
+                        FROM song_current, song_holdings, "user"
+                        WHERE song_current.id = song_holdings.song_id
+                        AND song_holdings.user_id = "user".id
+                        AND song_holdings.user_id = $1
+                        ORDER BY holding_id DESC;`
+                        pool.query(currentHoldingsQuery, [userId])
+                        .then((result) => {
+                            let holdings = result.rows
+                            songDetails.owned = false;
+                            console.log(songDetails.basicInfo[0].id)
+                            for (let i of holdings){
+                                if (songDetails.basicInfo[0].id === i.id){
+                                    songDetails.owned = true;
+                                    songDetails.quantity = i.quantity;
+                                }
+                            }
+                            res.send(songDetails)
+                        })
                     }).catch((error) => {
                         console.log("error getting chart overlap", error);
                     });

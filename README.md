@@ -36,14 +36,12 @@
 [x] - finish overview information
 [x] - get paper shadow (15 min)
 [x] - no border(15 min)
+[x] - song details modal 
+[x] - chart.js for historical song value 
+[x] - incorporate buy/sell modal component into song deatils page 
 
-
-
-[] - two options for views in the porfolio page (split current view into two views to make the page more horizontal)
-[] - allow user to view song details from either quick portfolio or the portfolio page 
-[] - ^clicking trade button will not trigger song details 
-
-
+[] - conditional buy based on user's buying power 
+[] - table containing all other charts the song appears on 
 
 [] - horizontal portfolio in top right 
 [] - create logo
@@ -53,11 +51,18 @@
 
 
 
-[x] - song details modal 
-[x] - chart.js for historical song value 
-[x] - incorporate buy/sell modal component into song deatils page 
-[] - conditional buy based on user's buying power 
-[] - table containing all other charts the song appears on 
+
+[] - two options for views in the porfolio page (split current view into two views to make the page more horizontal)
+[] - allow user to view song details from either quick portfolio or the portfolio page 
+[] - ^clicking trade button will not trigger song details 
+
+
+
+
+
+
+
+
 
 
 

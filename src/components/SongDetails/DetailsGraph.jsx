@@ -67,26 +67,27 @@ function DetailsGraph(props) {
     maintainAspectRatio: false,
     responsive: true,
     type: 'line',
+    layout: {
+      padding: 10
+    },
     interaction: {
-      intersect: true,
-      axis: 'x',
+      intersect: false,
+      mode: 'index',
+      displayColors: false
     },
     tooltips: {
       mode: 'index',
-      intersect: false
+      intersect: false,
+      displayColors: false
    },
-   hover: {
-    mode: 'index',
-    intersect: false
+    elements: {
+      point: {
+        radius: 0,
+        pointHitRadius: 12,
+        mode: 'x',
+        backgroundColor: 'none'
+      },
     },
-    // elements: {
-    //   point: {
-    //     radius: 0,
-    //     color: 'white',
-    //     pointHitRadius: 12,
-    //     mode: 'x',
-    //   },
-    // },
     scales: {
       x: {
         grid: {

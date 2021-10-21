@@ -101,7 +101,7 @@ function BuySellModal(props) {
                     size="small"
                     value={numberOfShares}
                     min={1}
-                    inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                    type={'number'}
                     onChange={(event) => {
                       handleChange(event);
                     }}

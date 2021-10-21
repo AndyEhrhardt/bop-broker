@@ -63,6 +63,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                   rank: songValHist[i].rank, date: songValHist[i].date, idFromHoldingTable: songValHist[i].holding_id})
               }
               console.log("portfolio assembled")
+              console.log(portfolio)
               res.send(portfolio)
             }).catch((error) => {
               console.log("error getting historical song holdings",error)
@@ -79,10 +80,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.user.id, "then:", req.body.data.id, req.body.quantity)
   const userId = req.user.id;
-  const songId = req.body.data.id;
+  const songId = req.body.data;
   const quantity = req.body.quantity;
+  console.log(userId, songId, quantity)
   const dateQuery = `SELECT song_charts.date
   FROM song_charts
   ORDER BY song_charts.date DESC

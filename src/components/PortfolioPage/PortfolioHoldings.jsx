@@ -289,7 +289,8 @@ function PortfolioHoldings() {
 
 
 
-
+                          {console.log(portfolio.historicalSongValue, track.holding_id)}
+                          {console.log(portfolio.historicalSongValue[track.holding_id])}
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
                           <TableCell
@@ -404,7 +405,7 @@ function PortfolioHoldings() {
 
 
 
-
+                      {portfolio.historicalSongValue[track.holding_id].length > 1 ? (
                         <TableCell
                           align="left"
                           sx={{
@@ -431,8 +432,8 @@ function PortfolioHoldings() {
                                 : "#e6bb00",
                           }}
                         >
-
-
+                        
+                    
 
                           {track.current_price -
                                 priceObject[
@@ -494,7 +495,19 @@ function PortfolioHoldings() {
 
                           </Typography>
                         </TableCell>
+                    ):( <TableCell
+                      align="left"
+                      sx={{
+                        paddingRight: 1.3,
+                        paddingLeft: 1.5,
+                        fontWeight: 500,
+                        color: "#e6bb00",
+                      }}
+                    >
+                      %0
+                    </TableCell>
 
+                  )}  
 
 
 

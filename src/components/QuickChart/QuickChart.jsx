@@ -130,7 +130,6 @@ function QuickChart(props) {
                                                         sx={{ fontWeight: 400,
                                                             color: track.movement > 0 ? "#06f202" :  track.movement < 0 ? "#f71500" : track.movement === 0 ? "#e6bb00" : "#0077ff"}} 
                                                         >
-                                                            {console.log(track.movement === null)}
                                                         {track.movement > 0 ? `+${track.movement}` : track.movement}
                                                         {track.movement === null && <NewReleasesIcon/>}
                                                     </Typography>
