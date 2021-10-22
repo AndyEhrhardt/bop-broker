@@ -4,6 +4,7 @@ import user from './user.reducer';
 import allCharts from './allCharts.reducer';
 import songDetails from './songDetails.reducer';
 import portfolio from './portfolio.reducer';
+import specialCharts from './specialCharts.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   allCharts,
   songDetails,
   portfolio,
+  specialCharts,
 });
 
 export default rootReducer;

@@ -23,7 +23,7 @@ function QuickPortfolio() {
   const classes = useStyles();
   const history = useHistory();
   const portfolio = useSelector((store) => store.portfolio);
-  const [elev, setElev] = useState(16);
+  const [elev, setElev] = useState(0);
   const [page, setPage] = useState(1);
   const [modalPop, setModalPop] = useState(false);
   const [buySellTrack, setBuySellTrack] = useState({});
@@ -36,7 +36,7 @@ function QuickPortfolio() {
   };
 
   const mouseLeave = () => {
-    setElev(4);
+    setElev(0);
   };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -281,7 +281,7 @@ function QuickPortfolio() {
                             className={classes.portTableCellSongArtist}
                             align="right"
                           >
-                            Song/Arist
+                            Song
                           </TableCell>
                           <TableCell
                             className={classes.tableCellPrice}
@@ -321,13 +321,6 @@ function QuickPortfolio() {
                                 }}
                               >
                                 {track.current_rank}
-                                <Button
-                                  onClick={() =>
-                                    handleSell(track, track.current_price)
-                                  }
-                                >
-                                  $
-                                </Button>
                               </TableCell>
                               <TableCell
                                 sx={{

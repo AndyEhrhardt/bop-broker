@@ -20,6 +20,7 @@ import songStyles from "./songDetailsStyles";
 import Modal from "@mui/material/Modal";
 import DetailsGraph from "./DetailsGraph";
 
+
 const priceObject = {
   1: 2500,
   2: 1250,
@@ -84,7 +85,6 @@ function SongDetails(props) {
         dispatch({ type: "CLEAR_SONG_DETAILS"});
         props.setSongDetailsOpen(false);
     }
-
   return (
     <Modal
       open={props.songDetailsOpen}
@@ -136,12 +136,11 @@ function SongDetails(props) {
                   </Typography>
                   }
               </div>
-            
             {songDetails.owned ? 
             <BuySell 
             track={songDetails.basicInfo[0]}
             quantity={songDetails.quantity}
-            price={priceObject[songDetails.basicInfo[0].rank]}
+            price={songDetails.basicInfo[0].current_price}
             buyingPower={portfolio.currentMoney.buying_power}
             masterId={props.songDetailsId}
             /> 

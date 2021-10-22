@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
 import Fade from "@mui/material/Fade";
 import songStyles from "./songDetailsStyles";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 function BuySell(props) {
   const classes = songStyles();
@@ -17,21 +18,32 @@ function BuySell(props) {
   const [notEnoughSell, setNotEnoughSell] = useState(false);
   const [notEnoughBuy, setNotEnoughBuy] = useState(false);
   const [numberOfShares, setNumberOfShares] = useState("");
-  
-
+  const [error, setError] = useState(false);
+  const [confirmTrade, setConfirmTrade] = useState(false)
 
   const handleChange = (event) => {
     setNumberOfShares(event.target.value);
-    console.log(parseInt(event.target.value));
-    console.log(props.quantity, "quantity")
+    console.log(Number.isInteger(Number(event.target.value)));
+    if (parseInt(event.target.value) < props.quantity) {
+      setNotEnoughSell(false);
+    } 
     if (parseInt(event.target.value) > props.quantity) {
       setNotEnoughSell(true);
-    } else if (event.target.value * props.price > props.buyingPower) {
-      setNotEnoughBuy(true);
-    } else {
-      setNotEnoughSell(false);
+    } 
+    if (Number(event.target.value) * props.price < props.buyingPower) {
       setNotEnoughBuy(false);
-    }
+    } 
+    if (Number(event.target.value) * props.price > props.buyingPower) {
+      setNotEnoughBuy(true);
+    } 
+    if (!Number.isInteger(Number(event.target.value))){
+      setError(true);
+      setNotEnoughBuy(true);
+      setNotEnoughSell(true);
+    } 
+    if (Number.isInteger(Number(event.target.value))){
+      setError(false);
+    } 
   };
   const handleBuySell = () => {
     if (parseInt(numberOfShares) === props.track.quantity && sellState) {
@@ -57,11 +69,9 @@ function BuySell(props) {
 
   return (
       <div className={classes.buySellWrap}>
-            <div>
-            
-            <div>
               <div className={classes.title}>
-                <>
+                <div className={classes.changeMode}>
+                
                 <Button
                   className={classes.buyTitle} sx={{ fontWeight: 300, fontSize: 20, height: 30 }}
                   color="success"
@@ -78,7 +88,7 @@ function BuySell(props) {
                 >
                   Buy
                 </Button> 
-                </>
+                </div>
                 <div className={classes.grayLine}></div>
               </div>
               <div className={classes.forInputBuyWrap}>
@@ -100,6 +110,7 @@ function BuySell(props) {
                           variant="filled"
                           size="small"
                           value={numberOfShares}
+                          error={error}
                           min={1}
                           inputProps={{ inputMode: "numeric", pattern: "[0-9]*", style: {fontSize: 20, paddingTop: 0} }}
                           sx={{maxWidth: 50}}
@@ -118,28 +129,83 @@ function BuySell(props) {
                     </Typography> 
                   </div>
               </div>
-              {props.buyAndSell && sellState &&
+              {/* { sellState &&
               <Button onClick={handleSellAll}>Sell All</Button>
-              } 
+              }  */}
+
+              <div className={classes.grayLine}></div>
+              
+              {sellState ? 
+              <div className={classes.forAmount}>
+              <Typography sx={{ fontWeight: 300, fontSize: 15 }}>
+              Available
+              </Typography>
+              <Typography sx={{ fontWeight: 300, fontSize: 15 }}>
+              {props.quantity}
+              </Typography>
+              </div>
+              : 
+              <div className={classes.forAmount}>
+              <Typography sx={{ fontWeight: 300, fontSize: 15 }}>
+              Buying Power
+              </Typography>
+              <Typography sx={{ fontWeight: 300, fontSize: 15 }}>
+              ${props.buyingPower}
+              </Typography>
+              </div>
+              }
+
+
               <div className={classes.buttonDiv}>
               {sellState ? (
-                  <Button
-                    disabled={notEnoughSell}
+                  <ButtonBase
+                  disabled={notEnoughSell}
                     onClick={() => handleBuySell()}
                   >
+                  <Typography sx={{ fontWeight: 300, 
+                    fontSize: 25,
+                    postition: 'absolute',
+                    border: "1px solid rgba(142, 142, 142, 0.47)",
+                    borderRadius: '10px',
+                    "&:hover": {
+                      backgroundColor: 'rgba(57, 255, 35, 0.2)',
+                      border: "1px solid #06f202",
+                      borderRadius: '0px'
+                    },
+                    transition: '0.2s',
+                    width: 80,
+                    textAlign: 'center'               
+                    }} className={classes.activeTypeButton}>
                     Sell
-                  </Button>
+                  </Typography>
+                  </ButtonBase>
                 ) : (
-                  <Button
-                    disabled={notEnoughBuy}
-                    onClick={() => handleBuySell()}
+                  <ButtonBase
+                  disabled={notEnoughBuy ? true : props.track.current_price > props.buyingbuyingPower ? true : false}
+                  onClick={() => handleBuySell()}
                   >
+                  <Typography sx={{ fontWeight: 300, 
+                    fontSize: 25,
+                    postition: 'absolute',
+                    border: "1px solid rgba(142, 142, 142, 0.47)",
+                    borderRadius: '10px',
+                    "&:hover": {
+                      backgroundColor: 'rgba(57, 255, 35, 0.2)',
+                      border: "1px solid #06f202",
+                      borderRadius: '0px'
+                    },
+                    transition: '0.2s',
+                    width: 80,
+                    textAlign: 'center'               
+                    }} className={classes.activeTypeButton}>
                     Buy
-                  </Button>
+                  </Typography>
+                  </ButtonBase>
                 )}
               </div>
-              </div>
-            </div>    
+            
+    
+        
       </div>
 
   );

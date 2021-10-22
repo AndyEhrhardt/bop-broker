@@ -147,18 +147,12 @@ function PortfolioHoldings() {
               id={songDetailsId}
               chartName={chartName}
             />
-          <TableContainer>
+          <TableContainer sx={{ maxHeight: 237 }}>
             <Typography component={"span"}>
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell
-                      align="left"
-                      sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
-                    >
-                      <br/>
-                      Trade
-                    </TableCell>
+                    
                     <TableCell
                       align="left"
                       sx={{ paddingRight: 1.3, paddingLeft: 1.5, fontWeight: 400, paddingBottom: 0 }}
@@ -279,10 +273,10 @@ function PortfolioHoldings() {
                 </TableHead>
                 <TableBody>
                   {portfolio.currentHoldings
-                    .slice(page * 3, page * 3 + 3)
                     .map((track, index) => (
                       <TableRow
                         className={classes.tableRow}
+                        stickyHeader
                         key={index}
                         sx={{
                           "td, th": {
@@ -294,21 +288,6 @@ function PortfolioHoldings() {
                         onClick={() => handleRowClick(track)}
                       >
 
-
-
-                        <TableCell>
-                        <Button
-                          onClick={() =>
-                                handleSell(track, track.current_price)
-                          }
-                        >
-                              $
-                        </Button>
-                        </TableCell>
-
-
-
-                          
                         {portfolio.historicalSongValue[track.holding_id]
                           .length > 1 ? (
                           <TableCell
@@ -742,14 +721,6 @@ function PortfolioHoldings() {
               </Table>
             </Typography>
           </TableContainer>
-          <TablePagination
-            page={page}
-            rowsPerPage={3}
-            rowsPerPageOptions={[3]}
-            count={portfolio.currentHoldings.length}
-            component="div"
-            onPageChange={handleChangePage}
-          />
         </div>
       )}
     </div>

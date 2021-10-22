@@ -4,7 +4,12 @@ import { blue } from '@mui/material/colors';
 
 
 const useStyles = makeStyles(() => ({
-      logoAndTitle:{
+  paperMargin:{
+    marginRight: 90,
+    marginLeft: 90,
+    padding: 10
+  },   
+  logoAndTitle:{
         paddingRight: 30
       },
       logo:{
@@ -44,9 +49,6 @@ const useStyles = makeStyles(() => ({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
-    },
-    quickPortfolio:{
-        
     },
     quickChartWrapper: {
       maxWidth: 310,
@@ -98,8 +100,8 @@ const useStyles = makeStyles(() => ({
       transition: '0.2s',
     },
     tableCellPrice:{
-      width: 20,
-      maxWidth: 30,
+      minWidth: 50,
+      maxWidth: 50,
     },
     Typography: {
       fontFamily: 'roboto',
@@ -140,7 +142,8 @@ const useStyles = makeStyles(() => ({
       display: 'flex',
       textAlign: 'left',
       gap: 10,
-      paddingRight: 5
+      paddingRight: 5,
+      minWidth: 260
     },
     quickPortColRight:{
       display: 'flex',
@@ -170,7 +173,9 @@ const useStyles = makeStyles(() => ({
       opacity: .5
     },
     quickPortMaster: {
-      display: 'flex'
+      display: 'flex',
+      alignSelf: 'flex-end',
+      position: 'abosolute'
     },
     quickSubTitle:{
       display: 'flex',

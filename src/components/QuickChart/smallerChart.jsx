@@ -6,7 +6,7 @@ const useSmallStyles = makeStyles(() => ({
     fontFamily: "Roboto",
     fontSize: 40,
     margin: 0,
-    fontWeight: 400,
+    fontWeight: 300,
     paddingTop: 10,
   },
   songName: {

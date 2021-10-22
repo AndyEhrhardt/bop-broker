@@ -12,9 +12,20 @@ function* fetchCharts() {
     console.log('Charts get request failed', error);
   }
 }
+function* fetchSpecialCharts() {
+  console.log("in fetch special charts")
+try {
+  // const response = yield axios.get('/api/charts');
+  console.log(response);
+  yield put({ type: 'SET_SPECIAL_CHARTS', payload: response.data });
+} catch (error) {
+  console.log('Charts get request failed', error);
+}
+}
 
 function* chartsSaga() {
   yield takeLatest('GET_ALL_CHARTS', fetchCharts);
+  yield takeLatest('GET_SPECIAL_CHARTS', fetchSpecialCharts);
 }
 
 export default chartsSaga;

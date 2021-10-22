@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import ChartList from "../ChartList/ChartList";
+import Paper from "@mui/material/Paper";
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -18,12 +19,15 @@ function UserPage() {
   useEffect(() => {
     dispatch({ type: "GET_ALL_CHARTS" });
     dispatch({ type: "GET_PORTFOLIO" });
+    dispatch({ type: "GET_SPECIAL_CHARTS" });
   }, [dispatch]);
 
   return (
     <div className="container">
+      <Paper className={classes.paperMargin} elevation={8}>
       <div className={classes.headerPort}>
-        <LogOutButton />
+        <LogOutButton
+        sx={{minWidth: 489}} />
         <div className={classes.logoAndTitle}>
           <img className={classes.logo} src={"images/favicon5.png"} />
           <Typography
@@ -53,6 +57,7 @@ function UserPage() {
         /> */}
         <ChartList />
       </div>
+      </Paper>
     </div>
   );
 }

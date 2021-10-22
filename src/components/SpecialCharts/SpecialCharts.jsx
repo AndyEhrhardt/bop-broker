@@ -18,7 +18,6 @@ import useStyles from '../styles/styles';
 import useSmallStyles from './smallerChart';
 import SwapVertSharpIcon from '@mui/icons-material/SwapVertSharp';
 
-import { ContactlessOutlined } from '@material-ui/icons';
 
 import SongDetails from '../SongDetails/SongDetails'
 
