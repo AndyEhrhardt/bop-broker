@@ -63,7 +63,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                   rank: songValHist[i].rank, date: songValHist[i].date, idFromHoldingTable: songValHist[i].holding_id})
               }
               console.log("portfolio assembled")
-              console.log(portfolio)
               res.send(portfolio)
             }).catch((error) => {
               console.log("error getting historical song holdings",error)

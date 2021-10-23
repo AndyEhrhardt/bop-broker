@@ -19,7 +19,7 @@ function UserPage() {
   useEffect(() => {
     dispatch({ type: "GET_ALL_CHARTS" });
     dispatch({ type: "GET_PORTFOLIO" });
-    dispatch({ type: "GET_SPECIAL_CHARTS" });
+    //dispatch({ type: "GET_SPECIAL_CHARTS" });
   }, [dispatch]);
 
   return (

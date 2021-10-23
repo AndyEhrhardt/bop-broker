@@ -149,7 +149,7 @@ function PortfolioHoldings() {
             />
           <TableContainer sx={{ maxHeight: 237 }}>
             <Typography component={"span"}>
-              <Table size="small">
+              <Table stickyHeader size="small">
                 <TableHead>
                   <TableRow>
                     
@@ -382,7 +382,8 @@ function PortfolioHoldings() {
                                   ].length - 1
                                 ].rank
                                ] * track.quantity
-                          )).toFixed(2)}
+                          )).toFixed(2).toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           
                           </Typography>
                           </TableCell>
@@ -698,10 +699,12 @@ function PortfolioHoldings() {
                           align="right"
                         >
                           <a style={{ fontWeight: 400 }}>
-                            $
-                            {priceObject[track.current_rank]
+                           
+                            ${track.current_price
                               .toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            
+                            
                           </a>
                         </TableCell>
                         <TableCell

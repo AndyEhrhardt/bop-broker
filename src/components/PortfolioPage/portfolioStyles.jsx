@@ -7,22 +7,6 @@ const portfolioStyles = makeStyles(() => ({
         width: '100%',
         height: '100%'
     },
-    "@keyframes open": {
-        "0%": {
-          transform: "translate(-50% ,-200%)"
-        },
-        "100%": {
-        transform: 'translate(-50%, -63%)',
-        }
-      },
-      "@keyframes close": {
-        "0%": {
-          transform: "translate(-50%, -63%)"
-        },
-        "100%": {
-          transform: "translate(-50 ,-200%)"
-        }
-      },
     grayLine:{
         backgroundColor: 'gray',
         opacity: .5,
@@ -48,7 +32,6 @@ const portfolioStyles = makeStyles(() => ({
     },
     graphwrapper:{
         minWidth: '60%'
-        // minHeight: '45%'
     },
     overviewWrapper:{
         // minWidth: 290,
@@ -147,7 +130,8 @@ const portfolioStyles = makeStyles(() => ({
     },
     quickPortColInfoLeft:{
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      gap: 2.3
     },
     quickPortGap:{
       display: 'flex',

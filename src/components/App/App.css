@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
-
-
-
+@import url("https://fonts.googleapis.com/css?family=Lato");
 
 html,
 body,
@@ -11,7 +7,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
 }
 
@@ -116,15 +112,15 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
-.MuiTableBody-root{
-  font-family: 'roboto';
-  font-weight: 100px;
-}	
-.MuiTableCell-root{
-  font-family: 'roboto';
+.MuiTableBody-root {
+  font-family: "roboto";
   font-weight: 100px;
 }
-.outer-table-row:hover{
+.MuiTableCell-root {
+  font-family: "roboto";
+  font-weight: 100px;
+}
+.outer-table-row:hover {
   background-color: rgb(142, 253, 132);
   animation-name: fadeIn;
   animation-duration: 1s;
@@ -139,15 +135,12 @@ input {
   }
 }
 
-.css-dv0mq-MuiTableCell-root{
+.css-dv0mq-MuiTableCell-root {
   padding: 0;
 }
 table {
   border-collapse: collapse;
 }
-
-
-
 
 @keyframes open {
   from {
@@ -155,13 +148,13 @@ table {
     left: 33%;
   }
   to {
-  top: -1%;
-  left: 33%;
+    top: -1%;
+    left: 33%;
   }
 }
 
 @keyframes example {
-  0%   {
+  0% {
     top: -1%;
     left: 33%;
   }
@@ -171,7 +164,7 @@ table {
   }
 }
 
-.shutItDown{
+.shutItDown {
   animation-name: example;
   animation-duration: 200ms;
   position: absolute;
@@ -182,10 +175,7 @@ table {
   justify-content: center; */
 }
 
-
-
-
-.openModalWrap{
+.openModalWrap {
   position: absolute;
   top: -1%;
   left: 33%;
@@ -194,10 +184,65 @@ table {
   background-color: none;
 }
 
-
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 100;
+}
+
+.login-page {
+  /* display: flex;
+  flex-direction: row-reverse;
+  align-items: center; */
+  height: 100%;
+  width: 100%;
+  padding-right: 10%;
+}
+
+.master-wrap{
+  height: 100%;
+}
+.register-button{
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  min-height: 300;
+  padding-top: 500;
+}
+
+.about-logo-wrapper{
+  display: flex;
+}
+.about-login-wrapper{
+  display: flex;
+  justify-content: space-around;
+  min-height: 100%;
+  min-width: 100%;
+}
+.logo-and-title{
+  padding-right: 30;
+  max-width: 100;
+}
+
+.logo {
+  position: absolute;
+  max-width: 100%;
+}
+
+
+.login-no-register{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 50%;
+  gap: 50;
+}
+

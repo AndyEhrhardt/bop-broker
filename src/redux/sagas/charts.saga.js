@@ -15,7 +15,7 @@ function* fetchCharts() {
 function* fetchSpecialCharts() {
   console.log("in fetch special charts")
 try {
-  // const response = yield axios.get('/api/charts');
+  const response = yield axios.get('/api/charts/special');
   console.log(response);
   yield put({ type: 'SET_SPECIAL_CHARTS', payload: response.data });
 } catch (error) {

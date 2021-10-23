@@ -5,7 +5,111 @@ const axios = require('axios');
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
-  
+
+router.get('/special', rejectUnauthenticated, (req, res) => {
+    console.log("in special router")
+    let specialCharts = {};
+    const dateQuery = `SELECT song_charts.date
+    FROM song_charts
+    ORDER BY song_charts.date DESC
+    LIMIT 1`
+    pool.query(dateQuery)
+        .then((result) => {            
+            let recentDate = new Date(result.rows[0].date.toISOString())
+            let previousDate = new Date(recentDate)
+            previousDate.setDate(previousDate.getDate() - 1)
+            recentDate = recentDate.toISOString().split('T')[0]
+            previousDate = previousDate.toISOString().split('T')[0]
+            const overallMovementQuery = `WITH old_movers AS (
+                SELECT song_charts.song_name AS title, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) AS id, song_charts.rank AS rank
+                FROM song_charts
+                WHERE song_charts.date = $1
+                GROUP BY song_charts.song_name, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id), song_charts.rank)
+                SELECT song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, song_charts.rank - old_movers.rank as movement, song_charts.rank 
+                FROM song_charts, old_movers
+                WHERE concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) = old_movers.id  
+                AND song_charts.date = $2
+                GROUP BY song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, movement, song_charts.rank
+                ORDER BY ABS(song_charts.rank - old_movers.rank) DESC
+                LIMIT 50;`
+            pool.query(overallMovementQuery, [previousDate, recentDate])
+                .then((result) =>{
+                    specialCharts.movementOverall = result.rows;
+                    const upMovementQuery = `WITH old_movers AS (
+                        SELECT song_charts.song_name AS title, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) AS id, song_charts.rank AS rank
+                        FROM song_charts
+                        WHERE song_charts.date = $1
+                        GROUP BY song_charts.song_name, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id), song_charts.rank)
+                        SELECT song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, song_charts.rank - old_movers.rank as movement, song_charts.rank 
+                        FROM song_charts, old_movers
+                        WHERE concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) = old_movers.id  
+                        AND song_charts.date = $2
+                        GROUP BY song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, movement, song_charts.rank
+                        ORDER BY song_charts.rank - old_movers.rank DESC
+                        LIMIT 50;`
+                        pool.query(upMovementQuery, [previousDate, recentDate])
+                        .then((result) => {
+                            specialCharts.upMovement = result.rows;
+                            const downMovementQuery = `WITH old_movers AS (
+                                SELECT song_charts.song_name AS title, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) AS id, song_charts.rank AS rank
+                                FROM song_charts
+                                WHERE song_charts.date = $1
+                                GROUP BY song_charts.song_name, concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id), song_charts.rank)
+                                SELECT song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, song_charts.rank - old_movers.rank as movement, song_charts.rank 
+                                FROM song_charts, old_movers
+                                WHERE concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) = old_movers.id  
+                                AND song_charts.date = $2
+                                GROUP BY song_charts.spotify_playlist_id, song_charts.spotify_song_id, song_charts.song_name, song_charts.artist, song_charts.id, movement, song_charts.rank
+                                ORDER BY song_charts.rank - old_movers.rank ASC
+                                LIMIT 50;`
+                                pool.query(downMovementQuery, [previousDate, recentDate])
+                                .then((result) => {
+                                    specialCharts.downMovement = result.rows;
+                                    const numberOneQuery = `SELECT * FROM song_current
+                                    WHERE current_rank = 1;`
+                                    pool.query(numberOneQuery)
+                                    .then((result) => {
+                                        specialCharts.numberOne = result.rows;
+                                        const newSongsQuery = `WITH old_songs AS (
+                                            SELECT concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) AS songId
+                                            FROM song_charts
+                                            WHERE song_charts.date < $1
+                                            GROUP BY concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id))
+                                            SELECT song_charts.*
+                                            FROM song_charts
+                                            WHERE song_charts.date = $1
+                                            AND concat(song_charts.spotify_song_id, song_charts.spotify_playlist_id) NOT IN 
+                                            (SELECT songId
+                                            FROM old_songs);`
+                                            pool.query(newSongsQuery, [recentDate])
+                                            .then((result) => {
+                                                console.log(result.rows);
+                                                specialCharts.newSongs=result.rows;
+                                                
+                                            })
+                                    })
+                                })
+                        })
+                        
+                })
+            })
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     const dateQuery = `SELECT song_charts.date
     FROM song_charts
@@ -60,7 +164,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             pool.query(songInfoQuery, [playlistAndSongId])
                 .then((result) => {
                     songDetails.basicInfo = result.rows;
-                    console.log(songDetails.basicInfo)
                     const chartOverlapQuery = `SELECT song_current.spotify_playlist_id, song_current.current_rank, song_current.current_price
                     FROM song_current 
                     WHERE song_current.spotify_song_id = $1;`
@@ -77,7 +180,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                         .then((result) => {
                             let holdings = result.rows
                             songDetails.owned = false;
-                            console.log(songDetails.basicInfo[0].id)
                             for (let i of holdings){
                                 if (songDetails.basicInfo[0].id === i.id){
                                     songDetails.owned = true;

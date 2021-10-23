@@ -1,4 +1,4 @@
-const specialChartsReducer = (state = [], action) => {
+const specialChartsReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_CHARTS':
         return action.payload;
