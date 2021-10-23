@@ -35,7 +35,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             portfolio.historicalTotal = result.rows
             if (result.rows.length > 1) {
               if (portfolio.historicalTotal[0].value - portfolio.historicalTotal[1].value > 0){ //picks css color depending on loss/gain/break even
-                portfolio.gains = "#06f202"
+                portfolio.gains = "#2bd600"
               } else if (portfolio.historicalTotal[0].value - portfolio.historicalTotal[1].value < 0){
                 portfolio.gains = "#f71500"
               } else {

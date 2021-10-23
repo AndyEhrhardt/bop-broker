@@ -145,22 +145,22 @@ table {
 @keyframes open {
   from {
     top: -60%;
-    left: 33%;
+    left: 50%;
   }
   to {
-    top: -1%;
-    left: 33%;
+    top: 30%;
+    left: 50%;
   }
 }
 
 @keyframes example {
   0% {
-    top: -1%;
-    left: 33%;
+    top: 30%;
+  left: 50%;
   }
   100% {
     top: -60%;
-    left: 33%;
+    left: 50%;
   }
 }
 
@@ -168,20 +168,24 @@ table {
   animation-name: example;
   animation-duration: 200ms;
   position: absolute;
-  top: -1%;
-  left: 33%;
+  top: 30%;
+  left: 50%;
   background-color: none;
+  margin-left: -370px;
+  margin-top: -260px;
   /* display: flex;
   justify-content: center; */
 }
 
 .openModalWrap {
   position: absolute;
-  top: -1%;
-  left: 33%;
+  top: 30%;
+  left: 50%;
   animation-name: open;
   animation-duration: 200ms;
   background-color: none;
+  margin-left: -370px;
+  margin-top: -260px;
 }
 
 input::-webkit-outer-spin-button,
@@ -205,6 +209,8 @@ input::-webkit-inner-spin-button {
   height: 100%;
   width: 100%;
   padding-right: 10%;
+  justify-content: space-around;
+  display: flex;
 }
 
 .master-wrap{
@@ -242,7 +248,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: 50%;
-  gap: 50;
+  padding-top: 500;
+  min-width: 5000;
 }
 

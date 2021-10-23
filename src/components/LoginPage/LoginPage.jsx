@@ -32,36 +32,50 @@ function LoginPage() {
 
   return (
     <div className={"login-page"}>
-      <div className={"about-login-wrapper"}>
-        <div className={"about-logo-wrapper"}>
+     
           <div className={"logo-and-title"}>
             <img className={"logo"} src={"images/favicon5.png"} />
             <Typography
               sx={{
-                fontWeight: 300,
+                fontWeight: 500,
                 fontFamily: "roboto",
-                fontSize: 55,
+                fontSize: 65,
                 paddingTop: 20,
                 paddingLeft: 18,
                 maxHeight: 30,
               }}
             >
               BopBroker
+              <Typography
+              sx={{
+                fontWeight: 400,
+                fontFamily: "roboto",
+                fontSize: 30,
+                paddingTop: 1.9,
+                paddingLeft: .3,
+                maxHeight: 30,
+                maxWidth: 500,
+              }}>
+                Welcome to BopBroker,
+                <br/>
+                <Typography
+              sx={{
+                fontWeight: 300,
+                fontFamily: "roboto",
+                fontSize: 25,
+                paddingTop: 1.6,
+                paddingLeft: .3,
+                maxHeight: 30,
+                maxWidth: 500,
+              }}>
+                Where songs become stocks and tracks get traded. 
+                
+                </Typography>
+
+              </Typography>
             </Typography>
           </div>
-        </div>
-        
           <LoginForm />
-          <div className={"login-form"}>
-          <ButtonBase
-          onClick={() => {
-            history.push("/registration");
-          }}>
-                    Register
-          </ButtonBase>
-        </div>
-        
-      </div>
       
     </div>
   );

@@ -42,10 +42,13 @@ function LoginForm() {
     <div className={"login-no-register"}>
       <Typography sx={{
       fontFamily: "roboto",
-      fontWeight: 300,
-      fontSize: 15
+      fontWeight: 400,
+      fontSize: 23,
+      minWidth: 200,
       }}
-      >Login</Typography>
+      >
+        Login
+      </Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -71,32 +74,38 @@ function LoginForm() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
+        
           <Button
-              color="success"
               onHover={"contained"}
               onClick={(event) => login(event)}
-              sx={{
-                fontFamily: "roboto",
-                fontWeight: 300,
-                fontSize: 25
-                }}
             >   
+            <Typography sx={{
+              fontFamily: "roboto",
+              fontWeight: 400,
+              fontSize: 25,
+              color: 'black',
+              textAlign: 'right'
+            }}>
                 Log In
+            </Typography>
             </Button>
+            
             <Button
-              color="success"
               onHover={"contained"}
               onClick={(event) => login(event)}
               sx={{
                 fontFamily: "roboto",
-                fontWeight: 300,
-                fontSize: 15
+                fontWeight: 400,
+                fontSize: 15,
+                color: 'black',
+                textAlign: 'right'
                 }}
               onClick={() => {
                 history.push("/registration");
               }}>   
                Register
             </Button>
+            
     </div>
   );
 }
