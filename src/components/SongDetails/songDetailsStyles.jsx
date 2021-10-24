@@ -49,7 +49,8 @@ const songStyles = makeStyles(() => ({
         maxHeight: "1px",
         backgroundColor: "gray",
         borderBottom: 10,
-        opacity: .5
+        opacity: .5,
+        marginTop: 5
     },
     buySellAndDetails:{
         display: 'flex',

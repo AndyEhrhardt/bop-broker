@@ -5,9 +5,10 @@ import { blue } from '@mui/material/colors';
 
 const useStyles = makeStyles(() => ({
   paperMargin:{
-    marginRight: 90,
-    marginLeft: 90,
-    padding: 10
+    marginRight: 50,
+    marginLeft: 50,
+    paddingRight: 20,
+    paddingLeft: 20,
   },   
   logoAndTitle:{
         paddingRight: 30
@@ -20,8 +21,8 @@ const useStyles = makeStyles(() => ({
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        gap: 10,
-        justifyContent: 'space-around'
+        gap: 40,
+        justifyContent: 'space-evenly'
       },
       quickComponentsContainer : {
         display: 'flex',

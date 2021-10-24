@@ -44,6 +44,7 @@ function PortfolioGraph(props) {
         fill: false,
         backgroundColor: props.color,
         borderColor: props.color,
+        tension: 0.2,
       },
     ],
   };

@@ -62,11 +62,6 @@ npm run client
 
 
 
-
-
-
-
-
 - [] two options for views in the porfolio page (split current view into two views to make the page more horizontal)
 - [] allow user to view song details from either quick portfolio or the portfolio page 
 - [] ^clicking trade button will not trigger song details 

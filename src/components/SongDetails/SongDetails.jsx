@@ -82,8 +82,9 @@ function SongDetails(props) {
   const portfolio = useSelector((store) => store.portfolio);
   const [songOwned, setSongOwned] = useState(false)
     const handleClose = () => {
-        dispatch({ type: "CLEAR_SONG_DETAILS"});
+        
         props.setSongDetailsOpen(false);
+        setTimeout(() => {dispatch({ type: "CLEAR_SONG_DETAILS"})}, 450)
     }
   return (
     <Modal
@@ -92,7 +93,12 @@ function SongDetails(props) {
         handleClose();
       }}
       disableAutoFocus={true}
+      closeAfterTransition
+      BackdropProps={{
+        timeout: 500,
+      }}
     >
+      <Fade in={props.songDetailsOpen}>
       <div className={classes.innerModalWrap}>
         {songDetails.allRanks === undefined ? (
           <p>Loading</p>
@@ -157,9 +163,10 @@ function SongDetails(props) {
 
             <DetailsGraph/> 
 
-          </div>
+          </div>   
         )}
       </div>
+      </Fade>
     </Modal>
   );
 }
