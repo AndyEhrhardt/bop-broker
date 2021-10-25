@@ -207,10 +207,12 @@ input::-webkit-inner-spin-button {
   flex-direction: row-reverse;
   align-items: center; */
   height: 100%;
-  width: 100%;
+  width: 80%;
   padding-right: 10%;
+  padding-left: 10%;
   justify-content: space-around;
   display: flex;
+  gap: 20;
 }
 
 .master-wrap{
