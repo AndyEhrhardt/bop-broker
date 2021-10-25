@@ -38,10 +38,16 @@
   "scripts": {
     "start": "node server/server.js",
     "client": "react-scripts start",
+    "apidoc": "apidoc -i server/routes src -o apidoc",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "apidoc": {
+    "title": "BopBroker API Documentation",
+    "version": "1.0",
+    "description" : "API Documentation for BopBroker, a solo project by Andy Ehrhardt"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

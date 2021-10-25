@@ -6,6 +6,19 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+
+
+/**
+ * @api {get} /user/:id Request User information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log("in get portfolio router")
     const userId = req.user.id;
