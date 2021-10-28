@@ -1,6 +1,12 @@
 ## DESCRIPTION
 BopBroker is a web app that allows users to buy and sell "shares" of songs using fake money. Share price is determined by the songs position on a daily top 50 chart and chart information is obtained once a day from Spotify API.
 
+## DEMO
+![Alt Text](https://media1.giphy.com/media/2LJCVY8smbJF43vR7h/giphy.gif?cid=790b7611dcb7a44a611afa079e60538f0b55053bfa681e72&rid=giphy.gif)
+
+
+
+
 ## SETUP
 clone this repository
 npm install
