@@ -58,8 +58,8 @@ npm run client
 - [x] create logo
 
 
-- [] table containing all other charts the song appears on 
-
+- [] table containing all other charts the song appears on, on song details
+- [] listen button on song details
 
 
 - [] two options for views in the porfolio page (split current view into two views to make the page more horizontal)
