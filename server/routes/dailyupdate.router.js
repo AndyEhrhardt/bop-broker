@@ -212,7 +212,7 @@ const postPlaylistToDatabase = (playlist) => {
         valueArray.push(track.rank, track.name, track.artist, track.spotify_song_id, track.spotify_playlist_id, track.date, track.price)
     }
     console.log(valueArray);
-    for (let i = 0; i < playlist.length * 7; i += 7) { //there are 6 values in each row, hence length*6 and i+=6
+    for (let i = 0; i < playlist.length * 7; i += 7) { //there are 7 values in each row, hence length*7 and i+=7
         queryText += `($${i+1}, $${i+2}, $${i+3}, $${i+4}, $${i+5}, $${i+6}, $${i+7}),` //this string is looped over and is used to sanitize the data
     }
     queryText = queryText.slice(0, queryText.length - 1) //removes the last comma from the end of the string
