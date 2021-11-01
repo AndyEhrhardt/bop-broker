@@ -213,8 +213,8 @@ const postPlaylistToDatabase = (playlist) => {
     }
     console.log(valueArray);
     for (let i = 0; i < playlist.length * 7; i += 7) { //there are 7 values in each row, hence length*7 and i+=7
-        queryText += `($${i+1}, $${i+2}, $${i+3}, $${i+4}, $${i+5}, $${i+6}, $${i+7}),` //this string is looped over and is used to sanitize the data
-    }
+        queryText += `($${i+1}, $${i+2}, $${i+3}, $${i+4}, $${i+5}, $${i+6}, $${i+7}),` //this string is looped over and is used to sanitize the data, 
+        } //the i+x is the index plus whatever amount the variable is needing to be past that index. Since 7 columns are receiving entries this goes up to 7
     queryText = queryText.slice(0, queryText.length - 1) //removes the last comma from the end of the string
     console.log("query text generated")
     pool.query(queryText, valueArray)
