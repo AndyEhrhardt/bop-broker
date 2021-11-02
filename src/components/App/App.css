@@ -153,7 +153,7 @@ table {
   }
 }
 
-@keyframes example {
+@keyframes close {
   0% {
     top: 30%;
   left: 50%;
@@ -165,21 +165,19 @@ table {
 }
 
 .shutItDown {
-  animation-name: example;
+  animation-name: close;
   animation-duration: 200ms;
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
   background-color: none;
   margin-left: -370px;
   margin-top: -260px;
-  /* display: flex;
-  justify-content: center; */
 }
 
 .openModalWrap {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
   animation-name: open;
   animation-duration: 200ms;
@@ -253,4 +251,3 @@ input::-webkit-inner-spin-button {
   padding-top: 500;
   min-width: 5000;
 }
-
