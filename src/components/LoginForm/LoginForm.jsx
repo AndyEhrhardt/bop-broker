@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { useHistory } from "react-router-dom";
 
-function LoginForm() {
+function LoginForm(props) {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -101,7 +101,7 @@ function LoginForm() {
                 textAlign: 'right'
                 }}
               onClick={() => {
-                history.push("/registration");
+                props.setLoginOrRegister(false)
               }}>   
                Register
             </Button>

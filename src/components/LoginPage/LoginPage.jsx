@@ -9,11 +9,13 @@ import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
 import Fade from "@mui/material/Fade";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import RegisterForm from "../RegisterForm/RegisterForm"
 
 function LoginPage() {
   const history = useHistory();
   const [elev, setElev] = useState(0);
   const [elev2, setElev2] = useState(0);
+  const [loginOrRegister, setLoginOrRegister] = useState(true);
 
   const mouseEnter = () => {
     setElev(12);
@@ -75,8 +77,11 @@ function LoginPage() {
               </Typography>
             </Typography>
           </div>
-          <LoginForm />
-      
+          {loginOrRegister ? 
+          <LoginForm setLoginOrRegister={setLoginOrRegister}/>
+          :
+          <RegisterForm setLoginOrRegister={setLoginOrRegister}/>
+          }
     </div>
   );
 }
