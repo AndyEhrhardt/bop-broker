@@ -128,7 +128,7 @@ const getDatabaseDate = () => {
 //calls first function to start the loop of functions 
 //!FIRST FUNCTION
 //*FIRST FUNCTION
-//getDatabaseDate();
+getDatabaseDate();
 
 //starts the process of getting the new data from spotify every day at 10:30AM UTC
 cron.schedule('00 02 * * *', () => {
