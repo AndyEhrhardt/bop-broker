@@ -113,7 +113,7 @@ function BuySell(props) {
                           error={error}
                           min={1}
                           inputProps={{ inputMode: "numeric", pattern: "[0-9]*", style: {fontSize: 20, paddingTop: 0} }}
-                          sx={{maxWidth: 50}}
+                          sx={{maxWidth: 65}}
                           onChange={(event) => {
                             handleChange(event);
                           }}
