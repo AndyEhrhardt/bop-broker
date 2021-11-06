@@ -130,11 +130,19 @@ const getDatabaseDate = () => {
 //*FIRST FUNCTION
 //getDatabaseDate();
 
-//starts the process of getting the new data from spotify every day at 10:30AM UTC
-cron.schedule('00 02 * * *', () => {
+//checks for new data from spotify every hour
+cron.schedule('0 * * * *', () => {
     console.log("starting functions");
     getDatabaseDate();
 });
+
+
+
+//starts the process of getting the new data from spotify every day at 10:30AM UTC
+// cron.schedule('00 02 * * *', () => {
+//     console.log("starting functions");
+//     getDatabaseDate();
+// });
 //gets the auth token from spotify 
 const obtainAuth = () => {
     axios(postConfig)
