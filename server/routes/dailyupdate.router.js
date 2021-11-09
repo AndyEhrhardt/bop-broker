@@ -188,9 +188,6 @@ const checkDate = () => {
         counter = 0;
         console.log("spotify playlist not yet updated");
         playlistsToPost.length = 0;
-        setTimeout(() => {
-            getDatabaseDate(); //if the database date is not older than the incoming date, keep checking every five minutes
-        }, 300000);
     }
 }
 const trimData = () => {
